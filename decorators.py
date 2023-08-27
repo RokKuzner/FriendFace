@@ -4,7 +4,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 
 def login_required(f):
-    def decorated_function(*args, **kwargs):
+    def decorated_function(request, *args, **kwargs):
         if "curren_user" in request.session:
             if request.session["curren_user"] != None:
                 pass
