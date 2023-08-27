@@ -22,3 +22,6 @@ def login(request):
         password = request.POST['password']
         print(username, password)
     return render(request, 'login.html')
+
+def register(request):
+    return render(request, 'register.html')

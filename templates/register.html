@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}FriendFace Login{% endblock %}
+{% block title %}FriendFace Register{% endblock %}
 
 {% block head %}
     <link rel="stylesheet" href="static/main.css">
@@ -9,15 +9,16 @@
 
 {% block content %}
     <div class="loginwrapper text-center">
-        <form action="login" method="post">
+        <form action="register" method="post">
             {% csrf_token %}
             <div class="loginwelcometxt">FriendFace</div>
             <input type="text" class="logininput form-control" placeholder="Username" aria-label="Username" name="user" aria-describedby="basic-addon1">
             <input type="password" class="logininput form-control" placeholder="Password" aria-label="Password" name="password" aria-describedby="basic-addon1" style="margin-top: 10px;">
-            <button type="submit" class="loginbutton btn btn-primary">Login</button>
+            <input type="password" class="logininput form-control" placeholder="Repeat password" aria-label="Password" name="password2" aria-describedby="basic-addon1" style="margin-top: 10px;">
+            <button type="submit" class="loginbutton btn btn-primary">Register</button>
         </form>
         <div class="loginlinkwraper">
-            <a href="register" class="loginlink">Don't have an account yet?</a>
+            <a href="login" class="loginlink">Login?</a>
         </div>
     </div>
 {% endblock %}
