@@ -9,11 +9,13 @@
 
 {% block content %}
     <div class="loginwrapper text-center">
-        <div class="loginwelcometxt">FriendFace</div>
-        Make this a form!!
-        <input type="text" class="logininput form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-        <input type="password" class="logininput form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" style="margin-top: 10px;">
-        <button type="button" class="loginbutton btn btn-primary">Login</button>
+        <form action="login" method="post">
+            {% csrf_token %}
+            <div class="loginwelcometxt">FriendFace</div>
+            <input type="text" class="logininput form-control" placeholder="Username" aria-label="Username" name="user" aria-describedby="basic-addon1">
+            <input type="password" class="logininput form-control" placeholder="Password" aria-label="Password" name="password" aria-describedby="basic-addon1" style="margin-top: 10px;">
+            <button type="submit" class="loginbutton btn btn-primary">Login</button>
+        </form>
         <div class="loginlinkwraper">
             <a href="/" class="loginlink">Don't have an account yet?</a>
         </div>

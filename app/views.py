@@ -17,4 +17,8 @@ def home(request):
     return render(request, 'index.html')
 
 def login(request):
+    if request.method == 'POST':
+        username = request.POST['user']
+        password = request.POST['password']
+        print(username, password)
     return render(request, 'login.html')
