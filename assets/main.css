@@ -28,10 +28,6 @@
     margin-top: 3rem;
 }
 
-.alertwarninglogin {
-    width: 100px;
-}
-
-.loginerror {
-    margin-top: 100px;
+.loginregistererror {
+    background-color: red;
 }

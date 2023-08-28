@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib import messages
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.urls import reverse
 from decorators import login_required
 
@@ -29,5 +29,5 @@ def register(request):
         password = request.POST['password']
         password = request.POST['password2']
         messages.error(request, "Error")
-        print(username, password)
+        return redirect('register')
     return render(request, 'register.html')
