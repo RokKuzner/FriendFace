@@ -9,7 +9,7 @@
     margin-top: 20vh;
     font-size: 2rem;
     background-color: rgb(29, 111, 225);
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 .logininput {
@@ -28,9 +28,10 @@
     margin-top: 3rem;
 }
 
-.error {
-    width: max-content;
-    padding: 5px;
-    margin: 5px;
-    background-color: red;
+.alertwarninglogin {
+    width: 100px;
+}
+
+.loginerror {
+    margin-top: 100px;
 }
