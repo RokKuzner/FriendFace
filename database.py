@@ -13,19 +13,19 @@ def generate_id(table_name:str, id_field:str):
         
     return id
 
-def validate_user(username, password):
+def validate_user(username:str, password:str):
     c.execute('SELECT * FROM users WHERE email=? AND password=?',
               (username, password))
     return c.fetchone() is not None
 
 
-def add_user(username, password):
+def add_user(username:str, password:str):
     c.execute('INSERT INTO users VALUES(?, ?, ?)', (username, generate_id('users', 'id'), password))
     conn.commit()
     return f'user {username} addded to db.'
 
 
-def user_exists(username):
+def user_exists(username:str):
     c.execute('SELECT * FROM users WHERE email=?', (username, ))
 
     if len(c.fetchall()) == 0:
