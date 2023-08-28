@@ -10,8 +10,8 @@
 {% block content %}
     <div class="loginwrapper text-center">
         <form action="register" method="post">
-            {% csrf_token %}
             <div class="loginwelcometxt">FriendFace</div>
+            {% csrf_token %}
             <input type="text" class="logininput form-control" placeholder="Username" aria-label="Username" name="user" aria-describedby="basic-addon1">
             <input type="password" class="logininput form-control" placeholder="Password" aria-label="Password" name="password" aria-describedby="basic-addon1" style="margin-top: 10px;">
             <input type="password" class="logininput form-control" placeholder="Repeat password" aria-label="Password" name="password2" aria-describedby="basic-addon1" style="margin-top: 10px;">
