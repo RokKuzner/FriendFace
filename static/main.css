@@ -27,3 +27,10 @@
 .loginlinkwraper {
     margin-top: 3rem;
 }
+
+.error {
+    width: max-content;
+    padding: 5px;
+    margin: 5px;
+    background-color: red;
+}

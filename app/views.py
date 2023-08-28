@@ -24,4 +24,10 @@ def login(request):
     return render(request, 'login.html')
 
 def register(request):
+    if request.method == 'POST':
+        username = request.POST['user']
+        password = request.POST['password']
+        password = request.POST['password2']
+        messages.error(request, "Error")
+        print(username, password)
     return render(request, 'register.html')
