@@ -8,13 +8,6 @@ import database as db
 # Create your views here.
 @login_required
 def home(request):
-    if "curren_user" in request.session:
-        if request.session["curren_user"] != None:
-            pass
-        else:
-            return HttpResponseRedirect(reverse('login'))
-    else:
-        return HttpResponseRedirect(reverse('login'))
     return render(request, 'index.html')
 
 def login(request):
@@ -42,6 +35,10 @@ def register(request):
         else:
             db.add_user(username, password1)
             request.session["curren_user"] = username
-            return redirect('home')
+            return HttpResponseRedirect(reverse('home'))
 
     return render(request, 'register.html')
+
+def logout(request):
+    request.session["curren_user"] = None
+    return HttpResponseRedirect(reverse('login'))

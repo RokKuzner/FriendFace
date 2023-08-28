@@ -12,6 +12,6 @@ def login_required(f):
                 return HttpResponseRedirect(reverse('login'))
         else:
             return HttpResponseRedirect(reverse('login'))
-        return f(*args, **kwargs)
+        return f(request, *args, **kwargs)
 
     return decorated_function
