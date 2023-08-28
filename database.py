@@ -1,6 +1,6 @@
 import sqlite3, random, string
 
-conn = sqlite3.connect('db.sqlite3')
+conn = sqlite3.connect('db.sqlite3', check_same_thread=False)
 c = conn.cursor()
 
 def generate_id(table_name:str, id_field:str):
