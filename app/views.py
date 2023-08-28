@@ -14,7 +14,13 @@ def login(request):
     if request.method == 'POST':
         username = request.POST['user']
         password = request.POST['password']
-        print(username, password)
+        if db.validate_user(username, password):
+            request.session["current_user"] = username
+            print('Validated')
+            return redirect('home')
+        else:
+            messages.error(request, "Username or password is incorrect")
+            return redirect('login')
     return render(request, 'login.html')
 
 def register(request):
@@ -34,11 +40,11 @@ def register(request):
             return redirect('register')
         else:
             db.add_user(username, password1)
-            request.session["curren_user"] = username
-            return HttpResponseRedirect(reverse('home'))
+            request.session["current_user"] = username
+            return redirect('home')
 
     return render(request, 'register.html')
 
 def logout(request):
-    request.session["curren_user"] = None
-    return HttpResponseRedirect(reverse('login'))
+    request.session["current_user"] = None
+    return redirect('login')

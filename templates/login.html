@@ -12,6 +12,11 @@
         <form action="login" method="post">
             {% csrf_token %}
             <div class="loginwelcometxt">FriendFace</div>
+            {% for message in messages %}
+                <div class="loginregistererror alert alert-warning" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
             <input type="text" class="logininput form-control" placeholder="Username" aria-label="Username" name="user" aria-describedby="basic-addon1">
             <input type="password" class="logininput form-control" placeholder="Password" aria-label="Password" name="password" aria-describedby="basic-addon1" style="margin-top: 10px;">
             <button type="submit" class="loginbutton btn btn-primary">Login</button>
