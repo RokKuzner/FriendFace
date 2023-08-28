@@ -16,8 +16,7 @@ def login(request):
         password = request.POST['password']
         if db.validate_user(username, password):
             request.session["current_user"] = username
-            print('Validated')
-            return redirect('home')
+            return redirect('/')
         else:
             messages.error(request, "Username or password is incorrect")
             return redirect('login')
@@ -41,7 +40,7 @@ def register(request):
         else:
             db.add_user(username, password1)
             request.session["current_user"] = username
-            return redirect('home')
+            return redirect('/')
 
     return render(request, 'register.html')
 
