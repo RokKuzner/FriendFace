@@ -43,4 +43,5 @@ def register(request):
             db.add_user(username, password1)
             request.session["curren_user"] = username
             return redirect('home')
+
     return render(request, 'register.html')
