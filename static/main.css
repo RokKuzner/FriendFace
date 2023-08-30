@@ -34,3 +34,9 @@
     margin-right: auto;
     margin-top: 10px;
 }
+
+@media screen and (max-width: 800px) {
+    .logininput {
+        width: 80vw;
+    }
+  }
