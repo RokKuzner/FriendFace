@@ -16,7 +16,8 @@ def generate_id(table_name:str, id_field:str):
 def validate_user(username:str, password:str):
     c.execute('SELECT * FROM users WHERE email=? AND password=?',
               (username, password))
-    return c.fetchone() is not None
+    data = c.fetchone()
+    return (data is not None and username == data[0] and password == data[2])
 
 
 def add_user(username:str, password:str):
@@ -28,7 +29,6 @@ def add_user(username:str, password:str):
 def user_exists(username:str):
     c.execute('SELECT * FROM users WHERE email=?', (username, ))
 
-    if len(c.fetchall()) == 0:
-        return False
-    else:
-        return True
+    data = c.fetchone()
+
+    return True if data is not None else False
