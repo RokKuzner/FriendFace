@@ -34,3 +34,57 @@
     margin-right: auto;
     margin-top: 10px;
 }
+
+.navbar {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(29, 111, 225);
+    color: white;
+    margin-bottom: 0;
+    width: 100vw;
+}
+
+.navbar-links ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: 100vw;
+}
+
+.navbar-links li {
+    list-style: none;
+    width: max-content;
+}
+
+.navbar-links li:hover {
+    cursor: pointer;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: white;
+    padding: 1rem;
+    display: block;
+    background-color: #33333300;
+}
+
+.nav-link-active {
+    background-color: #555;
+}
+
+.navlogo {
+    width: max-content;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+    color: rgb(29, 111, 225);
+    padding: 2px;
+}
+
+.navbar-user-img {
+    margin-left: auto;
+    padding-right: 10px;
+    padding-top: 8px;
+}
