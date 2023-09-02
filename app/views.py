@@ -37,6 +37,9 @@ def register(request):
         elif password1 != password2:
             messages.error(request, "Passwords do not match")
             return redirect('register')
+        elif "," in username:
+            messages.error(request, "Username cannot contain a comma")
+            return redirect('register')
         else:
             db.add_user(username, password1)
             request.session["current_user"] = username

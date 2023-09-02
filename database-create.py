@@ -7,11 +7,20 @@ USERS = """
 CREATE TABLE IF NOT EXISTS users(
 email TEXT UNIQUE,
 id TEXT UNIQUE,
-password TEXT
+password TEXT,
+friends TEXT
+)
+"""
+
+POSTS = """
+CREATE TABLE IF NOT EXISTS posts(
+user TEXT,
+content TEXT
 )
 """
 
 c.execute(USERS)
+c.execute(POSTS)
 
 conn.commit()
 conn.close()

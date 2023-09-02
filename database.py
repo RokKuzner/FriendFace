@@ -21,7 +21,7 @@ def validate_user(username:str, password:str):
 
 
 def add_user(username:str, password:str):
-    c.execute('INSERT INTO users VALUES(?, ?, ?)', (username, generate_id('users', 'id'), password))
+    c.execute('INSERT INTO users VALUES(?, ?, ?, ?)', (username, generate_id('users', 'id'), password, ''))
     conn.commit()
     return f'user {username} addded to db.'
 
