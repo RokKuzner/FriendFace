@@ -88,3 +88,69 @@
     padding-right: 10px;
     padding-top: 8px;
 }
+
+.mypostdiv {
+    width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5vh;
+    margin-top: 10vh;
+    border: 2px solid rgba(73, 73, 73, 0.26);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: right;
+}
+
+.postdivtextarea {
+    height: 10vh;
+}
+
+.postdivpostbtn {
+    margin-right: 10px;
+    margin-top: 7px;
+}
+
+.post {
+    width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5vh;
+    margin-top: 10vh;
+    border: 2px solid rgba(73, 73, 73, 0.26);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.likeimg {
+    width: 30px;
+    margin-top: 5px;
+}
+
+.likeimg:hover {
+    cursor: pointer;
+}
+
+.postuser {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.postuserdiv {
+    display: inline-flex;
+    margin-bottom: 5px;
+}
+
+.postusericon {
+    width:30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+.postcontent {
+    border: 2px solid rgba(73, 73, 73, 0.39);
+    padding: 10px;
+    min-height: 60px;
+    border-radius: 10px;
+}
