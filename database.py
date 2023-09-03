@@ -32,3 +32,11 @@ def user_exists(username:str):
     data = c.fetchone()
 
     return True if data is not None else False
+
+def new_post(user:str, content:str):
+    c.execute('INSERT INTO posts VALUES(?, ?)', (user, content))
+    conn.commit()
+
+def get_posts():
+    c.execute('SELECT * FROM posts')
+    return c.fetchall()

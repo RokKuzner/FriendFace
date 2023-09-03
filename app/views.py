@@ -8,7 +8,15 @@ import database as db
 # Create your views here.
 @login_required
 def home(request):
-    return render(request, 'index.html', {'logged_in':'current_user' in request.session})
+    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user']})
+
+@login_required
+def post(request):
+    user_posting = request.GET.get('user', None)
+    content = request.GET.get('content', None)
+    if user_posting == request.session['current_user']:
+        db.new_post(user_posting, content)
+    return redirect('/')
 
 def login(request):
     if request.method == 'POST':
@@ -20,7 +28,7 @@ def login(request):
         else:
             messages.error(request, "Username or password is incorrect")
             return redirect('login')
-    return render(request, 'login.html', {'logged_in':'current_user' in request.session})
+    return render(request, 'login.html', {'logged_in':False})
 
 def register(request):
     if request.method == 'POST':
@@ -45,7 +53,7 @@ def register(request):
             request.session["current_user"] = username
             return redirect('/')
 
-    return render(request, 'register.html', {'logged_in':'current_user' in request.session})
+    return render(request, 'register.html', {'logged_in':False})
 
 def logout(request):
     request.session["current_user"] = None

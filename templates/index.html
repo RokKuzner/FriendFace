@@ -8,8 +8,8 @@
 
 {% block content %}
     <div class="mypostdiv">
-        <textarea class="postdivtextarea form-control"></textarea>
-        <button type="button" class="postdivpostbtn btn btn-primary">Post</button>
+        <textarea class="postdivtextarea form-control" id="posttext"></textarea>
+        <button type="button" class="postdivpostbtn btn btn-primary" id="postbtn">Post</button>
     </div>
 
     <div class="post">
@@ -20,4 +20,8 @@
         <div class="postcontent">This is a cool post!</div>
         <img src="static/icons/heart.png" alt="like" class="likeimg">
     </div>
+    <script>
+        let current_user = "{{ current_user }}"
+    </script>
+    <script src="static/index_post.js"></script>
 {% endblock %}
