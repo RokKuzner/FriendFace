@@ -34,7 +34,7 @@ def user_exists(username:str):
     return True if data is not None else False
 
 def new_post(user:str, content:str):
-    c.execute('INSERT INTO posts VALUES(?, ?)', (user, content))
+    c.execute('INSERT INTO posts VALUES(?, ?, ?, ?)', (user, content, "0", generate_id("posts", "id")))
     conn.commit()
 
 def get_posts():

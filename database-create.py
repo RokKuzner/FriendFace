@@ -15,7 +15,9 @@ friends TEXT
 POSTS = """
 CREATE TABLE IF NOT EXISTS posts(
 user TEXT,
-content TEXT
+content TEXT,
+likes TEXT,
+id TEXT UNIQUE
 )
 """
 
