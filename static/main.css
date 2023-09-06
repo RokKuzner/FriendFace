@@ -103,6 +103,7 @@
     padding: 15px;
     border-radius: 10px;
     text-align: right;
+    min-width: max-content;
 }
 
 .postdivtextarea {
@@ -141,6 +142,10 @@
     margin-bottom: 5px;
 }
 
+.post {
+    min-width: max-content;
+}
+
 .postuserdiv {
     display: inline-flex;
     margin-bottom: 5px;
@@ -157,4 +162,15 @@
     padding: 10px;
     min-height: 60px;
     border-radius: 10px;
+}
+
+.likedstuff {
+    display: inline-flex;
+}
+
+.likediv {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 3px;
+    margin-left: 3px;
 }

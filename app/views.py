@@ -11,6 +11,13 @@ def home(request):
     return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':db.get_posts()[::-1]})
 
 @login_required
+def like(request):
+    post_id = request.GET.get('post', None)
+    user = request.GET.get('user', None)
+    print(post_id, user)
+    return redirect('/')
+
+@login_required
 def post(request):
     user_posting = request.GET.get('user', None)
     content = request.GET.get('content', None)
