@@ -43,14 +43,18 @@
     background-color: rgb(29, 111, 225);
     color: white;
     margin-bottom: 0;
-    width: 100vw;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
 }
 
 .navbar-links ul {
     margin: 0;
     padding: 0;
     display: flex;
-    width: 100vw;
+    width: 99vw;
 }
 
 .navbar-links li {

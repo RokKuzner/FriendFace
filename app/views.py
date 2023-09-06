@@ -8,7 +8,7 @@ import database as db
 # Create your views here.
 @login_required
 def home(request):
-    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user']})
+    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':db.get_posts()[::-1]})
 
 @login_required
 def post(request):

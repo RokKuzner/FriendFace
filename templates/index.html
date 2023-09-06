@@ -12,14 +12,16 @@
         <button type="button" class="postdivpostbtn btn btn-primary" id="postbtn">Post</button>
     </div>
 
-    <div class="post">
-        <div class="postuserdiv">
-            <img class="postusericon" src="static/icons/user.png" alt="User logo img">
-            <div class="postuser">Jože</div>
+    {% for post in posts %}
+        <div class="post">
+            <div class="postuserdiv">
+                <img class="postusericon" src="static/icons/user.png" alt="User logo img">
+                <div class="postuser">{{ post.0 }}</div>
+            </div>
+            <div class="postcontent">{{ post.1 }}</div>
+            <img src="static/icons/heart.png" alt="like" class="likeimg">
         </div>
-        <div class="postcontent">This is a cool post!</div>
-        <img src="static/icons/heart.png" alt="like" class="likeimg">
-    </div>
+    {% endfor %}
     <script>
         let current_user = "{{ current_user }}"
     </script>
