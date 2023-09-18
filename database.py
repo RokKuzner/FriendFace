@@ -59,7 +59,7 @@ def like_post(user:str, post_id:str):
 
     post_likes += 1
 
-    c.execute('UPDATE posts SET users_liked=? likes=? WHERE id=?', (new_post_user_likes, str(post_likes), post_id))
+    c.execute('UPDATE posts SET users_liked=?, likes=? WHERE id=?', (new_post_user_likes, str(post_likes), post_id))
     conn.commit()
 
 def dislike_post(user:str, post_id:str):
@@ -76,12 +76,12 @@ def dislike_post(user:str, post_id:str):
     new_post_user_likes = str(','.join(post_user_likes))
     post_likes -= 1
 
-    c.execute('UPDATE posts SET users_liked=? likes=? WHERE id=?', (new_post_user_likes, str(post_likes), post_id))
+    c.execute('UPDATE posts SET users_liked=?, likes=? WHERE id=?', (new_post_user_likes, str(post_likes), post_id))
     conn.commit()
 
 def user_liked_post(user:str, post_id:str):
     c.execute('SELECT * FROM posts WHERE id=?', (post_id,))
-    post =  c.fetchone()
+    post = c.fetchone()
 
     post_user_likes = str(post[3]).split(',')
 
