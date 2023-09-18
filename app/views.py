@@ -30,6 +30,15 @@ def like(request):
     return redirect('/')
 
 @login_required
+def comment(request):
+    user_posting = request.GET.get('user', None)
+    content = request.GET.get('content', None)
+    parrent_id = request.GET.get('parrentid', None)
+    if user_posting == request.session['current_user']:
+        db.new_comment(user_posting, content, parrent_id)
+    return redirect('/')
+
+@login_required
 def post(request):
     user_posting = request.GET.get('user', None)
     content = request.GET.get('content', None)
