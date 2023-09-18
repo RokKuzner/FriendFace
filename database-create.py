@@ -26,8 +26,6 @@ COMMENTS = """
 CREATE TABLE IF NOT EXISTS comments(
 user TEXT,
 content TEXT,
-likes TEXT,
-users_liked TEXT,
 parrent_id TEXT,
 id TEXT UNIQUE
 )

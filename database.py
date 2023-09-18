@@ -88,56 +88,10 @@ def user_liked_post(user:str, post_id:str):
     return True if user in post_user_likes else False
 
 def new_comment(user:str, content:str, parrent_post_id:str):
-    c.execute('INSERT INTO comments VALUES(?, ?, ?, ?, ?, ?)', (user, content, "0", "", parrent_post_id, generate_id("comments", "id")))
+    c.execute('INSERT INTO comments VALUES(?, ?, ?, ?)', (user, content, parrent_post_id, generate_id("comments", "id")))
     conn.commit()
 
 
 def get_comments_by_parrent_post(parrent_post_id:str):
     c.execute('SELECT * FROM comments WHERE parrent_id=?', (parrent_post_id,))
     return c.fetchall()
-
-def like_comment(user:str, comment_id:str):
-    if user_liked_comment(user, comment_id) != False:
-        return None
-    c.execute('SELECT * FROM comments WHERE id=?', (comment_id,))
-    comment =  c.fetchone()
-    comment_likes = int(comment[2])
-    comment_user_likes = str(comment[3]).split(',')
-
-    new_comment_user_likes = ''
-
-    if comment_likes == '0':
-        new_comment_user_likes = str(user)
-    else:
-        comment_user_likes.append(user)
-        new_comment_user_likes = str(','.join(comment_user_likes))
-
-    comment_likes += 1
-
-    c.execute('UPDATE comments SET users_liked=?, likes=? WHERE id=?', (new_comment_user_likes, str(comment_likes), comment_id))
-    conn.commit()
-
-def dislike_comment(user:str, comment_id:str):
-    if user_liked_comment(user, comment_id) != True:
-        return None
-    c.execute('SELECT * FROM comments WHERE id=?', (comment_id,))
-    comment =  c.fetchone()
-    comment_likes = int(comment[2])
-    comment_user_likes = str(comment[3]).split(',')
-
-    new_comment_user_likes = ''
-
-    comment_user_likes.remove(user)
-    new_comment_user_likes = str(','.join(comment_user_likes))
-    comment_likes -= 1
-
-    c.execute('UPDATE comments SET users_liked=?, likes=? WHERE id=?', (new_comment_user_likes, str(comment_likes), comment_id))
-    conn.commit()
-
-def user_liked_comment(user:str, comment_id:str):
-    c.execute('SELECT * FROM comments WHERE id=?', (comment_id,))
-    comment = c.fetchone()
-
-    comment_user_likes = str(comment[3]).split(',')
-
-    return True if user in comment_user_likes else False

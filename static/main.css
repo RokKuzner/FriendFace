@@ -175,3 +175,24 @@
     margin-top: 6px;
     margin-left: 8px;
 }
+
+.mycommentdiv {
+    margin-top: 10px;
+}
+
+.commentdivtextarea {
+    border: 1px gray solid;
+    margin-bottom: 10px;
+}
+
+.commentbtn {
+    text-decoration: none;
+    color: white;
+    background-color: rgb(29, 111, 225);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.commentbtndiv {
+    text-align: right;
+}
