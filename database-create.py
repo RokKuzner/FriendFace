@@ -22,8 +22,20 @@ id TEXT UNIQUE
 )
 """
 
+COMMENTS = """
+CREATE TABLE IF NOT EXISTS comments(
+user TEXT,
+content TEXT,
+likes TEXT,
+users_liked TEXT,
+parrent_id TEXT,
+id TEXT UNIQUE
+)
+"""
+
 c.execute(USERS)
 c.execute(POSTS)
+c.execute(COMMENTS)
 
 conn.commit()
 conn.close()
