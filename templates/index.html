@@ -20,8 +20,13 @@
             </div>
             <div class="postcontent">{{ post.1 }}</div>
             <div class="likedstuff">
-                <a href="like?post={{ post.4 }}&user={{ current_user }}"><img src="static/icons/heart.png" alt="like" class="likeimg" id="like"></a>
-                <div class="likediv">{{ post.2 }}</div>
+                {% if  post.5 == True%}
+                    <a href="like?post={{ post.4 }}&user={{ current_user }}"><img src="static/icons/liked.png" alt="like" class="likeimg" id="like"></a>
+                    <div class="likediv">{{ post.2 }}</div>
+                {% else %}
+                    <a href="like?post={{ post.4 }}&user={{ current_user }}"><img src="static/icons/like.png" alt="like" class="likeimg" id="like"></a>
+                    <div class="likediv">{{ post.2 }}</div>
+                {% endif %}
             </div>
         </div>
     {% endfor %}

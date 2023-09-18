@@ -8,12 +8,21 @@ import database as db
 # Create your views here.
 @login_required
 def home(request):
-    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':db.get_posts()[::-1]})
+    posts = db.get_posts()[::-1]
+    posts_with_liked_status = []
+    for post in posts:
+        if db.user_liked_post(request.session["current_user"], post[4]):
+            posts_with_liked_status.append(post+(True,))
+        else:
+            posts_with_liked_status.append(post+(False,))
+    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':posts_with_liked_status})
 
 @login_required
 def like(request):
     post_id = request.GET.get('post', None)
     user = request.GET.get('user', None)
+    if user != request.session["current_user"]:
+        return redirect('/')
     if db.user_liked_post(user, post_id):
         db.dislike_post(user, post_id)
     else:
