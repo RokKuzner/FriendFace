@@ -34,9 +34,55 @@ def user_exists(username:str):
     return True if data is not None else False
 
 def new_post(user:str, content:str):
-    c.execute('INSERT INTO posts VALUES(?, ?, ?, ?)', (user, content, "0", generate_id("posts", "id")))
+    c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?)', (user, content, "0", "", generate_id("posts", "id")))
     conn.commit()
 
 def get_posts():
     c.execute('SELECT * FROM posts')
     return c.fetchall()
+
+def like_post(user:str, post_id:str):
+    if user_liked_post(user, post_id) != False:
+        return None
+    c.execute('SELECT * FROM posts WHERE id=?', (post_id,))
+    post =  c.fetchone()
+    post_likes = int(post[2])
+    post_user_likes = str(post[3]).split(',')
+
+    new_post_user_likes = ''
+
+    if post_likes == '0':
+        new_post_user_likes = str(user)
+    else:
+        post_user_likes.append(user)
+        new_post_user_likes = str(','.join(post_user_likes))
+
+    post_likes += 1
+
+    c.execute('UPDATE posts SET users_liked=? likes=? WHERE id=?', (new_post_user_likes, str(post_likes), post_id))
+    conn.commit()
+
+def dislike_post(user:str, post_id:str):
+    if user_liked_post(user, post_id) != True:
+        return None
+    c.execute('SELECT * FROM posts WHERE id=?', (post_id,))
+    post =  c.fetchone()
+    post_likes = int(post[2])
+    post_user_likes = str(post[3]).split(',')
+
+    new_post_user_likes = ''
+
+    post_user_likes.remove(user)
+    new_post_user_likes = str(','.join(post_user_likes))
+    post_likes -= 1
+
+    c.execute('UPDATE posts SET users_liked=? likes=? WHERE id=?', (new_post_user_likes, str(post_likes), post_id))
+    conn.commit()
+
+def user_liked_post(user:str, post_id:str):
+    c.execute('SELECT * FROM posts WHERE id=?', (post_id,))
+    post =  c.fetchone()
+
+    post_user_likes = str(post[3]).split(',')
+
+    return True if user in post_user_likes else False

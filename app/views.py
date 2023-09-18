@@ -14,7 +14,10 @@ def home(request):
 def like(request):
     post_id = request.GET.get('post', None)
     user = request.GET.get('user', None)
-    print(post_id, user)
+    if db.user_liked_post(user, post_id):
+        db.dislike_post(user, post_id)
+    else:
+        db.like_post(user, post_id)
     return redirect('/')
 
 @login_required

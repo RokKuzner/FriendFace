@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS posts(
 user TEXT,
 content TEXT,
 likes TEXT,
+users_liked TEXT,
 id TEXT UNIQUE
 )
 """
