@@ -9,13 +9,13 @@ import database as db
 @login_required
 def home(request):
     posts = db.get_posts()[::-1]
-    posts_with_liked_status = []
+    posts_return = []
     for post in posts:
         if db.user_liked_post(request.session["current_user"], post[4]):
-            posts_with_liked_status.append(post+(True,))
+            posts_return.append(post+(True,db.get_comments_by_parrent_post(post[4])[::-1]))
         else:
-            posts_with_liked_status.append(post+(False,))
-    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':posts_with_liked_status})
+            posts_return.append(post+(False,db.get_comments_by_parrent_post(post[4])[::-1]))
+    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':posts_return})
 
 @login_required
 def like(request):
@@ -31,11 +31,11 @@ def like(request):
 
 @login_required
 def comment(request):
-    user_posting = request.GET.get('user', None)
-    content = request.GET.get('content', None)
-    parrent_id = request.GET.get('parrentid', None)
-    if user_posting == request.session['current_user']:
-        db.new_comment(user_posting, content, parrent_id)
+    if request.method == 'POST':
+        content = request.POST['comment_content']
+        parrent_id = request.POST['comment_parrent_id']
+        print(content, parrent_id)
+        db.new_comment(request.session['current_user'], content, parrent_id)
     return redirect('/')
 
 @login_required
