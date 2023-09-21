@@ -254,3 +254,8 @@ hr.postseperator {
 
     font-size: 2rem;
 }
+
+.postusernameatag {
+    text-decoration: none;
+    color: black;
+}

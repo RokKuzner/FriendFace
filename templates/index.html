@@ -12,7 +12,7 @@
         <div class="post">
             <div class="postuserdiv">
                 <img class="postusericon" src="static/icons/user.png" alt="User logo img">
-                <div class="postuser">{{ post.0 }}</div>
+                <a href="/user/{{ post.0 }}" class="postusernameatag"><div class="postuser">{{ post.0 }}</div></a>
             </div>
             <div class="postcontent">{{ post.1 }}</div>
             <div class="likedstuff">
