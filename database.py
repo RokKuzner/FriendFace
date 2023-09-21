@@ -41,6 +41,10 @@ def get_posts():
     c.execute('SELECT * FROM posts')
     return c.fetchall()
 
+def get_posts_by_user(user:str):
+    c.execute('SELECT * FROM posts WHERE user=?', (user,))
+    return c.fetchall()
+
 def like_post(user:str, post_id:str):
     if user_liked_post(user, post_id) != False:
         return None

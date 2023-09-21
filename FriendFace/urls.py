@@ -24,5 +24,6 @@ urlpatterns = [
     path('logout', include('app.urls')),
     path('post', include('app.urls')),
     path('like', include('app.urls')),
-    path('comment', include('app.urls'))
+    path('comment', include('app.urls')),
+    path('user', include('app.urls'))
 ]

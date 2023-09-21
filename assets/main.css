@@ -120,10 +120,17 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 2vh;
-    border: 2px solid rgba(73, 73, 73, 0.26);
     padding: 15px;
     border-radius: 10px;
     text-align: left;
+    border: 1px solid #0000004f;
+}
+
+hr.postseperator {
+    border-top: 2px solid black;
+    width: 60vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .likeimg {
@@ -157,7 +164,6 @@
 }
 
 .postcontent {
-    border: 2px solid rgba(73, 73, 73, 0.39);
     padding: 10px;
     min-height: 60px;
     border-radius: 10px;
@@ -165,11 +171,72 @@
 
 .likedstuff {
     display: inline-flex;
+    margin-top: 3px;
+    margin-left: 5px;
 }
 
 .likediv {
     font-size: 1.3rem;
     font-weight: bold;
-    margin-top: 3px;
-    margin-left: 3px;
+    margin-top: 6px;
+    margin-left: 8px;
+}
+
+.mycommentdiv {
+    margin-top: 10px;
+}
+
+.commentdivtextarea {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0%;
+    margin-bottom: 10px;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.commentdivtextarea:focus {
+    outline: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
+}
+
+.commentbtn {
+    text-decoration: none;
+    color: white;
+    background-color: rgb(29, 111, 225);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.commentbtndiv {
+    text-align: right;
+}
+
+.comments {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    margin-top: 10px;
+}
+
+.comment {
+    margin-left: 30px;
+    border: 2px solid rgba(73, 73, 73, 0.26);
+    padding: 15px;
+    border-radius: 10px;
+    min-width: max-content;
+}
+
+.commentuser {
+    margin-bottom: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.commentusericon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }

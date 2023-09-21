@@ -18,6 +18,17 @@ def home(request):
     return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':posts_return})
 
 @login_required
+def user(request, user_page):
+    posts = db.get_posts_by_user(user_page)[::-1]
+    posts_return = []
+    for post in posts:
+        if db.user_liked_post(request.session["current_user"], post[4]):
+            posts_return.append(post+(True,db.get_comments_by_parrent_post(post[4])[::-1]))
+        else:
+            posts_return.append(post+(False,db.get_comments_by_parrent_post(post[4])[::-1]))
+    return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':posts_return, 'user_page':user_page})
+
+@login_required
 def like(request):
     post_id = request.GET.get('post', None)
     user = request.GET.get('user', None)
