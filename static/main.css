@@ -240,3 +240,17 @@ hr.postseperator {
     height: 20px;
     margin-right: 5px;
 }
+
+.userpagewelcome {
+    width: 90vw;
+
+    margin: 1rem auto 1rem auto;
+    padding: 20px;
+
+    text-align: center;
+
+    border: 1px solid rgb(176, 176, 176);
+    border-radius: 5px;
+
+    font-size: 2rem;
+}

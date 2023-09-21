@@ -25,11 +25,12 @@
                 {% endif %}
             </div>
 
-            <form action="comment" method="post">
+            <form action="/comment" method="post">
                 {% csrf_token %}
                 <div class="mycommentdiv">
                     <input class="commentdivtextarea" id="posttext" name="comment_content" placeholder="Comment">
                     <input type="hidden" name="comment_parrent_id" value="{{ post.4 }}">
+                    <input type="hidden" name="redirect_to" value="{{ this_url }}">
                     <button type="submit" class="commentbtndiv btn btn-primary" id="postbtn">Comment</button>
                 </div>
             </form>

@@ -15,7 +15,7 @@ def home(request):
             posts_return.append(post+(True,db.get_comments_by_parrent_post(post[4])[::-1]))
         else:
             posts_return.append(post+(False,db.get_comments_by_parrent_post(post[4])[::-1]))
-    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':posts_return})
+    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':posts_return, 'this_url':str('/')})
 
 @login_required
 def user(request, user_page):
@@ -26,7 +26,9 @@ def user(request, user_page):
             posts_return.append(post+(True,db.get_comments_by_parrent_post(post[4])[::-1]))
         else:
             posts_return.append(post+(False,db.get_comments_by_parrent_post(post[4])[::-1]))
-    return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':posts_return, 'user_page':user_page})
+
+    print(str('/user/'+user_page))
+    return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':posts_return, 'user_page':user_page, 'this_url':str('/user/'+user_page)})
 
 @login_required
 def like(request):
@@ -45,9 +47,11 @@ def comment(request):
     if request.method == 'POST':
         content = request.POST['comment_content']
         parrent_id = request.POST['comment_parrent_id']
+        redirect_to = request.POST['redirect_to']
+        print("!!!!!!!!!!!!!!!REDIRECTING TO:", redirect_to)
         print(content, parrent_id)
         db.new_comment(request.session['current_user'], content, parrent_id)
-    return redirect('/')
+    return redirect(redirect_to)
 
 @login_required
 def post(request):
