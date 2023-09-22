@@ -249,8 +249,8 @@ hr.postseperator {
 
     text-align: center;
 
-    border: 1px solid rgb(176, 176, 176);
-    border-radius: 5px;
+    border: 1px solid rgba(176, 176, 176);
+    border-radius: 15px;
 
     font-size: 2rem;
 }
@@ -258,4 +258,17 @@ hr.postseperator {
 .postusernameatag {
     text-decoration: none;
     color: black;
+}
+
+.infoaboutuser {
+    font-size: 1.1rem;
+    display: flex;
+    margin: 20px auto 0 auto;
+    width: max-content;
+}
+
+.subinfo {
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: 20px;
 }

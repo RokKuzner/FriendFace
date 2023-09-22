@@ -21,26 +21,33 @@ def home(request):
 def user(request, user_page):
     posts = db.get_posts_by_user(user_page)[::-1]
     posts_return = []
+
+    total_likes = 0
+    total_posts = 0
+
     for post in posts:
+        total_posts += 1
+        total_likes += int(post[2])
         if db.user_liked_post(request.session["current_user"], post[4]):
             posts_return.append(post+(True,db.get_comments_by_parrent_post(post[4])[::-1]))
         else:
             posts_return.append(post+(False,db.get_comments_by_parrent_post(post[4])[::-1]))
 
     print(str('/user/'+user_page))
-    return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':posts_return, 'user_page':user_page, 'this_url':str('/user/'+user_page)})
+    return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':posts_return, 'user_page':user_page, 'this_url':str('/user/'+user_page), 'total_likes':total_likes, 'total_posts':total_posts})
 
 @login_required
 def like(request):
     post_id = request.GET.get('post', None)
     user = request.GET.get('user', None)
+    redirect_to = request.GET.get('redirect_to', None)
     if user != request.session["current_user"]:
-        return redirect('/')
+        return redirect('/login')
     if db.user_liked_post(user, post_id):
         db.dislike_post(user, post_id)
     else:
         db.like_post(user, post_id)
-    return redirect('/')
+    return redirect('/') if redirect_to == None else redirect(redirect_to)
 
 @login_required
 def comment(request):

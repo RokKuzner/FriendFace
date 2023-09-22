@@ -17,10 +17,10 @@
             <div class="postcontent">{{ post.1 }}</div>
             <div class="likedstuff">
                 {% if  post.5 == True%}
-                    <a href="like?post={{ post.4 }}&user={{ current_user }}"><img src="static/icons/liked.png" alt="like" class="likeimg" id="like"></a>
+                    <a href="like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}"><img src="static/icons/liked.png" alt="like" class="likeimg" id="like"></a>
                     <div class="likediv">{{ post.2 }}</div>
                 {% else %}
-                    <a href="like?post={{ post.4 }}&user={{ current_user }}"><img src="static/icons/like.png" alt="like" class="likeimg" id="like"></a>
+                    <a href="like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}"><img src="static/icons/like.png" alt="like" class="likeimg" id="like"></a>
                     <div class="likediv">{{ post.2 }}</div>
                 {% endif %}
             </div>
