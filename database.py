@@ -13,12 +13,12 @@ def generate_id(table_name:str, id_field:str):
         
     return id
 
+#Users
 def validate_user(username:str, password:str):
     c.execute('SELECT * FROM users WHERE email=? AND password=?',
               (username, password))
     data = c.fetchone()
     return (data is not None and username == data[0] and password == data[2])
-
 
 def add_user(username:str, password:str):
     user_id = generate_id('users', 'id')
@@ -32,7 +32,6 @@ def get_users_id_by_username(username:str):
 
     return data[1] if data != None else None
 
-
 def user_exists(username:str):
     c.execute('SELECT * FROM users WHERE email=?', (username, ))
 
@@ -40,6 +39,7 @@ def user_exists(username:str):
 
     return True if data is not None else False
 
+#Posts
 def new_post(user:str, content:str):
     c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?)', (user, content, "0", "", generate_id("posts", "id")))
     conn.commit()
@@ -98,10 +98,10 @@ def user_liked_post(user:str, post_id:str):
 
     return True if user in post_user_likes else False
 
+#Comments
 def new_comment(user:str, content:str, parrent_post_id:str):
     c.execute('INSERT INTO comments VALUES(?, ?, ?, ?, ?)', (user, content, parrent_post_id, generate_id("comments", "id"), get_users_id_by_username(user)))
     conn.commit()
-
 
 def get_comments_by_parrent_post(parrent_post_id:str):
     c.execute('SELECT * FROM comments WHERE parrent_id=?', (parrent_post_id,))
