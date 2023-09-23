@@ -36,6 +36,10 @@
 }
 
 .navbar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
@@ -46,8 +50,6 @@
     width: 100%;
     margin: 0;
     padding: 0;
-    top: 0;
-    left: 0;
 }
 
 .navbar-links ul {
@@ -271,4 +273,48 @@ hr.postseperator {
     font-weight: bold;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.menu {
+    position: absolute;
+    top: 60px;
+    right: 5px;
+    color: black;
+    background-color: white;
+    border: 1px rgb(191, 191, 191) solid;
+    border-radius: 8px;
+    margin: 0px;
+    padding: 5px;
+    width: 20%;
+}
+
+.menu ul li {
+    list-style: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.menu ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.mentusername {
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
 }
