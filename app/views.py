@@ -33,7 +33,6 @@ def user(request, user_page):
         else:
             posts_return.append(post+(False,db.get_comments_by_parrent_post(post[4])[::-1]))
 
-    print(str('/user/'+user_page))
     return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':posts_return, 'user_page':user_page, 'this_url':str('/user/'+user_page), 'total_likes':total_likes, 'total_posts':total_posts})
 
 @login_required
@@ -55,8 +54,6 @@ def comment(request):
         content = request.POST['comment_content']
         parrent_id = request.POST['comment_parrent_id']
         redirect_to = request.POST['redirect_to']
-        print("!!!!!!!!!!!!!!!REDIRECTING TO:", redirect_to)
-        print(content, parrent_id)
         db.new_comment(request.session['current_user'], content, parrent_id)
     return redirect(redirect_to)
 
