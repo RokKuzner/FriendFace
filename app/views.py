@@ -76,7 +76,7 @@ def login(request):
             return redirect('/')
         else:
             messages.error(request, "Username or password is incorrect")
-            return redirect('login')
+            return redirect('/login')
     return render(request, 'login.html', {'logged_in':False})
 
 def register(request):
@@ -87,16 +87,16 @@ def register(request):
 
         if db.user_exists(username):
             messages.error(request, "User with this username allready exists")
-            return redirect('register')
+            return redirect('/register')
         elif len(password1) < 6:
             messages.error(request, "Password must be at least 6 characters long")
-            return redirect('register')
+            return redirect('/register')
         elif password1 != password2:
             messages.error(request, "Passwords do not match")
-            return redirect('register')
+            return redirect('/register')
         elif "," in username:
             messages.error(request, "Username cannot contain a comma")
-            return redirect('register')
+            return redirect('/register')
         else:
             user_id = db.add_user(username, password1)
             request.session["current_user"] = username
@@ -112,4 +112,4 @@ def register(request):
 def logout(request):
     request.session["current_user"] = None
     del request.session['current_user']
-    return redirect('login')
+    return redirect('/login')
