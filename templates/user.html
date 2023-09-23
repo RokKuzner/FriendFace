@@ -14,7 +14,7 @@
     {% for post in posts %}
         <div class="post">
             <div class="postuserdiv">
-                <img class="postusericon" src="/media/avatars/{{ post.7 }}.jpg" alt="User logo img">
+                <img class="postusericon round" src="/media/avatars/{{ post.7 }}.jpg" alt="User logo img">
                 <div class="postuser">{{ post.0 }}</div>
             </div>
             <div class="postcontent">{{ post.1 }}</div>
@@ -41,7 +41,7 @@
             <div class="comments">
                 {% for comment in post.6 %}
                     <div class="comment">
-                        <div class="commentuser"><img class="commentusericon" src="/media/avatars/{{ comment.4 }}.jpg" alt="User logo img">{{ comment.0 }}</div>
+                        <div class="commentuser"><img class="commentusericon round" src="/media/avatars/{{ comment.4 }}.jpg" alt="User logo img">{{ comment.0 }}</div>
                         <div class="commentcontent">{{ comment.1 }}</div>
                     </div>
                     <br>

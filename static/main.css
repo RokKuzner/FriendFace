@@ -332,3 +332,7 @@ hr.postseperator {
     margin-left: 5px;
     margin-top: 3px;
 }
+
+.round {
+    border-radius: 100%;
+}
