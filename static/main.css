@@ -254,11 +254,15 @@ hr.postseperator {
     border: 1px solid rgba(176, 176, 176);
     border-radius: 15px;
 
-    font-size: 2rem;
+    background-color: rgba(255, 255, 255, 0.5);
+
+    font-size: 3rem;
+
+    color: white;
 }
 
 .userwelcom, .infoaboutuser {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgb(29, 111, 225, 0.5);
     width: max-content;
     margin: 0px auto 0px auto;
     padding-left: 10px;
@@ -272,7 +276,7 @@ hr.postseperator {
 }
 
 .infoaboutuser {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     display: flex;
     margin: 20px auto 0 auto;
     width: max-content;
