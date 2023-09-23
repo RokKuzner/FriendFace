@@ -26,6 +26,12 @@ def add_user(username:str, password:str):
     conn.commit()
     return user_id
 
+def get_users_id_by_username(username:str):
+    c.execute('SELECT * FROM users WHERE email=?', (username,))
+    data = c.fetchone()
+
+    return data[1] if data != None else None
+
 
 def user_exists(username:str):
     c.execute('SELECT * FROM users WHERE email=?', (username, ))
