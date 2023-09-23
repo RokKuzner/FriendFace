@@ -101,6 +101,12 @@ def register(request):
             user_id = db.add_user(username, password1)
             request.session["current_user"] = username
 
+            try:
+                a = request.FILES['avatar']
+            except:
+                messages.error(request, "You must chose an avatar for yourself")
+                return redirect('/register')
+
             filename = os.path.join(BASE_DIR, "media", "avatars", str(user_id+'.jpg'))
             with open(filename, "wb") as f:
                 f.write(request.FILES['avatar'].read())
