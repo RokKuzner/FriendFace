@@ -6,6 +6,7 @@ from decorators import login_required
 import database as db
 from FriendFace.settings import BASE_DIR
 import os
+from PIL import Image
 
 # Create your views here.
 @login_required
@@ -110,6 +111,12 @@ def register(request):
             filename = os.path.join(BASE_DIR, "media", "avatars", str(user_id+'.jpg'))
             with open(filename, "wb") as f:
                 f.write(request.FILES['avatar'].read())
+
+            image = Image.open(filename)
+            croped_img = image.crop(box=(0, 0, min(image.size), min(image.size)))
+            correct_format = croped_img.convert("RGB")
+            os.remove(filename)
+            correct_format.save(filename)
 
             return redirect('/')
 
