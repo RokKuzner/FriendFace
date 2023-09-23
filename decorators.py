@@ -9,9 +9,9 @@ def login_required(f):
             if request.session["current_user"] is not None:
                 pass
             else:
-                return redirect('login')
+                return redirect('/login')
         else:
-             return redirect('login')
+             return redirect('/login')
         return f(request, *args, **kwargs)
 
     return decorated_function
