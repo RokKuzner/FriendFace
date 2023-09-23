@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS comments(
 user TEXT,
 content TEXT,
 parrent_id TEXT,
-id TEXT UNIQUE
+id TEXT UNIQUE,
+user_id TEXT
 )
 """
 
