@@ -2,3 +2,4 @@ db.sqlite3
 __pycache__/
 media/
 FriendFace/__pycache__/
+app/__pycache__/
