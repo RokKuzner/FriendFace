@@ -3,8 +3,11 @@
 {% block title %}FriendFace{% endblock %}
 
 {% block content %}
-    <div class="userpagewelcome">
-        <strong>{{ user_page }}</strong>'s posts
+    <div class="userpagewelcome" style="background-image: url('/media/avatars/{{ current_user_id }}.jpg');">
+        <div class="userwelcom">
+            <strong>{{ user_page }}</strong>'s posts
+        </div>
+        
         <div class="infoaboutuser">
             <div class="subinfo">{{ total_likes }} likes</div>
             <div class="subinfo">{{ total_posts }} posts</div>
