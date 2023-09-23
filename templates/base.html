@@ -17,7 +17,14 @@
                 </div>
                 <div class="menu hidden" id="user_menu">
                     <ul>
-                        <li class="mentusername">{{ current_user }}</li>
+                        <li class="mentusername">
+                            <div class="inmenuusericon">
+                                <img src="/static/icons/user.png" alt="User logo img" style="width:100%;" class="usericomimg">
+                            </div>
+                            <div class="menuusername">
+                                {{ current_user }}
+                            </div>
+                        </li>
                         <hr>
                         <li><a href="/user/{{ current_user }}">Profile</a></li>
                         <li><a href="/logout">Logout</a></li>

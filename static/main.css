@@ -286,6 +286,7 @@ hr.postseperator {
     margin: 0px;
     padding: 5px;
     width: 20%;
+    min-width: max-content;
 }
 
 .menu ul li {
@@ -317,4 +318,17 @@ hr.postseperator {
 
 .hidden {
     display: none;
+}
+
+.mentusername {
+    display: flex;
+}
+
+.inmenuusericon {
+    width: 35px;
+}
+
+.menuusername {
+    margin-left: 5px;
+    margin-top: 3px;
 }
