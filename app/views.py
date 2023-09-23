@@ -31,11 +31,11 @@ def user(request, user_page):
         total_posts += 1
         total_likes += int(post[2])
         if db.user_liked_post(request.session["current_user"], post[4]):
-            posts_return.append(post+(True,db.get_comments_by_parrent_post(post[4])[::-1]))
+            posts_return.append(post+(True,db.get_comments_by_parrent_post(post[4])[::-1], db.get_users_id_by_username(post[0])))
         else:
-            posts_return.append(post+(False,db.get_comments_by_parrent_post(post[4])[::-1]))
+            posts_return.append(post+(False,db.get_comments_by_parrent_post(post[4])[::-1], db.get_users_id_by_username(post[0])))
 
-    return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'], 'current_user_id': db.get_users_id_by_username(request.session['current_user']),'posts':posts_return, 'user_page':user_page, 'this_url':str('/user/'+user_page), 'total_likes':total_likes, 'total_posts':total_posts})
+    return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'], 'current_user_id': db.get_users_id_by_username(request.session['current_user']),'posts':posts_return, 'user_page':user_page, 'user_page_id':db.get_users_id_by_username(user_page), 'this_url':str('/user/'+user_page), 'total_likes':total_likes, 'total_posts':total_posts})
 
 @login_required
 def like(request):
