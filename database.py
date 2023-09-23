@@ -41,7 +41,7 @@ def user_exists(username:str):
     return True if data is not None else False
 
 def new_post(user:str, content:str):
-    c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?, ?)', (user, content, "0", "", generate_id("posts", "id"), get_users_id_by_username(user)))
+    c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?)', (user, content, "0", "", generate_id("posts", "id")))
     conn.commit()
 
 def get_posts():
@@ -99,7 +99,7 @@ def user_liked_post(user:str, post_id:str):
     return True if user in post_user_likes else False
 
 def new_comment(user:str, content:str, parrent_post_id:str):
-    c.execute('INSERT INTO comments VALUES(?, ?, ?, ?)', (user, content, parrent_post_id, generate_id("comments", "id")))
+    c.execute('INSERT INTO comments VALUES(?, ?, ?, ?, ?)', (user, content, parrent_post_id, generate_id("comments", "id"), get_users_id_by_username(user)))
     conn.commit()
 
 
