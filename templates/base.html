@@ -12,14 +12,14 @@
                 <div class="navbar-links">
                     <ul>
                         <li><a href="/" class="navbar-link"><div class="navlogo">FriendFace</div></a></li>
-                        <li id="user_img_icon" class="navbar-user-img"><img src="/static/icons/user.png" alt="User logo img" style="width:50px;" class="usericomimg"></li>
+                        <li id="user_img_icon" class="navbar-user-img"><img src="/media/avatars/{{ current_user_id }}.jpg" alt="User logo img" style="width:50px;" class="usericomimg"></li>
                     </ul>
                 </div>
                 <div class="menu hidden" id="user_menu">
                     <ul>
                         <li class="mentusername">
                             <div class="inmenuusericon">
-                                <img src="/static/icons/user.png" alt="User logo img" style="width:100%;" class="usericomimg">
+                                <img src="/media/avatars/{{ current_user_id }}.jpg" alt="User logo img" style="width:100%;" class="usericomimg">
                             </div>
                             <div class="menuusername">
                                 {{ current_user }}

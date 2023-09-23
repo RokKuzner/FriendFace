@@ -14,10 +14,10 @@ def home(request):
     posts_return = []
     for post in posts:
         if db.user_liked_post(request.session["current_user"], post[4]):
-            posts_return.append(post+(True,db.get_comments_by_parrent_post(post[4])[::-1]))
+            posts_return.append(post+(True,db.get_comments_by_parrent_post(post[4])[::-1], db.get_users_id_by_username(post[0])))
         else:
-            posts_return.append(post+(False,db.get_comments_by_parrent_post(post[4])[::-1]))
-    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':posts_return, 'this_url':str('/')})
+            posts_return.append(post+(False,db.get_comments_by_parrent_post(post[4])[::-1], db.get_users_id_by_username(post[0])))
+    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'], 'current_user_id': db.get_users_id_by_username(request.session['current_user']), 'posts':posts_return, 'this_url':str('/')})
 
 @login_required
 def user(request, user_page):
@@ -35,7 +35,7 @@ def user(request, user_page):
         else:
             posts_return.append(post+(False,db.get_comments_by_parrent_post(post[4])[::-1]))
 
-    return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'], 'posts':posts_return, 'user_page':user_page, 'this_url':str('/user/'+user_page), 'total_likes':total_likes, 'total_posts':total_posts})
+    return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'], 'current_user_id': db.get_users_id_by_username(request.session['current_user']),'posts':posts_return, 'user_page':user_page, 'this_url':str('/user/'+user_page), 'total_likes':total_likes, 'total_posts':total_posts})
 
 @login_required
 def like(request):
