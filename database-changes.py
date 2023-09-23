@@ -4,7 +4,7 @@ conn = sqlite3.connect('db.sqlite3')
 c = conn.cursor()
 
 CHANGE = """
-DROP TABLE comments;
+DROP TABLE posts;
 """
 
 c.execute(CHANGE)

@@ -9,7 +9,7 @@
 
 {% block content %}
     <div class="loginwrapper text-center">
-        <form action="register" method="post">
+        <form action="register" method="post" enctype="multipart/form-data">
             <div class="loginwelcometxt">FriendFace</div>
             {% for message in messages %}
                 <div class="loginregistererror alert alert-warning" role="alert">
@@ -20,6 +20,7 @@
             <input type="text" class="logininput form-control" placeholder="Username" aria-label="Username" name="user" aria-describedby="basic-addon1">
             <input type="password" class="logininput form-control" placeholder="Password" aria-label="Password" name="password" aria-describedby="basic-addon1" style="margin-top: 10px;">
             <input type="password" class="logininput form-control" placeholder="Repeat password" aria-label="Password" name="password2" aria-describedby="basic-addon1" style="margin-top: 10px;">
+            <input type="file" class="logininput form-control" name="avatar" accept="image/jpg" style="margin-top: 10px;">
             <button type="submit" class="loginbutton btn btn-primary">Register</button>
         </form>
         <div class="loginlinkwraper">

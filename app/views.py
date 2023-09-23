@@ -4,6 +4,8 @@ from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.urls import reverse
 from decorators import login_required
 import database as db
+from FriendFace.settings import BASE_DIR
+import os
 
 # Create your views here.
 @login_required
@@ -96,8 +98,13 @@ def register(request):
             messages.error(request, "Username cannot contain a comma")
             return redirect('register')
         else:
-            db.add_user(username, password1)
+            user_id = db.add_user(username, password1)
             request.session["current_user"] = username
+
+            filename = os.path.join(BASE_DIR, "media", "avatars", str(user_id+'.jpg'))
+            with open(filename, "wb") as f:
+                f.write(request.FILES['avatar'].read())
+
             return redirect('/')
 
     return render(request, 'register.html', {'logged_in':False})
