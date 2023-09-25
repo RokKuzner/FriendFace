@@ -3,7 +3,11 @@
 {% block title %}FriendFace{% endblock %}
 
 {% block content %}
-    <div class="userpagewelcome" style="background-image: url('/media/avatars/{{ current_user_id }}.jpg');">
+    <div class="userpagewelcome">
+        <div class="userpageuseravatardiv">
+            <img src="/media/avatars/{{ user_page_id }}.jpg" alt="User logo img" class="userpageuseravatarimg round">
+        </div>
+
         <div class="userwelcom">
             <strong>{{ user_page }}</strong>'s posts
         </div>

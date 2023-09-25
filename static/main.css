@@ -247,23 +247,23 @@ hr.postseperator {
 .userpagewelcome {
     width: 90vw;
 
-    margin: 1rem auto 1rem auto;
+    margin: 0 auto 1rem auto;
     padding: 20px;
 
     text-align: center;
 
     border: 1px solid rgba(176, 176, 176);
-    border-radius: 15px;
+    border-top: 0px;
+    border-radius: 0px 0px 15px 15px;
 
     background-color: rgba(255, 255, 255, 0.5);
 
-    font-size: 3rem;
+    font-size: 2rem;
 
-    color: white;
+    color: black;
 }
 
 .userwelcom, .infoaboutuser {
-    background-color: rgb(29, 111, 225, 0.5);
     width: max-content;
     margin: 0px auto 0px auto;
     padding-left: 10px;
@@ -276,10 +276,16 @@ hr.postseperator {
     color: black;
 }
 
+.userpageuseravatarimg {
+    width: 10vw;
+    min-width: 100px;
+    max-width: 200px;
+}
+
 .infoaboutuser {
     font-size: 1.3rem;
     display: flex;
-    margin: 20px auto 0 auto;
+    margin: 10px auto 0 auto;
     width: max-content;
 }
 
@@ -357,6 +363,10 @@ hr.postseperator {
     }
 
     .mypostdiv {
+        width: 97vw;
+    }
+
+    .userpagewelcome {
         width: 97vw;
     }
 }
