@@ -112,7 +112,7 @@ def register(request):
 
             image = Image.open(request.FILES['avatar'])
             croped_img = image.crop(box=(0, 0, min(image.size), min(image.size)))
-            croped_img.save(filename)
+            croped_img.convert("RGB").save(filename)
 
             return redirect('/')
 
