@@ -109,14 +109,10 @@ def register(request):
                 return redirect('/register')
 
             filename = os.path.join(BASE_DIR, "media", "avatars", str(user_id+'.jpg'))
-            with open(filename, "wb") as f:
-                f.write(request.FILES['avatar'].read())
 
-            image = Image.open(filename)
+            image = Image.open(request.FILES['avatar'])
             croped_img = image.crop(box=(0, 0, min(image.size), min(image.size)))
-            correct_format = croped_img.convert("RGB")
-            os.remove(filename)
-            correct_format.save(filename)
+            croped_img.save(filename)
 
             return redirect('/')
 
