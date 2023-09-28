@@ -70,7 +70,6 @@ def post(request):
 
 def login(request):
     then = str(request.GET.get('then', None))
-    print("THEN:", then)
     if request.method == 'POST':
         username = request.POST['user']
         password = request.POST['password']
