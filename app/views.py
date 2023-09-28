@@ -69,16 +69,22 @@ def post(request):
     return redirect('/')
 
 def login(request):
+    then = str(request.GET.get('then', None))
+    print("THEN:", then)
     if request.method == 'POST':
         username = request.POST['user']
         password = request.POST['password']
         if db.validate_user(username, password):
             request.session["current_user"] = username
+            if then != 'None':
+                return redirect(str(then))
             return redirect('/')
         else:
             messages.error(request, "Username or password is incorrect")
+            if then != 'None':
+                return redirect(str('/login?then='+str(then)))
             return redirect('/login')
-    return render(request, 'login.html', {'logged_in':False})
+    return render(request, 'login.html', {'logged_in':False, 'then':then})
 
 def register(request):
     if request.method == 'POST':

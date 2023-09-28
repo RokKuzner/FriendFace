@@ -9,7 +9,7 @@
 
 {% block content %}
     <div class="loginwrapper text-center">
-        <form action="login" method="post">
+        <form action="login?then={{ then }}" method="post">
             {% csrf_token %}
             <div class="loginwelcometxt">FriendFace</div>
             {% for message in messages %}
