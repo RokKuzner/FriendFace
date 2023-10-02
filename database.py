@@ -78,7 +78,7 @@ def follow_user(user_following:str, user_to_follow:str):
     conn.commit()
 
 def unfollow_user(user_following:str, user_to_follow:str):
-    if is_following_user(user_following, user_to_follow) == True:
+    if is_following_user(user_following, user_to_follow) == False:
         return None
 
     c.execute("SELECT * FROM users WHERE email=?", (user_following,))
