@@ -44,13 +44,35 @@ def new_post(user:str, content:str):
     c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?)', (user, content, "0", "", generate_id("posts", "id")))
     conn.commit()
 
-def get_posts():
+def get_posts(user:str):
     c.execute('SELECT * FROM posts')
-    return c.fetchall()
+    posts = c.fetchall()
+    posts_return = []
+    for post in posts:
+        if user_liked_post(user, post[4]):
+            posts_return.append(post+(True,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
+        else:
+            posts_return.append(post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
+    return posts_return
 
 def get_posts_by_user(user:str):
     c.execute('SELECT * FROM posts WHERE user=?', (user,))
-    return c.fetchall()
+    posts = c.fetchall()
+
+    posts_return = []
+
+    total_likes = 0
+    total_posts = 0
+
+    for post in posts:
+        total_posts += 1
+        total_likes += int(post[2])
+        if user_liked_post(user, post[4]):
+            posts_return.append(post+(True,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
+        else:
+            posts_return.append(post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
+
+    return [posts_return, total_likes, total_posts]
 
 def like_post(user:str, post_id:str):
     if user_liked_post(user, post_id) != False:

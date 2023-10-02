@@ -11,32 +11,13 @@ from PIL import Image
 # Create your views here.
 @login_required
 def home(request):
-    posts = db.get_posts()[::-1]
-    posts_return = []
-    for post in posts:
-        if db.user_liked_post(request.session["current_user"], post[4]):
-            posts_return.append(post+(True,db.get_comments_by_parrent_post(post[4])[::-1], db.get_users_id_by_username(post[0])))
-        else:
-            posts_return.append(post+(False,db.get_comments_by_parrent_post(post[4])[::-1], db.get_users_id_by_username(post[0])))
-    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'], 'current_user_id': db.get_users_id_by_username(request.session['current_user']), 'posts':posts_return, 'this_url':str('/')})
+    posts = db.get_posts(request.session["current_user"])
+    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'], 'current_user_id': db.get_users_id_by_username(request.session['current_user']), 'posts':posts[::-1], 'this_url':str('/')})
 
 @login_required
 def user(request, user_page):
-    posts = db.get_posts_by_user(user_page)[::-1]
-    posts_return = []
-
-    total_likes = 0
-    total_posts = 0
-
-    for post in posts:
-        total_posts += 1
-        total_likes += int(post[2])
-        if db.user_liked_post(request.session["current_user"], post[4]):
-            posts_return.append(post+(True,db.get_comments_by_parrent_post(post[4])[::-1], db.get_users_id_by_username(post[0])))
-        else:
-            posts_return.append(post+(False,db.get_comments_by_parrent_post(post[4])[::-1], db.get_users_id_by_username(post[0])))
-
-    return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'], 'current_user_id': db.get_users_id_by_username(request.session['current_user']),'posts':posts_return, 'user_page':user_page, 'user_page_id':db.get_users_id_by_username(user_page), 'this_url':str('/user/'+user_page), 'total_likes':total_likes, 'total_posts':total_posts})
+    posts = db.get_posts_by_user(user_page)
+    return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'], 'current_user_id': db.get_users_id_by_username(request.session['current_user']),'posts':posts[0][::-1], 'user_page':user_page, 'user_page_id':db.get_users_id_by_username(user_page), 'this_url':str('/user/'+user_page), 'total_likes':posts[1], 'total_posts':posts[2]})
 
 @login_required
 def like(request):
