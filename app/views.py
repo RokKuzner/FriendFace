@@ -20,6 +20,18 @@ def user(request, user_page):
     return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'], 'current_user_id': db.get_users_id_by_username(request.session['current_user']),'posts':posts[0][::-1], 'user_page':user_page, 'user_page_id':db.get_users_id_by_username(user_page), 'this_url':str('/user/'+user_page), 'total_likes':posts[1], 'total_posts':posts[2]})
 
 @login_required
+def follow(request, user):
+    redirect_to = request.GET.get('redirect_to', None)
+    db.follow_user(request.session["current_user"], user)
+    return redirect('/') if redirect_to == None else redirect(redirect_to)
+
+@login_required
+def unfollow(request, user):
+    redirect_to = request.GET.get('redirect_to', None)
+    db.unfollow_user(request.session["current_user"], user)
+    return redirect('/') if redirect_to == None else redirect(redirect_to)
+
+@login_required
 def like(request):
     post_id = request.GET.get('post', None)
     user = request.GET.get('user', None)

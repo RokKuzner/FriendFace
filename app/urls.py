@@ -11,8 +11,9 @@ urlpatterns = [
   path('post', views.post, name='post'),
   path('like', views.like, name='like'),
   path('comment', views.comment, name='comment'),
-  path('user/<str:user_page>', views.user, name='user')
+  path('user/<str:user_page>', views.user, name='user'),
+  path('follow/<str:user>', views.follow, name='follow'),
+  path('unfollow/<str:user>', views.unfollow, name='unfollow')
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
