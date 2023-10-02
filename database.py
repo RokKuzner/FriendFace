@@ -56,7 +56,7 @@ def follow_user(user_following:str, user_to_follow:str):
     c.execute("SELECT * FROM users WHERE email=?", (user_following,))
     user_following_return = c.fetchone()
 
-    if not str(user_following[3]) == '':
+    if not str(user_following_return[3]) == '':
         user_following_list = str(user_following_return[3]).split(',').append(user_to_follow)
         user_following_list = ','.join(user_following_list)
     else:
@@ -67,14 +67,14 @@ def follow_user(user_following:str, user_to_follow:str):
     user_to_follow_return = c.fetchone()
     user_followers = int(user_to_follow_return[5])+1
 
-    if not str(user_following[3]) == '':
+    if not str(user_following_return[3]) == '':
         user_to_follow_list = str(user_to_follow_return[3]).split(',').append(user_following)
         user_to_follow_list = ','.join(user_to_follow_list)
     else:
-        user_to_follow_list = str(user_to_follow_list)
+        user_to_follow_list = str(user_following)
 
     c.execute('UPDATE users SET following=? WHERE email=?', (user_following_list, user_following))
-    c.execute('UPDATE users SET followers=?, followers_n=? WHERE email=?', (user_following_list, str(user_followers), user_to_follow))
+    c.execute('UPDATE users SET followers=?, followers_n=? WHERE email=?', (user_to_follow_list, str(user_followers), user_to_follow))
     conn.commit()
 
 def unfollow_user(user_following:str, user_to_follow:str):
@@ -84,9 +84,12 @@ def unfollow_user(user_following:str, user_to_follow:str):
     c.execute("SELECT * FROM users WHERE email=?", (user_following,))
     user_following_return = c.fetchone()
 
-    if not str(user_following[3]) == '':
+    if not str(user_following_return[3]) == '':
         user_following_list = str(user_following_return[3]).split(',').remove(user_to_follow)
-        user_following_list = ','.join(user_following_list)
+        if user_following_list == None:
+            user_following_list = ''
+        else:
+            user_following_list = ','.join(user_following_list)
     else:
         user_following_list = str(user_to_follow)
 
@@ -95,14 +98,17 @@ def unfollow_user(user_following:str, user_to_follow:str):
     user_to_follow_return = c.fetchone()
     user_followers = int(user_to_follow_return[5])-1
 
-    if not str(user_following[3]) == '':
+    if not str(user_following_return[3]) == '':
         user_to_follow_list = str(user_to_follow_return[3]).split(',').remove(user_following)
-        user_to_follow_list = ','.join(user_to_follow_list)
+        if user_to_follow_list == None:
+            user_to_follow_list = ''
+        else:
+            user_to_follow_list = ','.join(user_to_follow_list)
     else:
-        user_to_follow_list = str(user_to_follow_list)
+        user_to_follow_list = str(user_following)
 
     c.execute('UPDATE users SET following=? WHERE email=?', (user_following_list, user_following))
-    c.execute('UPDATE users SET followers=?, followers_n=? WHERE email=?', (user_following_list, str(user_followers), user_to_follow))
+    c.execute('UPDATE users SET followers=?, followers_n=? WHERE email=?', (user_to_follow_list, str(user_followers), user_to_follow))
     conn.commit()
 
 
