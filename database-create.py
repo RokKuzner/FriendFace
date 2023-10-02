@@ -8,7 +8,9 @@ CREATE TABLE IF NOT EXISTS users(
 email TEXT UNIQUE,
 id TEXT UNIQUE,
 password TEXT,
-folowing TEXT
+following TEXT,
+followers TEXT,
+followers_n TEXT
 )
 """
 

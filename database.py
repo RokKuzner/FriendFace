@@ -22,7 +22,7 @@ def validate_user(username:str, password:str):
 
 def add_user(username:str, password:str):
     user_id = generate_id('users', 'id')
-    c.execute('INSERT INTO users VALUES(?, ?, ?, ?)', (username, user_id, password, ''))
+    c.execute('INSERT INTO users VALUES(?, ?, ?, ?, ?, ?)', (username, user_id, password, '', '', '0'))
     conn.commit()
     return user_id
 
@@ -38,6 +38,73 @@ def user_exists(username:str):
     data = c.fetchone()
 
     return True if data is not None else False
+
+def is_following_user(follower:str, username:str):
+    c.execute('SELECT * FROM users WHERE email=?', (username,))
+    returned = c.fetchone()
+
+    if returned[3] == '':
+        return False
+    else:
+        user_following_list = str(returned[3]).split(',')
+        return True if follower in user_following_list else False
+
+def follow_user(user_following:str, user_to_follow:str):
+    if is_following_user(user_following, user_to_follow) == True:
+        return None
+
+    c.execute("SELECT * FROM users WHERE email=?", (user_following,))
+    user_following_return = c.fetchone()
+
+    if not str(user_following[3]) == '':
+        user_following_list = str(user_following_return[3]).split(',').append(user_to_follow)
+        user_following_list = ','.join(user_following_list)
+    else:
+        user_following_list = str(user_to_follow)
+
+    
+    c.execute("SELECT * FROM users WHERE email=?", (user_to_follow,))
+    user_to_follow_return = c.fetchone()
+    user_followers = int(user_to_follow_return[5])+1
+
+    if not str(user_following[3]) == '':
+        user_to_follow_list = str(user_to_follow_return[3]).split(',').append(user_following)
+        user_to_follow_list = ','.join(user_to_follow_list)
+    else:
+        user_to_follow_list = str(user_to_follow_list)
+
+    c.execute('UPDATE users SET following=? WHERE email=?', (user_following_list, user_following))
+    c.execute('UPDATE users SET followers=?, followers_n=? WHERE email=?', (user_following_list, str(user_followers), user_to_follow))
+    conn.commit()
+
+def unfollow_user(user_following:str, user_to_follow:str):
+    if is_following_user(user_following, user_to_follow) == True:
+        return None
+
+    c.execute("SELECT * FROM users WHERE email=?", (user_following,))
+    user_following_return = c.fetchone()
+
+    if not str(user_following[3]) == '':
+        user_following_list = str(user_following_return[3]).split(',').remove(user_to_follow)
+        user_following_list = ','.join(user_following_list)
+    else:
+        user_following_list = str(user_to_follow)
+
+    
+    c.execute("SELECT * FROM users WHERE email=?", (user_to_follow,))
+    user_to_follow_return = c.fetchone()
+    user_followers = int(user_to_follow_return[5])-1
+
+    if not str(user_following[3]) == '':
+        user_to_follow_list = str(user_to_follow_return[3]).split(',').remove(user_following)
+        user_to_follow_list = ','.join(user_to_follow_list)
+    else:
+        user_to_follow_list = str(user_to_follow_list)
+
+    c.execute('UPDATE users SET following=? WHERE email=?', (user_following_list, user_following))
+    c.execute('UPDATE users SET followers=?, followers_n=? WHERE email=?', (user_following_list, str(user_followers), user_to_follow))
+    conn.commit()
+
 
 #Posts
 def new_post(user:str, content:str):
