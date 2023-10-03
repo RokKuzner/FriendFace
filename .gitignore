@@ -3,3 +3,4 @@ __pycache__/
 media/
 FriendFace/__pycache__/
 app/__pycache__/
+database-changes.py
