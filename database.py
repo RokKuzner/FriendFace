@@ -149,6 +149,17 @@ def get_posts(user:str):
     return posts_return
 
 def get_posts_by_user(user:str):
+    c.execute('SELECT * FROM posts WHERE email=?', (user,))
+    posts = c.fetchall()
+    posts_return = []
+    for post in posts:
+        if user_liked_post(user, post[4]):
+            posts_return.append(post+(True,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
+        else:
+            posts_return.append(post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
+    return posts_return
+
+def get_posts_by_user(user:str):
     c.execute('SELECT * FROM posts WHERE user=?', (user,))
     posts = c.fetchall()
 
