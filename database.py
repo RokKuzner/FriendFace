@@ -39,76 +39,96 @@ def user_exists(username:str):
 
     return True if data is not None else False
 
-def is_following_user(follower:str, username:str):
-    c.execute('SELECT * FROM users WHERE email=?', (username,))
+def is_following_user(user_following:str, user:str):
+    c.execute('SELECT * FROM users WHERE email=?', (user_following,))
     returned = c.fetchone()
 
-    if returned[3] == '':
+    if returned == None or returned[3] == '':
         return False
     else:
         user_following_list = str(returned[3]).split(',')
-        return True if follower in user_following_list else False
+        return True if user in user_following_list else False
 
 def follow_user(user_following:str, user_to_follow:str):
     if is_following_user(user_following, user_to_follow) == True:
-        return None
-
-    c.execute("SELECT * FROM users WHERE email=?", (user_following,))
-    user_following_return = c.fetchone()
-
-    if not str(user_following_return[3]) == '':
-        user_following_list = str(user_following_return[3]).split(',').append(user_to_follow)
-        user_following_list = ','.join(user_following_list)
-    else:
-        user_following_list = str(user_to_follow)
-
+        return "User allready following"
     
-    c.execute("SELECT * FROM users WHERE email=?", (user_to_follow,))
-    user_to_follow_return = c.fetchone()
-    user_followers = int(user_to_follow_return[5])+1
+    #user_following
+    current_user_following = []
+    c.execute('SELECT * FROM users WHERE email=?', (user_following,))
+    returned_user_following = c.fetchone()
 
-    if not str(user_following_return[3]) == '':
-        user_to_follow_list = str(user_to_follow_return[3]).split(',').append(user_following)
-        user_to_follow_list = ','.join(user_to_follow_list)
-    else:
-        user_to_follow_list = str(user_following)
+    if len(returned_user_following[3]) != 0:
+        current_user_following = returned_user_following[3].split(',')
 
-    c.execute('UPDATE users SET following=? WHERE email=?', (user_following_list, user_following))
-    c.execute('UPDATE users SET followers=?, followers_n=? WHERE email=?', (user_to_follow_list, str(user_followers), user_to_follow))
+    current_user_following.append(user_to_follow)
+    new_user_following = current_user_following.copy()
+    new_user_following_str = ','.join(new_user_following)
+
+    c.execute('UPDATE users SET following=? WHERE email=?', (new_user_following_str, user_following))
+    conn.commit()
+
+
+    #user_to_follow
+    current_user_to_follow_followers = []
+    current_user_to_follow_followers_n = 0
+
+    c.execute('SELECT * FROM users WHERE email=?', (user_to_follow,))
+    returned_user_to_follow = c.fetchone()
+
+    if len(returned_user_to_follow[4]) != 0:
+        current_user_to_follow_followers = returned_user_to_follow[4].split(',')
+    current_user_to_follow_followers_n = int(returned_user_to_follow[5])
+
+    current_user_to_follow_followers.append(user_following)
+    new_user_to_follow_followers = current_user_to_follow_followers.copy()
+    new_user_to_follow_followers_str = ','.join(new_user_to_follow_followers)
+
+    current_user_to_follow_followers_n += 1
+    current_user_to_follow_followers_n_str = str(current_user_to_follow_followers_n)
+
+    c.execute('UPDATE users SET followers=?, followers_n=? WHERE email=?', (new_user_to_follow_followers_str, current_user_to_follow_followers_n_str, user_to_follow))
     conn.commit()
 
 def unfollow_user(user_following:str, user_to_follow:str):
     if is_following_user(user_following, user_to_follow) == False:
-        return None
-
-    c.execute("SELECT * FROM users WHERE email=?", (user_following,))
-    user_following_return = c.fetchone()
-
-    if not str(user_following_return[3]) == '':
-        user_following_list = str(user_following_return[3]).split(',').remove(user_to_follow)
-        if user_following_list == None:
-            user_following_list = ''
-        else:
-            user_following_list = ','.join(user_following_list)
-    else:
-        user_following_list = str(user_to_follow)
-
+        return "User allready not following"
     
-    c.execute("SELECT * FROM users WHERE email=?", (user_to_follow,))
-    user_to_follow_return = c.fetchone()
-    user_followers = int(user_to_follow_return[5])-1
+    #user_following
+    current_user_following = []
+    c.execute('SELECT * FROM users WHERE email=?', (user_following,))
+    returned_user_following = c.fetchone()
 
-    if not str(user_following_return[3]) == '':
-        user_to_follow_list = str(user_to_follow_return[3]).split(',').remove(user_following)
-        if user_to_follow_list == None:
-            user_to_follow_list = ''
-        else:
-            user_to_follow_list = ','.join(user_to_follow_list)
-    else:
-        user_to_follow_list = str(user_following)
+    if len(returned_user_following[3]) != 0:
+        current_user_following = returned_user_following[3].split(',')
 
-    c.execute('UPDATE users SET following=? WHERE email=?', (user_following_list, user_following))
-    c.execute('UPDATE users SET followers=?, followers_n=? WHERE email=?', (user_to_follow_list, str(user_followers), user_to_follow))
+    current_user_following.remove(user_to_follow)
+    new_user_following = current_user_following.copy()
+    new_user_following_str = ','.join(new_user_following)
+
+    c.execute('UPDATE users SET following=? WHERE email=?', (new_user_following_str, user_following))
+    conn.commit()
+
+
+    #user_to_follow
+    current_user_to_follow_followers = []
+    current_user_to_follow_followers_n = 0
+
+    c.execute('SELECT * FROM users WHERE email=?', (user_to_follow,))
+    returned_user_to_follow = c.fetchone()
+
+    if len(returned_user_to_follow[4]) != 0:
+        current_user_to_follow_followers = returned_user_to_follow[4].split(',')
+    current_user_to_follow_followers_n = int(returned_user_to_follow[5])
+
+    current_user_to_follow_followers.remove(user_following)
+    new_user_to_follow_followers = current_user_to_follow_followers.copy()
+    new_user_to_follow_followers_str = ','.join(new_user_to_follow_followers)
+
+    current_user_to_follow_followers_n -= 1
+    current_user_to_follow_followers_n_str = str(current_user_to_follow_followers_n)
+
+    c.execute('UPDATE users SET followers=?, followers_n=? WHERE email=?', (new_user_to_follow_followers_str, current_user_to_follow_followers_n_str, user_to_follow))
     conn.commit()
 
 
