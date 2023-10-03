@@ -53,6 +53,9 @@ def follow_user(user_following:str, user_to_follow:str):
     if is_following_user(user_following, user_to_follow) == True:
         return "User allready following"
     
+    if user_following == user_to_follow:
+        return "Cannot subscribe to yourself"
+    
     #user_following
     current_user_following = []
     c.execute('SELECT * FROM users WHERE email=?', (user_following,))
@@ -131,6 +134,10 @@ def unfollow_user(user_following:str, user_to_follow:str):
     c.execute('UPDATE users SET followers=?, followers_n=? WHERE email=?', (new_user_to_follow_followers_str, current_user_to_follow_followers_n_str, user_to_follow))
     conn.commit()
 
+
+def get_folowers_n(user:str):
+    c.execute('SELECT * FROM users WHERE email=?', (user,))
+    return c.fetchone()[5]
 
 #Posts
 def new_post(user:str, content:str):

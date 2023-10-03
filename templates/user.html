@@ -17,6 +17,7 @@
         <div class="infoaboutuser">
             <div class="subinfo">{{ total_likes }} likes</div>
             <div class="subinfo">{{ total_posts }} posts</div>
+            <div class="subinfo">{{ followers }} followers</div>
             {% if is_following == True %}
                 <div class="subinfo subscribebntdiv">
                     <a class="unfollow btn btn-primary" href="/unfollow/{{ user_page }}?redirect_to={{ this_url }}">Unfollow</a>
