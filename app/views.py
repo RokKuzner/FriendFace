@@ -12,12 +12,18 @@ from PIL import Image
 @login_required
 def home(request):
     posts = db.get_posts(request.session["current_user"])
-    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'], 'current_user_id': db.get_users_id_by_username(request.session['current_user']), 'posts':posts[::-1], 'this_url':str('/')})
+    return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'],
+                                          'current_user_id': db.get_users_id_by_username(request.session['current_user']),
+                                          'posts':posts[::-1], 'this_url':str('/')})
 
 @login_required
 def user(request, user_page):
     posts = db.get_posts_by_user(user_page)
-    return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'], 'current_user_id': db.get_users_id_by_username(request.session['current_user']),'posts':posts[0][::-1], 'user_page':user_page, 'user_page_id':db.get_users_id_by_username(user_page), 'this_url':str('/user/'+user_page), 'total_likes':posts[1], 'total_posts':posts[2]})
+    return render(request, 'user.html', {'logged_in':True, 'current_user':request.session['current_user'],
+                                         'current_user_id': db.get_users_id_by_username(request.session['current_user']),
+                                         'posts':posts[0][::-1], 'user_page':user_page, 'user_page_id':db.get_users_id_by_username(user_page),
+                                         'this_url':str('/user/'+user_page), 'total_likes':posts[1], 'total_posts':posts[2],
+                                         'is_following':db.is_following_user(request.session['current_user'], user_page)})
 
 @login_required
 def follow(request, user):

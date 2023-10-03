@@ -9,12 +9,23 @@
         </div>
 
         <div class="userwelcom">
-            <strong>{{ user_page }}</strong>'s posts
+            <div class="usersname">
+                <strong>{{ user_page }}</strong>
+            </div>
         </div>
         
         <div class="infoaboutuser">
             <div class="subinfo">{{ total_likes }} likes</div>
             <div class="subinfo">{{ total_posts }} posts</div>
+            {% if is_following == True %}
+                <div class="subinfo subscribebntdiv">
+                    <a class="unfollow btn btn-primary" href="/unfollow/{{ user_page }}?redirect_to={{ this_url }}">Unfollow</a>
+                </div>
+            {% else %}
+                <div class="subinfo subscribebntdiv">
+                    <a class="btn btn-primary" href="/follow/{{ user_page }}?redirect_to={{ this_url }}">Follow</a>
+                </div>
+            {% endif %}
         </div>
     </div>
 

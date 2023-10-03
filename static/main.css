@@ -271,6 +271,12 @@ hr.postseperator {
     border-radius: 8px;
 }
 
+.unfollow, .unfollow:hover, .unfollow:active {
+    background: rgb(199, 199, 199);
+    color: black;
+    border: 1px rgba(0, 0, 0, 0) solid;
+}
+
 .postusernameatag {
     text-decoration: none;
     color: black;
