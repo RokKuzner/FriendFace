@@ -139,6 +139,16 @@ def get_folowers_n(user:str):
     c.execute('SELECT * FROM users WHERE email=?', (user,))
     return c.fetchone()[5]
 
+def get_users_following(user:str):
+    c.execute('SELECT * FROM users WHERE email=?', (user,))
+    returned_user = c.fetchone()
+
+    user_following_str = returned_user[3]
+    if user_following_str == '':
+        return []
+    
+    return user_following_str.split(',')
+
 #Posts
 def new_post(user:str, content:str):
     c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?)', (user, content, "0", "", generate_id("posts", "id")))
