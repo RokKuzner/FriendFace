@@ -303,6 +303,10 @@ hr.postseperator {
     width: max-content;
 }
 
+.infoaboutuser div {
+    display: flex;
+}
+
 .subinfo {
     font-weight: bold;
     margin-left: 20px;
@@ -371,7 +375,7 @@ hr.postseperator {
     border-radius: 100%;
 }
 
-@media (max-device-width: 480px){
+@media (max-device-width: 480px), (max-width: 575px){
     .post {
         width: 97vw;
     }
@@ -382,5 +386,13 @@ hr.postseperator {
 
     .userpagewelcome {
         width: 97vw;
+    }
+
+    .infoaboutuser div {
+        display: block;
+    }
+
+    .infoaboutuser div div:nth-child(2) {
+        margin-top: 10px;
     }
 }
