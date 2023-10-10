@@ -151,10 +151,6 @@ hr.postseperator {
     margin-bottom: 5px;
 }
 
-.post {
-    min-width: max-content;
-}
-
 .postuserdiv {
     display: inline-flex;
     margin-bottom: 5px;
@@ -170,6 +166,7 @@ hr.postseperator {
     padding: 10px;
     min-height: 60px;
     border-radius: 10px;
+    word-wrap: break-word
 }
 
 .likedstuff {
