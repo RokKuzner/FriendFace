@@ -151,7 +151,7 @@ def get_users_following(user:str):
 
 #Posts
 def new_post(user:str, content:str):
-    c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?)', (user, content, "0", "", generate_id("posts", "id")))
+    c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?, ?)', (user, content, "0", "", generate_id("posts", "id"), 'thetime'))
     conn.commit()
 
 def get_posts(user:str):
@@ -165,18 +165,7 @@ def get_posts(user:str):
             posts_return.append(post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
     return posts_return
 
-def get_posts_by_user(user:str):
-    c.execute('SELECT * FROM posts WHERE email=?', (user,))
-    posts = c.fetchall()
-    posts_return = []
-    for post in posts:
-        if user_liked_post(user, post[4]):
-            posts_return.append(post+(True,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
-        else:
-            posts_return.append(post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
-    return posts_return
-
-def get_posts_by_user(user:str):
+def get_posts_by_user(user:str, current_user:str):
     c.execute('SELECT * FROM posts WHERE user=?', (user,))
     posts = c.fetchall()
 
@@ -188,7 +177,7 @@ def get_posts_by_user(user:str):
     for post in posts:
         total_posts += 1
         total_likes += int(post[2])
-        if user_liked_post(user, post[4]):
+        if user_liked_post(current_user, post[4]):
             posts_return.append(post+(True,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
         else:
             posts_return.append(post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))

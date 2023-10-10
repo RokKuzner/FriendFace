@@ -33,12 +33,12 @@
     {% for post in posts %}
         <div class="post">
             <div class="postuserdiv">
-                <img class="postusericon round" src="/media/avatars/{{ post.7 }}.jpg" alt="User logo img">
+                <img class="postusericon round" src="/media/avatars/{{ post.8 }}.jpg" alt="User logo img">
                 <div class="postuser">{{ post.0 }}</div>
             </div>
             <div class="postcontent">{{ post.1 }}</div>
             <div class="likedstuff">
-                {% if  post.5 == True%}
+                {% if  post.6 == True%}
                     <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}"><img src="/static/icons/liked.png" alt="like" class="likeimg" id="like"></a>
                     <div class="likediv">{{ post.2 }}</div>
                 {% else %}
@@ -58,7 +58,7 @@
             </form>
 
             <div class="comments">
-                {% for comment in post.6 %}
+                {% for comment in post.7 %}
                     <div class="comment">
                         <div class="commentuser"><img class="commentusericon round" src="/media/avatars/{{ comment.4 }}.jpg" alt="User logo img">{{ comment.0 }}</div>
                         <div class="commentcontent">{{ comment.1 }}</div>

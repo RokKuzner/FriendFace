@@ -20,7 +20,8 @@ user TEXT,
 content TEXT,
 likes TEXT,
 users_liked TEXT,
-id TEXT UNIQUE
+id TEXT UNIQUE,
+time TEXT
 )
 """
 
