@@ -1,4 +1,4 @@
-import sqlite3, random, string
+import sqlite3, random, string, time
 
 conn = sqlite3.connect('db.sqlite3', check_same_thread=False)
 c = conn.cursor()
@@ -151,7 +151,9 @@ def get_users_following(user:str):
 
 #Posts
 def new_post(user:str, content:str):
-    c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?, ?)', (user, content, "0", "", generate_id("posts", "id"), 'thetime'))
+    thetime = time.time()
+    thetime = str(thetime)
+    c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?, ?)', (user, content, "0", "", generate_id("posts", "id"), thetime))
     conn.commit()
 
 def get_posts(user:str):
