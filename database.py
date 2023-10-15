@@ -134,7 +134,6 @@ def unfollow_user(user_following:str, user_to_follow:str):
     c.execute('UPDATE users SET followers=?, followers_n=? WHERE email=?', (new_user_to_follow_followers_str, current_user_to_follow_followers_n_str, user_to_follow))
     conn.commit()
 
-
 def get_folowers_n(user:str):
     c.execute('SELECT * FROM users WHERE email=?', (user,))
     return c.fetchone()[5]
@@ -148,6 +147,15 @@ def get_users_following(user:str):
         return []
     
     return user_following_str.split(',')
+
+def get_users_following_users_following(user:str):
+    users_friends_friends = []
+    for users_following in get_users_following(user):
+        for users_users_following in get_users_following(users_following):
+            if users_users_following != user:
+                users_friends_friends.append(users_users_following)
+    
+    return users_friends_friends  
 
 #Posts
 def new_post(user:str, content:str):
