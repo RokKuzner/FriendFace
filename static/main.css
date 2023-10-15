@@ -372,6 +372,24 @@ hr.postseperator {
     border-radius: 100%;
 }
 
+.underdevelepmentwrap {
+    display: flex;
+    margin-top: 15vh;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.underdevelopmentmessage {
+    display: block;
+    margin-top: 100px;
+    padding: 10px;
+}
+
+.underdevelopmentimgdiv {
+    display: flex;
+}
+
 @media (max-device-width: 480px), (max-width: 575px){
     .post {
         width: 97vw;
@@ -391,5 +409,26 @@ hr.postseperator {
 
     .infoaboutuser div div:nth-child(2) {
         margin-top: 10px;
+    }
+}
+
+@media (max-device-width: 725px), (max-width: 725px){
+    .underdevelepmentwrap {
+        margin-left: 0;
+        margin-right: 0;
+        width: auto;
+    }
+
+    .underdevelopmentmessage {
+        width: max-content;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 30px;
+        padding-right: 30px;
+        text-align: center;
+    }
+
+    .underdevelopmentimgdiv {
+        display: none;
     }
 }
