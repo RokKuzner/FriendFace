@@ -21,14 +21,18 @@
             </div>
             <div class="subinfoP2">
                 <div class="subinfo">{{ followers }} followers</div>
-                {% if is_following == True %}
-                    <div class="subinfo subscribebntdiv">
-                        <a class="unfollow btn btn-primary" href="/unfollow/{{ user_page }}?redirect_to={{ this_url }}">Unfollow</a>
-                    </div>
+                {% if is_my_page == True %}
+                <a class="btn btn-primary" href="/editprofile/{{ current_user }}">Edit your profile</a>
                 {% else %}
-                    <div class="subinfo subscribebntdiv">
-                        <a class="btn btn-primary" href="/follow/{{ user_page }}?redirect_to={{ this_url }}">Follow</a>
-                    </div>
+                    {% if is_following == True %}
+                        <div class="subinfo subscribebntdiv">
+                            <a class="unfollow btn btn-primary" href="/unfollow/{{ user_page }}?redirect_to={{ this_url }}">Unfollow</a>
+                        </div>
+                    {% else %}
+                        <div class="subinfo subscribebntdiv">
+                            <a class="btn btn-primary" href="/follow/{{ user_page }}?redirect_to={{ this_url }}">Follow</a>
+                        </div>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>

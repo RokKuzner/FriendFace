@@ -27,5 +27,6 @@ urlpatterns = [
     path('comment', include('app.urls')),
     path('user', include('app.urls')),
     path('follow', include('app.urls')),
-    path('unfollow', include('app.urls'))
+    path('unfollow', include('app.urls')),
+    path('editprofile', include('app.urls'))
 ]

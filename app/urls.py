@@ -13,7 +13,8 @@ urlpatterns = [
   path('comment', views.comment, name='comment'),
   path('user/<str:user_page>', views.user, name='user'),
   path('follow/<str:user>', views.follow, name='follow'),
-  path('unfollow/<str:user>', views.unfollow, name='unfollow')
+  path('unfollow/<str:user>', views.unfollow, name='unfollow'),
+  path('editprofile/<str:user>', views.editprofile, name='editprofile')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
