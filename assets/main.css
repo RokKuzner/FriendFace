@@ -36,6 +36,10 @@
 }
 
 .navbar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
@@ -44,10 +48,9 @@
     color: white;
     margin-bottom: 0;
     width: 100%;
+    height: 70px;
     margin: 0;
     padding: 0;
-    top: 0;
-    left: 0;
 }
 
 .navbar-links ul {
@@ -148,10 +151,6 @@ hr.postseperator {
     margin-bottom: 5px;
 }
 
-.post {
-    min-width: max-content;
-}
-
 .postuserdiv {
     display: inline-flex;
     margin-bottom: 5px;
@@ -167,6 +166,7 @@ hr.postseperator {
     padding: 10px;
     min-height: 60px;
     border-radius: 10px;
+    word-wrap: break-word
 }
 
 .likedstuff {
@@ -239,4 +239,196 @@ hr.postseperator {
     width: 20px;
     height: 20px;
     margin-right: 5px;
+}
+
+.userpagewelcome {
+    width: 90vw;
+
+    margin: 0 auto 1rem auto;
+    padding: 20px;
+
+    text-align: center;
+
+    border: 1px solid rgba(176, 176, 176);
+    border-top: 0px;
+    border-radius: 0px 0px 15px 15px;
+
+    background-color: rgba(255, 255, 255, 0.5);
+
+    font-size: 2rem;
+
+    color: black;
+}
+
+.userwelcom, .infoaboutuser {
+    width: max-content;
+    margin: 0px auto 0px auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 8px;
+}
+
+.unfollow, .unfollow:hover, .unfollow:active {
+    background: rgb(199, 199, 199);
+    color: black;
+    border: 1px rgba(0, 0, 0, 0) solid;
+}
+
+.postusernameatag {
+    text-decoration: none;
+    color: black;
+}
+
+.userpageuseravatarimg {
+    width: 10vw;
+    min-width: 100px;
+    max-width: 200px;
+}
+
+.userpageuseravatardiv {
+    padding: 2px;
+    border: 3px rgb(29, 111, 225) solid;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.infoaboutuser {
+    font-size: 1.3rem;
+    display: flex;
+    margin: 10px auto 0 auto;
+    width: max-content;
+}
+
+.infoaboutuser div {
+    display: flex;
+}
+
+.subinfo {
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.menu {
+    position: absolute;
+    top: 60px;
+    right: 5px;
+    color: black;
+    background-color: white;
+    border: 1px rgb(191, 191, 191) solid;
+    border-radius: 8px;
+    margin: 0px;
+    padding: 5px;
+    width: 20%;
+    min-width: max-content;
+}
+
+.menu ul li {
+    list-style: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.menu ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.mentusername {
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+.mentusername {
+    display: flex;
+}
+
+.inmenuusericon {
+    width: 35px;
+}
+
+.menuusername {
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+.round {
+    border-radius: 100%;
+}
+
+.underdevelepmentwrap {
+    display: flex;
+    margin-top: 15vh;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.underdevelopmentmessage {
+    display: block;
+    margin-top: 100px;
+    padding: 10px;
+}
+
+.underdevelopmentimgdiv {
+    display: flex;
+}
+
+@media (max-device-width: 480px), (max-width: 575px){
+    .post {
+        width: 97vw;
+    }
+
+    .mypostdiv {
+        width: 97vw;
+    }
+
+    .userpagewelcome {
+        width: 97vw;
+    }
+
+    .infoaboutuser div {
+        display: block;
+    }
+
+    .infoaboutuser div div:nth-child(2) {
+        margin-top: 10px;
+    }
+}
+
+@media (max-device-width: 725px), (max-width: 725px){
+    .underdevelepmentwrap {
+        margin-left: 0;
+        margin-right: 0;
+        width: auto;
+    }
+
+    .underdevelopmentmessage {
+        width: max-content;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 30px;
+        padding-right: 30px;
+        text-align: center;
+    }
+
+    .underdevelopmentimgdiv {
+        display: none;
+    }
 }
