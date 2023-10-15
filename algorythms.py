@@ -22,9 +22,12 @@ def grade_post(user:str, post):
     total_points = 0
     current_time = time.time()
     time_posted = float(post[5])
+    users_following_users_following = db.get_users_following_users_following(user)
 
     if db.is_following_user(user, post[0]):
         total_points += 15
+    elif post[0] in users_following_users_following:
+        total_points += 5
 
     total_points += (time_posted) / (current_time/5)
 
