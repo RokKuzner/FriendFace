@@ -7,11 +7,12 @@ import database as db
 from FriendFace.settings import BASE_DIR
 import os
 from PIL import Image
+import algorythms as alg
 
 # Create your views here.
 @login_required
 def home(request):
-    posts = db.get_posts(request.session["current_user"])
+    posts = alg.get_personalized_posts(request.session['current_user'])
     return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'],
                                           'current_user_id': db.get_users_id_by_username(request.session['current_user']),
                                           'posts':posts[::-1], 'this_url':str('/')})
