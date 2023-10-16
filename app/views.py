@@ -88,6 +88,7 @@ def post(request):
 def login(request):
     then = str(request.GET.get('then', None))
     if request.method == 'POST':
+        logged_out = logout(request)
         username = request.POST['user']
         password = request.POST['password']
         if db.validate_user(username, password):
