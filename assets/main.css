@@ -375,19 +375,22 @@ hr.postseperator {
 .underdevelepmentwrap {
     display: flex;
     margin-top: 15vh;
-    width: max-content;
+    padding: 10px;
+    width: auto;
     margin-left: auto;
     margin-right: auto;
+    max-width: max-content;
 }
 
 .underdevelopmentmessage {
     display: block;
     margin-top: 100px;
     padding: 10px;
+    text-align: center;
 }
 
 .underdevelopmentimgdiv {
-    display: flex;
+    display: block;
 }
 
 @media (max-device-width: 480px), (max-width: 575px){
@@ -412,11 +415,10 @@ hr.postseperator {
     }
 }
 
-@media (max-device-width: 725px), (max-width: 725px){
+@media (max-device-width: 380px), (max-width: 380px){
     .underdevelepmentwrap {
         margin-left: 0;
         margin-right: 0;
-        width: auto;
     }
 
     .underdevelopmentmessage {
@@ -425,7 +427,6 @@ hr.postseperator {
         margin-right: auto;
         padding-left: 30px;
         padding-right: 30px;
-        text-align: center;
     }
 
     .underdevelopmentimgdiv {
