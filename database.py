@@ -170,9 +170,9 @@ def get_posts(user:str):
     posts_return = []
     for post in posts:
         if user_liked_post(user, post[4]):
-            posts_return.append(post+(True,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
+            posts_return.append(post+(True,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0]), str(len(get_comments_by_parrent_post(post[4])))))
         else:
-            posts_return.append(post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
+            posts_return.append(post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0]), str(len(get_comments_by_parrent_post(post[4])))))
     return posts_return
 
 def get_posts_by_user(user:str, current_user:str):
@@ -188,11 +188,22 @@ def get_posts_by_user(user:str, current_user:str):
         total_posts += 1
         total_likes += int(post[2])
         if user_liked_post(current_user, post[4]):
-            posts_return.append(post+(True,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
+            posts_return.append(post+(True,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0]), str(len(get_comments_by_parrent_post(post[4])))))
         else:
-            posts_return.append(post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
+            posts_return.append(post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0]), str(len(get_comments_by_parrent_post(post[4])))))
 
     return [posts_return, total_likes, total_posts]
+
+def get_post_by_post_id(user:str, post_id:str):
+    c.execute('SELECT * FROM posts WHERE id=?', (post_id,))
+    post = c.fetchone()
+    post_return = ()
+    if user_liked_post(user, post[4]):
+        post_return = (post+(True,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
+    else:
+        post_return = (post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
+    return post_return
+
 
 def like_post(user:str, post_id:str):
     if user_liked_post(user, post_id) != False:

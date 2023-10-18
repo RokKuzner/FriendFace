@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}FriendFace{% endblock %}
+
+{% block content %}
+    <div class="post" id="{{ post.4 }}" style="margin-top: 20px;">
+        <div class="postuserdiv">
+            <img class="postusericon round" src="/media/avatars/{{ post.8 }}.jpg" alt="User logo img">
+            <a href="/user/{{ post.0 }}" class="postusernameatag"><div class="postuser">{{ post.0 }}</div></a>
+        </div>
+        <div class="postcontent">{{ post.1 }}</div>
+        <div class="likedstuff">
+            {% if  post.6 == True%}
+                <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.4 }}"><img src="/static/icons/liked.png" alt="like" class="likeimg" id="like"></a>
+                <div class="likediv">{{ post.2 }}</div>
+            {% else %}
+                <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.4 }}"><img src="/static/icons/like.png" alt="like" class="likeimg" id="like"></a>
+                <div class="likediv">{{ post.2 }}</div>
+            {% endif %}
+        </div>
+
+        <form action="/comment" method="post">
+            {% csrf_token %}
+            <div class="mycommentdiv">
+                <input class="commentdivtextarea" id="posttext" name="comment_content" placeholder="Comment">
+                <input type="hidden" name="comment_parrent_id" value="{{ post.4 }}">
+                <input type="hidden" name="redirect_to" value="{{ this_url }}#{{ post.4 }}">
+                <button type="submit" class="commentbtndiv btn btn-primary" id="postbtn">Comment</button>
+            </div>
+        </form>
+
+        <div class="comments">
+            {% for comment in post.7 %}
+                <div class="comment">
+                    <div class="commentuser"><img class="commentusericon round" src="/media/avatars/{{ comment.4 }}.jpg" alt="User logo img">{{ comment.0 }}</div>
+                    <div class="commentcontent">{{ comment.1 }}</div>
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+</div>
+{% endblock %}

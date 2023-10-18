@@ -56,6 +56,12 @@ def editprofile(request, user):
     return redirect('/')
 
 @login_required
+def getpost(request, post_id):
+    return render(request, "post.html", {'logged_in':True, 'current_user':request.session['current_user'],
+                                          'current_user_id': db.get_users_id_by_username(request.session['current_user']),
+                                          'post':db.get_post_by_post_id(request.session['current_user'], post_id), 'this_url':str(f'/getpost/{post_id}')})
+
+@login_required
 def like(request):
     post_id = request.GET.get('post', None)
     user = request.GET.get('user', None)

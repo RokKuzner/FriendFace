@@ -35,14 +35,8 @@
                 </div>
             </form>
 
-            <div class="comments">
-                {% for comment in post.7 %}
-                    <div class="comment">
-                        <div class="commentuser"><img class="commentusericon round" src="/media/avatars/{{ comment.4 }}.jpg" alt="User logo img">{{ comment.0 }}</div>
-                        <div class="commentcontent">{{ comment.1 }}</div>
-                    </div>
-                    <br>
-                {% endfor %}
+            <div class="GoToComments">
+                <a href="/getpost/{{ post.4 }}">Comments ({{ post.9 }})</a>
             </div>
         </div>
     {% endfor %}
