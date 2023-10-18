@@ -221,6 +221,13 @@ hr.postseperator {
     margin-top: 10px;
 }
 
+.GoToComments {
+    width: max-content;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .comment {
     margin-left: 30px;
     border: 2px solid rgba(73, 73, 73, 0.26);
@@ -419,10 +426,13 @@ hr.postseperator {
     .underdevelepmentwrap {
         margin-left: 0;
         margin-right: 0;
+        display: flex;
+        flex-direction: column;
+        margin-top: 5vh;
     }
 
     .underdevelopmentmessage {
-        width: max-content;
+        max-width: max-content;
         margin-left: auto;
         margin-right: auto;
         padding-left: 30px;
@@ -430,6 +440,19 @@ hr.postseperator {
     }
 
     .underdevelopmentimgdiv {
-        display: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-device-width: 518px), (max-width: 518px){
+    .underdevelopmentmessage {
+        margin-top: 80px;
+    }
+}
+
+@media (max-device-width: 411px), (max-width: 411px){
+    .underdevelopmentmessage {
+        margin-top: 70px;
     }
 }
