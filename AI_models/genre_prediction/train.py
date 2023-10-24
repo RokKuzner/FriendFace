@@ -6,25 +6,25 @@ import tensorflow_hub as hub
 from sklearn.preprocessing import LabelEncoder, LabelBinarizer
 
 #Loading dataset
-df = pd.read_csv("data/nyt-articles-2020.csv", usecols=["newsdesk", "abstract"])
+df = pd.read_csv("data/data.csv", usecols=["genre", "description"])
 
 #Data preperation
-df = df.dropna(subset=["newsdesk", "abstract"])
+df = df.dropna(subset=["genre", "description"])
 
-genres = df["newsdesk"].unique()
+genres = df["genre"].unique()
 
 label_encoder = LabelEncoder()
 label_binarizer = LabelBinarizer()
 
-df["newsdesk"] = label_encoder.fit_transform(df["newsdesk"])
-labels = label_binarizer.fit_transform(df["newsdesk"])
+df["genre"] = label_encoder.fit_transform(df["genre"])
+labels = label_binarizer.fit_transform(df["genre"])
 
 train, val, test = np.split(df.sample(frac=1), [int(0.90*len(df)), int(0.95*len(df))])
 
 def df_to_dataset(dataframe, shuffle=True, batch_size=256):
   df = dataframe.copy()
-  labels = df.pop('newsdesk')
-  descriptions = df.pop("abstract")
+  labels = df.pop('genre')
+  descriptions = df.pop("description")
   ds = tf.data.Dataset.from_tensor_slices((descriptions, labels))
   if shuffle:
     ds = ds.shuffle(buffer_size=len(dataframe))

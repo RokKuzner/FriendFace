@@ -4,9 +4,9 @@ import pandas as pd
 import numpy as np
 
 #Loading dataset and unique varietyes
-df = pd.read_csv("data/nyt-articles-2020.csv", usecols=["newsdesk", "abstract"])
-df = df.dropna(subset=["newsdesk", "abstract"]) #Drops all empty rows
-genres = df["newsdesk"].unique()
+df = pd.read_csv("data/data.csv", usecols=["genre", "description"])
+df = df.dropna(subset=["genre", "description"]) #Drops all empty rows
+genres = df["genre"].unique()
 
 #Create custom objects
 custom_objects = {
