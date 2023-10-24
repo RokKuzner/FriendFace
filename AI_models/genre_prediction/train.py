@@ -21,7 +21,7 @@ labels = label_binarizer.fit_transform(df["genre"])
 
 train, val, test = np.split(df.sample(frac=1), [int(0.90*len(df)), int(0.95*len(df))])
 
-def df_to_dataset(dataframe, shuffle=True, batch_size=256):
+def df_to_dataset(dataframe, shuffle=True, batch_size=1024):
   df = dataframe.copy()
   labels = df.pop('genre')
   descriptions = df.pop("description")
@@ -50,7 +50,7 @@ model.add(tf.keras.layers.Dense(len(genres), activation="softmax"))
 
 #Compiling the model
 model.compile(
-    optimizer=tf.keras.optimizers.Adam(learning_rate=0.01),
+    optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
     loss=tf.keras.losses.SparseCategoricalCrossentropy(),
     metrics=["accuracy"]
 )
