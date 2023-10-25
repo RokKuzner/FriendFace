@@ -16,7 +16,7 @@ custom_objects = {
 # Load the model with the custom object dictionary
 model = tf.keras.models.load_model('models/genre_prediction.h5', custom_objects=custom_objects)
 
-to_predict = ['All year long, Earth passes through streams of cosmic debris. Here’s a list of major meteor showers and how to spot one.']
+to_predict = ["never miss an eclipse, a meteor shower, a rocket launch or any other astronomical and space event that's out of this world"]
 
 predictions = model.predict(to_predict)
 

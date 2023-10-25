@@ -39,6 +39,30 @@ for i in json_data:
         data.append((description, "other"))
 
 
+#Oversampling data
+categoryes = {}
+for i in data:
+    if i[1] in categoryes:
+        categoryes[i[1]].append(i)
+    else:
+        categoryes[i[1]] = [i]
+
+max_category_n = 0
+max_category_key = ''
+for i in categoryes:
+    if len(categoryes[i]) > max_category_n:
+        max_category_n = len(categoryes[i])
+        max_category_key = i
+
+for i in data:
+    if i[1] != max_category_key:
+        categoryes[i[1]] = categoryes[i[1]]*int(max_category_n/len(categoryes[i[1]]))
+
+data = []
+for i in categoryes:
+    for indx in categoryes[i[1]]:
+        data.append(indx)
+
 #Make a brand new and clean and shiny csv file
 with open("data/data.csv", "w", newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
