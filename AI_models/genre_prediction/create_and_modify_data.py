@@ -60,7 +60,7 @@ for i in data:
 
 data = []
 for i in categoryes:
-    for indx in categoryes[i[1]]:
+    for indx in categoryes[i]:
         data.append(indx)
 
 #Make a brand new and clean and shiny csv file
