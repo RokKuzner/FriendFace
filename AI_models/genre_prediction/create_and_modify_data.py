@@ -56,7 +56,11 @@ for i in categoryes:
 
 for i in data:
     if i[1] != max_category_key:
-        categoryes[i[1]] = categoryes[i[1]]*int(max_category_n/len(categoryes[i[1]]))
+        multipication = int(max_category_n/len(categoryes[i[1]]))
+        max_multiplication = 200
+        if multipication > max_multiplication:
+            multipication = max_multiplication
+        categoryes[i[1]] = categoryes[i[1]]*multipication
 
 data = []
 for i in categoryes:
