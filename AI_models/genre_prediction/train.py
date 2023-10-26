@@ -17,7 +17,6 @@ label_encoder = LabelEncoder()
 label_binarizer = LabelBinarizer()
 
 df["genre"] = label_encoder.fit_transform(df["genre"])
-labels = label_binarizer.fit_transform(df["genre"])
 
 train, val, test = np.split(df.sample(frac=1), [int(0.90*len(df)), int(0.95*len(df))])
 
@@ -62,7 +61,7 @@ early_stopping = tf.keras.callbacks.EarlyStopping(
     restore_best_weights=True  # Restore the best model weights
 )
 
-history = model.fit(train_data, epochs=50, validation_data=valid_data, callbacks=[early_stopping])
+history = model.fit(train_data, epochs=15, validation_data=valid_data, callbacks=[early_stopping])
 
 print("Evaluation:", model.evaluate(test_data))
 
