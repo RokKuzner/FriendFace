@@ -21,7 +21,10 @@ for index, row in df.iterrows():
     else:
         new_value = "other"
 
-    description = '"' + str(df.at[index, "abstract"].lower()).replace('"', "") + '"'
+    description = str(df.at[index, "abstract"].lower()).replace('"', "")
+    
+    if description == "" or description == str(" "*len(description)):
+        continue
 
     data.append((description, str(new_value).lower()))
 
@@ -32,7 +35,9 @@ with open('data/News_Category_Dataset_v3.json', 'r', encoding="utf-8") as f:
 categoryes_replace = {"tech":"technology", "science":"science", "arts & culture":"culture", "business":"business", "politics":"politics", "entertainment":"entertainment", "sports":"sports"}
 
 for i in json_data:
-    description = '"' + str(i["short_description"].lower()).replace('"', "") + '"'
+    description = str(i["short_description"].lower()).replace('"', "")
+    if description == "" or description == str(" "*len(description)):
+        continue
     if i["category"].lower() in list(categoryes_replace.keys()):
         data.append((description, str(categoryes_replace[i["category"].lower()])))
     else:
