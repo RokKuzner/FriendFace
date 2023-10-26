@@ -27,7 +27,7 @@ for index, row in df.iterrows():
         if char.isalpha() == True or char == " ":
             description_modifyed += char
     description = description_modifyed
-    if len(description) == 0 or description == str(" "*len(description)) or description.isnumeric() or "the hackers gained more access than the company previously revealed though the attackers were unable to modify code or access emails" in description:
+    if len(description) == 0 or description == str(" "*len(description)) or description.isnumeric():
         pass
     else:
         data.append((description, str(new_value).lower()))
