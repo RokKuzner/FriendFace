@@ -2,25 +2,24 @@ import tensorflow as tf
 import tensorflow_hub as hub
 import pandas as pd
 import numpy as np
+from sklearn.preprocessing import LabelEncoder, LabelBinarizer
 
-#Loading dataset and unique varietyes
-df = pd.read_csv("data/data.csv", usecols=["genre", "description"])
-df = df.dropna(subset=["genre", "description"]) #Drops all empty rows
-genres = df["genre"].unique()
+custom_objects = {"KerasLayer": hub.KerasLayer}
 
-#Create custom objects
-custom_objects = {
-    "KerasLayer": hub.KerasLayer
-}
-
-# Load the model with the custom object dictionary
 model = tf.keras.models.load_model('models/genre_prediction.h5', custom_objects=custom_objects)
 
-to_predict = ["surveillance technology like stingray can sweep up data from any cell phone in its range"]
+descriptions = ["there is a new galery where you can paint pictures down in now york"]
 
-predictions = model.predict(to_predict)
+descriptions = np.array(descriptions)
+descriptions = tf.convert_to_tensor(descriptions, dtype=tf.string)
 
-predicted_class_index = np.argmax(predictions)
-predicted_class = genres[predicted_class_index]
+predictions = model(descriptions)
 
-print("Predicted class:", predicted_class)
+df = pd.read_csv("data/data.csv", usecols=["genre", "description"])
+df = df.dropna(subset=["genre", "description"])
+label_encoder = LabelEncoder()
+label_encoder.fit_transform(df["genre"])
+
+predicted_labels = label_encoder.inverse_transform(predictions.numpy().argmax(axis=1))
+
+print(f"Predicted Genre: {predicted_labels[0]}")
