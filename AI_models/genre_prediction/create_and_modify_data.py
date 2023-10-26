@@ -22,11 +22,15 @@ for index, row in df.iterrows():
         new_value = "other"
 
     description = str(df.at[index, "abstract"].lower()).replace('"', "")
-    
-    if description == "" or description == str(" "*len(description)):
-        continue
-
-    data.append((description, str(new_value).lower()))
+    description_modifyed = ""
+    for char in description:
+        if char.isalpha() == True or char == " ":
+            description_modifyed += char
+    description = description_modifyed
+    if len(description) == 0 or description == str(" "*len(description)) or description.isnumeric() or "the hackers gained more access than the company previously revealed though the attackers were unable to modify code or access emails" in description:
+        pass
+    else:
+        data.append((description, str(new_value).lower()))
 
 #data from others
 with open('data/News_Category_Dataset_v3.json', 'r', encoding="utf-8") as f:
@@ -35,13 +39,19 @@ with open('data/News_Category_Dataset_v3.json', 'r', encoding="utf-8") as f:
 categoryes_replace = {"tech":"technology", "science":"science", "arts & culture":"culture", "business":"business", "politics":"politics", "entertainment":"entertainment", "sports":"sports"}
 
 for i in json_data:
-    description = str(i["short_description"].lower()).replace('"', "")
-    if description == "" or description == str(" "*len(description)):
-        continue
-    if i["category"].lower() in list(categoryes_replace.keys()):
-        data.append((description, str(categoryes_replace[i["category"].lower()])))
+    description = str(df.at[index, "abstract"].lower()).replace('"', "")
+    description_modifyed = ""
+    for char in description:
+        if char.isalpha() == True or char == " ":
+            description_modifyed += char
+    description = description_modifyed
+    if len(description) == 0 or description == str(" "*len(description)) or description.isnumeric() or "the hackers gained more access than the company previously revealed though the attackers were unable to modify code or access emails" in description:
+        pass
     else:
-        data.append((description, "other"))
+        if i["category"].lower() in list(categoryes_replace.keys()):
+            data.append((description, str(categoryes_replace[i["category"].lower()])))
+        else:
+            data.append((description, "other"))
 
 
 #Oversampling data
