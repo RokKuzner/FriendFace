@@ -6,9 +6,9 @@ import json
 data = []
 
 #Data from nyt articles
-df = pd.read_csv("data/nyt-articles-2020.csv", usecols=["newsdesk", "abstract"])
+df = pd.read_csv("data/nyt-articles-2020.csv", usecols=["newsdesk", "headline"])
 
-df = df.dropna(subset=["newsdesk", "abstract"])
+df = df.dropna(subset=["newsdesk", "headline"])
 
 genres = df["newsdesk"].unique()
 use = ["games", "science", "culture", "sports", "travel", "politics", "business", "technology", "movies"]
@@ -21,7 +21,7 @@ for index, row in df.iterrows():
     else:
         new_value = "other"
 
-    description = str(df.at[index, "abstract"].lower()).replace('"', "")
+    description = str(df.at[index, "headline"].lower()).replace('"', "")
     description_modifyed = ""
     for char in description:
         if char.isalpha() == True or char == " ":
@@ -39,7 +39,7 @@ with open('data/News_Category_Dataset_v3.json', 'r', encoding="utf-8") as f:
 categoryes_replace = {"tech":"technology", "science":"science", "arts & culture":"culture", "business":"business", "politics":"politics", "entertainment":"entertainment", "sports":"sports"}
 
 for i in json_data:
-    description = str(df.at[index, "abstract"].lower()).replace('"', "")
+    description = str(i["headline"].lower()).replace('"', "")
     description_modifyed = ""
     for char in description:
         if char.isalpha() == True or char == " ":
