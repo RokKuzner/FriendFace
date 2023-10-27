@@ -58,6 +58,28 @@ for i in json_data:
             data.append((description, "other"))
 
 
+#Data from science subreddit
+df = pd.read_csv("data/science.csv", usecols=["title", "body"])
+
+df = df.dropna(subset=["title", "body"])
+
+for index, row in df.iterrows():
+    if df.at[index, "body"] == "":
+        description = str(df.at[index, "title"]).lower()
+    else:
+        description = str(df.at[index, "body"]).lower()
+    description_modifyed = ""
+    for char in description:
+        if char.isalpha() == True or char == " " or char.isnumeric():
+            description_modifyed += char
+    if len(description_modifyed) != 0 and description_modifyed[0] == " ":
+        description_modifyed = description_modifyed[1:]
+    description = description_modifyed
+    if len(description) == 0 or description == str(" "*len(description)) or description.isnumeric():
+        pass
+    else:
+        data.append((description, "science"))
+
 #Oversampling data
 categoryes = {}
 for i in data:

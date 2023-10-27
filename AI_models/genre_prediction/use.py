@@ -8,7 +8,7 @@ custom_objects = {"KerasLayer": hub.KerasLayer}
 
 model = tf.keras.models.load_model('models/genre_prediction.h5', custom_objects=custom_objects)
 
-descriptions = ["there is a new galery where you can paint pictures down in now york"]
+descriptions = ["atoms are created with a chemical reaction"]
 
 descriptions = np.array(descriptions)
 descriptions = tf.convert_to_tensor(descriptions, dtype=tf.string)
