@@ -26,7 +26,7 @@ for index, row in df.iterrows():
     for char in description:
         if char.isalpha() == True or char == " " or char.isnumeric():
             description_modifyed += char
-    if description_modifyed[0] == " ":
+    if len(description_modifyed) != 0 and description_modifyed[0] == " ":
         description_modifyed = description_modifyed[1:]
     description = description_modifyed
     if len(description) == 0 or description == str(" "*len(description)) or description.isnumeric():
@@ -46,7 +46,7 @@ for i in json_data:
     for char in description:
         if char.isalpha() == True or char == " " or char.isnumeric():
             description_modifyed += char
-    if description_modifyed[0] == " ":
+    if len(description_modifyed) != 0 and description_modifyed[0] == " ":
         description_modifyed = description_modifyed[1:]
     description = description_modifyed
     if len(description) == 0 or description == str(" "*len(description)) or description.isnumeric():
