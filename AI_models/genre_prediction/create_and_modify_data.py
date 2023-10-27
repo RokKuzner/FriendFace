@@ -21,11 +21,13 @@ for index, row in df.iterrows():
     else:
         new_value = "other"
 
-    description = str(df.at[index, "headline"].lower()).replace('"', "")
+    description = str(df.at[index, "headline"]).lower()
     description_modifyed = ""
     for char in description:
-        if char.isalpha() == True or char == " ":
+        if char.isalpha() == True or char == " " or char.isnumeric():
             description_modifyed += char
+    if description_modifyed[0] == " ":
+        description_modifyed = description_modifyed[1:]
     description = description_modifyed
     if len(description) == 0 or description == str(" "*len(description)) or description.isnumeric():
         pass
@@ -39,11 +41,13 @@ with open('data/News_Category_Dataset_v3.json', 'r', encoding="utf-8") as f:
 categoryes_replace = {"tech":"technology", "science":"science", "arts & culture":"culture", "business":"business", "politics":"politics", "entertainment":"entertainment", "sports":"sports"}
 
 for i in json_data:
-    description = str(i["headline"].lower()).replace('"', "")
+    description = str(i["headline"]).lower()
     description_modifyed = ""
     for char in description:
-        if char.isalpha() == True or char == " ":
+        if char.isalpha() == True or char == " " or char.isnumeric():
             description_modifyed += char
+    if description_modifyed[0] == " ":
+        description_modifyed = description_modifyed[1:]
     description = description_modifyed
     if len(description) == 0 or description == str(" "*len(description)) or description.isnumeric():
         pass
