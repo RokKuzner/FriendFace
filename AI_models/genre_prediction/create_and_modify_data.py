@@ -80,6 +80,25 @@ for index, row in df.iterrows():
     else:
         data.append((description, "science"))
 
+#Data from techonology subreddit
+df = pd.read_csv("data/technology.csv", usecols=["title"])
+
+df = df.dropna(subset=["title"])
+
+for index, row in df.iterrows():
+    description = str(df.at[index, "title"]).lower()
+    description_modifyed = ""
+    for char in description:
+        if char.isalpha() == True or char == " " or char.isnumeric():
+            description_modifyed += char
+    if len(description_modifyed) != 0 and description_modifyed[0] == " ":
+        description_modifyed = description_modifyed[1:]
+    description = description_modifyed
+    if len(description) == 0 or description == str(" "*len(description)) or description.isnumeric():
+        pass
+    else:
+        data.append((description, "technology"))
+
 #Oversampling data
 categoryes = {}
 for i in data:
