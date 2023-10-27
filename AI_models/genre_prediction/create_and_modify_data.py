@@ -29,7 +29,7 @@ for index, row in df.iterrows():
     if len(description_modifyed) != 0 and description_modifyed[0] == " ":
         description_modifyed = description_modifyed[1:]
     description = description_modifyed
-    if len(description) == 0 or description == str(" "*len(description)) or description.isnumeric():
+    if len(description) < 15 or 0 or description == str(" "*len(description)) or description.isnumeric():
         pass
     else:
         data.append((description, str(new_value).lower()))
@@ -49,7 +49,7 @@ for i in json_data:
     if len(description_modifyed) != 0 and description_modifyed[0] == " ":
         description_modifyed = description_modifyed[1:]
     description = description_modifyed
-    if len(description) == 0 or description == str(" "*len(description)) or description.isnumeric():
+    if len(description) < 15 or 0 or description == str(" "*len(description)) or description.isnumeric():
         pass
     else:
         if i["category"].lower() in list(categoryes_replace.keys()):
@@ -75,7 +75,7 @@ for index, row in df.iterrows():
     if len(description_modifyed) != 0 and description_modifyed[0] == " ":
         description_modifyed = description_modifyed[1:]
     description = description_modifyed
-    if len(description) == 0 or description == str(" "*len(description)) or description.isnumeric():
+    if len(description) < 15 or 0 or description == str(" "*len(description)) or description.isnumeric():
         pass
     else:
         data.append((description, "science"))
@@ -94,7 +94,7 @@ for index, row in df.iterrows():
     if len(description_modifyed) != 0 and description_modifyed[0] == " ":
         description_modifyed = description_modifyed[1:]
     description = description_modifyed
-    if len(description) == 0 or description == str(" "*len(description)) or description.isnumeric():
+    if len(description) < 15 or 0 or description == str(" "*len(description)) or description.isnumeric():
         pass
     else:
         data.append((description, "technology"))
