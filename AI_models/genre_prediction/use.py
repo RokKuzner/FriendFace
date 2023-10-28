@@ -27,7 +27,7 @@ while True:
         description_modifyed = description_modifyed[1:]
     user_input = description_modifyed
 
-    if len(user_input) < 15 or 0 or user_input == str(" "*len(user_input)) or user_input.isnumeric():
+    if len(user_input) < 5 or 0 or user_input == str(" "*len(user_input)) or user_input.isnumeric():
         print("Invalid input!")
         continue
 
