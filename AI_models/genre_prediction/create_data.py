@@ -9,13 +9,15 @@ def get_data_from_nytarticles():
 
     df = df.dropna(subset=["newsdesk", "headline"])
 
-    use = ["science", "culture", "sports", "travel", "politics", "business", "technology", "movies"]
+    use = ["science", "culture", "sports", "travel", "politics", "business", "technology"]
 
     for index, row in df.iterrows():
         new_value = ""
         newdesk_value = df.at[index, "newsdesk"]
         if str(newdesk_value).lower() in use:
             new_value = str(newdesk_value).lower()
+        elif str(newdesk_value).lower() == "movies":
+            new_value = "entertainment"
         else:
             new_value = "other"
 
