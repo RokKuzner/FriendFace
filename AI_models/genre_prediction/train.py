@@ -20,7 +20,7 @@ df["genre"] = label_encoder.fit_transform(df["genre"])
 
 train, val, test = np.split(df.sample(frac=1), [int(0.90*len(df)), int(0.95*len(df))])
 
-def df_to_dataset(dataframe, shuffle=True, batch_size=1024):
+def df_to_dataset(dataframe, shuffle=True, batch_size=512):
   df = dataframe.copy()
   labels = df.pop('genre')
   descriptions = df.pop("description")
@@ -36,8 +36,7 @@ valid_data = df_to_dataset(val)
 test_data = df_to_dataset(test)
 
 #Making the model
-embedding = "https://tfhub.dev/google/nnlm-en-dim50/2"
-hub_layer = hub.KerasLayer(embedding, dtype=tf.string, trainable=True)
+hub_layer = hub.KerasLayer("https://tfhub.dev/google/nnlm-en-dim50/2", dtype=tf.string, trainable=True)
 
 model = tf.keras.Sequential()
 model.add(hub_layer)
