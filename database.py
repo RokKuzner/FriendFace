@@ -1,4 +1,5 @@
 import sqlite3, random, string, time
+import algorythms as alg
 
 conn = sqlite3.connect('db.sqlite3', check_same_thread=False)
 c = conn.cursor()
@@ -161,7 +162,10 @@ def get_users_following_users_following(user:str):
 def new_post(user:str, content:str):
     thetime = time.time()
     thetime = str(thetime)
-    c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?, ?)', (user, content, "0", "", generate_id("posts", "id"), thetime))
+    post_id = generate_id("posts", "id")
+    post_genre = alg.get_post_genre(str(content))
+    c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?, ?)', (user, content, "0", "", post_id, thetime))
+    c.execute('INSERT INTO postgenre VALUES(?, ?)', (post_id, post_genre))
     conn.commit()
 
 def get_posts(user:str):
