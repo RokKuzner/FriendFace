@@ -1,5 +1,10 @@
 import database as db
 import time
+import tensorflow as tf
+import tensorflow_hub as hub
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import LabelEncoder
 
 def get_personalized_posts(user:str):
     user_following = db.get_users_following(user)
@@ -40,3 +45,35 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
+
+#Genre prediction
+custom_objects = {"KerasLayer": hub.KerasLayer}
+
+model = tf.keras.models.load_model('AI_models/genre_prediction/models/genre_prediction.h5', custom_objects=custom_objects)
+
+df = pd.read_csv("AI_models/genre_prediction/data/data.csv", usecols=["genre", "description"])
+df = df.dropna(subset=["genre", "description"])
+label_encoder = LabelEncoder()
+label_encoder.fit_transform(df["genre"])
+
+def get_post_genre(post_content:str):
+    #Cleaning up data
+    content_modifyed = ""
+    for char in post_content:
+        if char.isalpha() == True or char == " " or char.isnumeric():
+            content_modifyed += char
+    while len(content_modifyed) != 0 and content_modifyed[0] == " ":
+        content_modifyed = content_modifyed[1:]
+    while len(content_modifyed) != 0 and content_modifyed[-1] == " ":
+        content_modifyed = content_modifyed[:len(content_modifyed)-1]
+    post_content = content_modifyed
+
+    content = [post_content]
+    content = np.array(content)
+    content = tf.convert_to_tensor(content, dtype=tf.string)
+
+    predictions = model(content)
+
+    predicted_labels = label_encoder.inverse_transform(predictions.numpy().argmax(axis=1))
+
+    return predicted_labels[0]
