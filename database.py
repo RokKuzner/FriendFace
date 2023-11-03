@@ -185,6 +185,16 @@ def add_user_interest(user:str, interest:str):
     c.execute('UPDATE interests SET interests=? WHERE user=?', (new_interests, user))
     conn.commit()
 
+def get_user_interests(user:str):
+    c.execute('SELECT * FROM interests WHERE user=?', (user,))
+    raw = c.fetchone()
+    if raw == ():
+        intersets = []
+    else:
+        intersets = str(raw[1]).split(",")
+
+    return intersets
+
 #Posts
 def new_post(user:str, content:str):
     thetime = time.time()
