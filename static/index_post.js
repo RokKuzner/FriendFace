@@ -4,7 +4,9 @@ let post_text = document.getElementById("posttext")
 let like_btn = document.getElementById("like")
 
 function post_click() {
-    let redirect_url = window.location.href + "post?user="+current_user+"&content="+post_text.value
+    let parts_of_url = String(window.location.href).split("/")
+    let redirect_url = parts_of_url[0] + "post?user="+current_user+"&content="+post_text.value
+    
     if ( (!(post_text.value == '')) && (!(post_text.value == (' '*post_text.value.length))) ) {
         window.location.replace(redirect_url);
     }
