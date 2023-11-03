@@ -159,6 +159,32 @@ def get_users_following_users_following(user:str):
     
     return users_friends_friends  
 
+def add_user_interest(user:str, interest:str):
+    c.execute('SELECT * FROM interests WHERE user=?', (user,))
+    raw = c.fetchone()
+    if raw == ():
+        current_intersets = []
+    else:
+        current_intersets = str(raw[1]).split(",")
+
+    new_interests = []
+    new_interests += current_intersets
+
+    if current_intersets == []:
+        new_interests = [interest]
+    else:
+        if interest not in current_intersets:
+            new_interests.append(interest)
+
+    try:
+        new_interests.remove("")
+    except:
+        pass
+    new_interests = ",".join(new_interests)
+
+    c.execute('UPDATE interests SET interests=? WHERE user=?', (new_interests, user))
+    conn.commit()
+
 #Posts
 def new_post(user:str, content:str):
     thetime = time.time()
