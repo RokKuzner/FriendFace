@@ -35,9 +35,17 @@ user_id TEXT
 )
 """
 
+POST_GENRE = """
+CREATE TABLE IF NOT EXISTS postgenre(
+postid TEXT UNIQUE,
+genre TEXT
+)
+"""
+
 c.execute(USERS)
 c.execute(POSTS)
 c.execute(COMMENTS)
+c.execute(POST_GENRE)
 
 conn.commit()
 conn.close()
