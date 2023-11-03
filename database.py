@@ -24,6 +24,7 @@ def validate_user(username:str, password:str):
 def add_user(username:str, password:str):
     user_id = generate_id('users', 'id')
     c.execute('INSERT INTO users VALUES(?, ?, ?, ?, ?, ?)', (username, user_id, password, '', '', '0'))
+    c.execute('INSERT INTO interests VALUES(?, ?)', (username, ""))
     conn.commit()
     return user_id
 
