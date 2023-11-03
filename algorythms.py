@@ -66,7 +66,7 @@ def get_post_genre(post_content:str):
         content_modifyed = content_modifyed[1:]
     while len(content_modifyed) != 0 and content_modifyed[-1] == " ":
         content_modifyed = content_modifyed[:len(content_modifyed)-1]
-    post_content = content_modifyed
+    post_content = content_modifyed.lower()
 
     content = [post_content]
     content = np.array(content)
