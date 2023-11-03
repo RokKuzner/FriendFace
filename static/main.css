@@ -454,6 +454,10 @@ hr.postseperator {
     .underdevelopmentmessage {
         margin-top: 80px;
     }
+
+    .loginregistererror {
+        width: 90%;
+    }
 }
 
 @media (max-device-width: 411px), (max-width: 411px){
