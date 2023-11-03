@@ -209,6 +209,10 @@ def get_post_by_post_id(user:str, post_id:str):
         post_return = (post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
     return post_return
 
+def get_post_genre(post_id:str):
+    c.execute('SELECT * FROM postgenre WHERE postid=?', (post_id,))
+    return c.fetchone()[1]
+
 
 def like_post(user:str, post_id:str):
     if user_liked_post(user, post_id) != False:
