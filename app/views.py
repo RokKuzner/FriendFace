@@ -72,6 +72,8 @@ def like(request):
         db.dislike_post(user, post_id)
     else:
         db.like_post(user, post_id)
+        genre = db.get_post_genre(post_id)
+        db.add_user_interest(user, genre)
     return redirect('/') if redirect_to == None else redirect(redirect_to)
 
 @login_required
