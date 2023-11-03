@@ -42,10 +42,18 @@ genre TEXT
 )
 """
 
+USER_INTERESTS = """
+CREATE TABLE IF NOT EXISTS interests(
+user TEXT UNIQUE,
+interests TEXT
+)
+"""
+
 c.execute(USERS)
 c.execute(POSTS)
 c.execute(COMMENTS)
 c.execute(POST_GENRE)
+c.execute(USER_INTERESTS)
 
 conn.commit()
 conn.close()
