@@ -65,8 +65,13 @@
                 </div>
             </form>
 
-            <div class="GoToComments">
-                <a href="/getpost/{{ post.4 }}">Comments ({{ post.9 }})</a>
+            <div class="commentoptions">
+                <div class="commentoption">
+                    <a href="/getpost/{{ post.4 }}">Comments ({{ post.9 }})</a>
+                </div>
+                <div class="commentoption sharediv">
+                    Share
+                </div>
             </div>
         </div>
     {% endfor %}
@@ -74,4 +79,5 @@
         let current_user = "{{ current_user }}"
     </script>
     <script src="/static/index_post.js"></script>
+    <script src="static/share_post.js"></script>
 {% endblock %}

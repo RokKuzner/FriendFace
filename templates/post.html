@@ -29,6 +29,12 @@
             </div>
         </form>
 
+        <div class="commentoptions">
+            <div class="commentoption sharediv">
+                Share
+            </div>
+        </div>
+
         <div class="comments">
             {% for comment in post.7 %}
                 <div class="comment">
@@ -38,5 +44,6 @@
                 <br>
             {% endfor %}
         </div>
-</div>
+    </div>
+    <script src="static/share_post.js"></script>
 {% endblock %}
