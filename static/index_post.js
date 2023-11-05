@@ -1,7 +1,9 @@
-console.log(current_user)
+console.info("Current user: "+current_user)
+console.info("Current user id: "+current_user_id)
+console.info("Current page: "+this_url)
+
 let post_btn = document.getElementById("postbtn")
 let post_text = document.getElementById("posttext")
-let like_btn = document.getElementById("like")
 
 function post_click() {
     let parts_of_url = String(window.location.href).split("/")
@@ -12,9 +14,4 @@ function post_click() {
     }
 }
 
-function like_click() {
-    console.log('like!!')
-}
-
 post_btn.addEventListener("click", post_click)
-like_btn.addEventListener("click", like_click)
