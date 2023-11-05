@@ -305,7 +305,7 @@ def read_post(user:str, post_id:str):
 
 def is_post_read(user:str, post_id:str):
     c.execute('SELECT * FROM readposts WHERE user=? AND post=?', (user, post_id))
-    if c.fetchall() != []:
+    if c.fetchall() == []:
         return False
     return True
 
