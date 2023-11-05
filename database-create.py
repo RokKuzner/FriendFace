@@ -49,11 +49,20 @@ interests TEXT
 )
 """
 
+READ_POSTS = """
+CREATE TABLE IF NOT EXISTS readposts(
+user TEXT,
+post TEXT
+)
+"""
+
+
 c.execute(USERS)
 c.execute(POSTS)
 c.execute(COMMENTS)
 c.execute(POST_GENRE)
 c.execute(USER_INTERESTS)
+c.execute(READ_POSTS)
 
 conn.commit()
 conn.close()
