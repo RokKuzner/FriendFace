@@ -296,6 +296,13 @@ def user_liked_post(user:str, post_id:str):
 
     return True if user in post_user_likes else False
 
+def read_post(user:str, post_id:str):
+    c.execute('SELECT * FROM readposts WHERE user=? AND post=?', (user, post_id))
+    if c.fetchall() != []:
+        return "Allready read"
+    c.execute('INSERT INTO readposts VALUES(?, ?)', (user, post_id))
+    conn.commit()
+
 #Comments
 def new_comment(user:str, content:str, parrent_post_id:str):
     c.execute('INSERT INTO comments VALUES(?, ?, ?, ?, ?)', (user, content, parrent_post_id, generate_id("comments", "id"), get_users_id_by_username(user)))
