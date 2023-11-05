@@ -231,6 +231,7 @@ hr.postseperator {
     margin-right: auto;
     width: 60%;
     min-width: max-content;
+    max-width: 200px;
 }
 
 .commentoption {
