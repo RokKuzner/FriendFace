@@ -9,8 +9,6 @@ async function copy_to_clipboard(text) {
 
 for (let post of document.querySelectorAll(".post")) {
     let share_div = post.querySelector(".commentoptions .sharediv")
-    console.log("IN HERE")
-    console.log(share_div)
     share_div.addEventListener("click", e => {
         let url = String(window.location.href)+"getpost/"+post.id
         copy_to_clipboard(url)
