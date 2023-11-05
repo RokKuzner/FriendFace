@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 .loginwelcometxt {
     width: max-content;
     padding-top: 5px;
