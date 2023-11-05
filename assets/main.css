@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 .loginwelcometxt {
     width: max-content;
     padding-top: 5px;
@@ -221,16 +225,29 @@ hr.postseperator {
     margin-top: 10px;
 }
 
-.GoToComments {
+.commentoptions {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    min-width: max-content;
+    max-width: 200px;
+}
+
+.commentoption {
     width: max-content;
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.GoToComments a {
+.commentoption a {
     text-decoration: none;
     color: black;
+}
+
+.sharediv:hover {
+    cursor: pointer;
 }
 
 .comment {
