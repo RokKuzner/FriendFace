@@ -29,5 +29,6 @@ urlpatterns = [
     path('follow', include('app.urls')),
     path('unfollow', include('app.urls')),
     path('editprofile', include('app.urls')),
-    path('getpost', include('app.urls'))
+    path('getpost', include('app.urls')),
+    path('readpost', include('app.urls'))
 ]

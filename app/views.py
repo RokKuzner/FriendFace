@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.urls import reverse
+from django.http import JsonResponse
 from decorators import login_required
 import database as db
 from FriendFace.settings import BASE_DIR
@@ -60,6 +61,14 @@ def getpost(request, post_id):
     return render(request, "post.html", {'logged_in':True, 'current_user':request.session['current_user'],
                                           'current_user_id': db.get_users_id_by_username(request.session['current_user']),
                                           'post':db.get_post_by_post_id(request.session['current_user'], post_id), 'this_url':str(f'/getpost/{post_id}')})
+
+@login_required
+def readpost(request):
+    post_id = request.GET.get('post', None)
+    if post_id != None:
+        db.read_post(request.session["current_user"], post_id)
+        return JsonResponse({"status": "succes"}, status=200)
+    return JsonResponse({"status": "error", "descriprion":"post_id not provided"}, status=500)
 
 @login_required
 def like(request):
