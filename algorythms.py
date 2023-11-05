@@ -39,6 +39,9 @@ def grade_post(user:str, post):
     if db.get_post_genre(post[4]) in db.get_user_interests(user):
         total_points += 15
 
+    if db.is_post_read(user, post[4]) == True:
+        total_points = total_points / 4
+
     return total_points
 
 def get_client_ip(request):
