@@ -10,12 +10,15 @@ function isInViewport(element) {
 
 let posts = document.querySelectorAll(".post")
 let read_posts_this_session = []
+const http = new XMLHttpRequest()
 
 function handle() {
     let indx = 0
     while (indx < posts.length) {
         if (isInViewport(posts[indx]) && (read_posts_this_session.includes(posts[indx]) == false)) {
-            console.log("read post:", posts[indx])
+            let url = String(window.location.href)+"readpost?post="+posts[indx].id
+            http.open("GET", String(url))
+            http.send()
             read_posts_this_session.push(posts[indx])
         }
         indx ++
