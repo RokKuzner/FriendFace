@@ -50,7 +50,7 @@ def unfollow(request, user):
 @login_required
 def editprofile(request, user):
     if user == request.session['current_user']:
-        return render(request, 'featureindevelopment.html', {'logged_in':True, 'current_user':request.session['current_user'],
+        return render(request, 'editprofile.html', {'logged_in':True, 'current_user':request.session['current_user'],
                                           'current_user_id': db.get_users_id_by_username(request.session['current_user'])})
     else:
         pass

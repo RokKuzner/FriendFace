@@ -14,7 +14,7 @@ urlpatterns = [
   path('user/<str:user_page>', views.user, name='user'),
   path('follow/<str:user>', views.follow, name='follow'),
   path('unfollow/<str:user>', views.unfollow, name='unfollow'),
-  path('editprofile/<str:user>', views.editprofile, name='editprofile'),
+  path('user/<str:user>/edit', views.editprofile, name='editprofile'),
   path('getpost/<str:post_id>', views.getpost, name='editprofile'),
   path('readpost', views.readpost, name='readpost')
 ]
