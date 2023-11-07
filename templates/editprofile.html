@@ -3,12 +3,19 @@
 {% block title %}FriendFace{% endblock %}
 
 {% block content %}
-<div class="underdevelepmentwrap">
-    <p class="underdevelopmentmessage">
-        This feature is still <strong>under development</strong>. Thank you for your patience!
-    </p>
-    <div class="underdevelopmentimgdiv">
-        <img class="underdevelopmentimg" src="/static/icons/brokenrobot.jpg" alt="">
+<div class="editprofilewrap">
+    <div class="changewrap">
+        <form action="user/{{ currentuser }}/edit/password" method="post">
+            {% csrf_token %}
+            {% for message in messages %}
+                <div class="loginregistererror alert alert-warning" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <input type="password" class="changepasswordinput form-control" placeholder="Old Password" aria-label="Old Password" name="oldpassword" aria-describedby="basic-addon1">
+            <input type="password" class="changepasswordinput form-control" placeholder="New Password" aria-label="New Password" name="newpassword" aria-describedby="basic-addon1" style="margin-top: 15px;">
+            <button type="submit" class="loginbutton btn btn-primary">Change password</button>
+        </form>
     </div>
 </div>
 {% endblock %}

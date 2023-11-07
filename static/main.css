@@ -422,6 +422,25 @@ hr.postseperator {
     display: block;
 }
 
+.changewrap {
+    width: 50vw;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #0000004f;
+
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.changepasswordinput {
+    width: 90%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @media (max-device-width: 480px), (max-width: 575px){
     .post {
         width: 97vw;
@@ -480,5 +499,11 @@ hr.postseperator {
 @media (max-device-width: 411px), (max-width: 411px){
     .underdevelopmentmessage {
         margin-top: 70px;
+    }
+}
+
+@media (max-device-width: 900px), (max-width: 900px){
+    .changewrap {
+        width: 80vw;
     }
 }
