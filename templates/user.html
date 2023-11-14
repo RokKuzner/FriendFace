@@ -22,7 +22,7 @@
             <div class="subinfoP2">
                 <div class="subinfo">{{ followers }} followers</div>
                 {% if is_my_page == True %}
-                <a class="btn btn-primary" href="/editprofile/{{ current_user }}">Edit your profile</a>
+                <a class="btn btn-primary" href="/user/{{ current_user }}/edit">Edit your profile</a>
                 {% else %}
                     {% if is_following == True %}
                         <div class="subinfo subscribebntdiv">
