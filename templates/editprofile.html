@@ -4,14 +4,15 @@
 
 {% block content %}
 <div class="editprofilewrap">
+    {% for message in messages %}
+        <div class="loginregistererror alert alert-warning" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="changewrap">
-        <form action="user/{{ currentuser }}/edit/password" method="post">
+        <form action="/user/{{ current_user }}/edit" method="post">
             {% csrf_token %}
-            {% for message in messages %}
-                <div class="loginregistererror alert alert-warning" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
+            <input type="hidden" value="password" name="change">
             <input type="password" class="changepasswordinput form-control" placeholder="Old Password" aria-label="Old Password" name="oldpassword" aria-describedby="basic-addon1">
             <input type="password" class="changepasswordinput form-control" placeholder="New Password" aria-label="New Password" name="newpassword" aria-describedby="basic-addon1" style="margin-top: 15px;">
             <button type="submit" class="loginbutton btn btn-primary">Change password</button>
