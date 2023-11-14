@@ -195,6 +195,10 @@ def get_user_interests(user:str):
 
     return intersets
 
+def change_password(user:str, new_password:str):
+    c.execute('UPDATE users SET password=? WHERE email=?', (new_password, user))
+    conn.commit()
+
 #Posts
 def new_post(user:str, content:str):
     thetime = time.time()
