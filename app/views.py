@@ -49,12 +49,31 @@ def unfollow(request, user):
 
 @login_required
 def editprofile(request, user):
-    if user == request.session['current_user']:
-        return render(request, 'editprofile.html', {'logged_in':True, 'current_user':request.session['current_user'],
-                                          'current_user_id': db.get_users_id_by_username(request.session['current_user'])})
-    else:
-        pass
-    return redirect('/')
+    if user != request.session['current_user']:
+        return redirect("/logout")
+
+    if request.method == 'POST' and request.POST["change"] == "password":
+        old_password = request.POST["oldpassword"]
+        new_password = request.POST["newpassword"]
+        redirect_url = "/user/"+user+"/edit"
+
+        if old_password == new_password:
+            messages.error(request, "The provided passwords are the same")
+            return redirect(redirect_url)
+        if not db.validate_user(user, old_password):
+            messages.error(request, "Incorect old(current) password")
+            return redirect(redirect_url)
+        if len(new_password) < 6:
+            messages.error(request, "New password must be at least 6 characters long")
+            return redirect(redirect_url)
+        
+        db.change_password(user, new_password)
+        messages.success(request, "Succesfully changed password")
+        return redirect(redirect_url)
+
+    return render(request, 'editprofile.html', {'logged_in':True, 'current_user':request.session['current_user'],
+                                                'current_user_id': db.get_users_id_by_username(request.session['current_user'])})
+        
 
 @login_required
 def getpost(request, post_id):
