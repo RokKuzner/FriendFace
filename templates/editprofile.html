@@ -18,5 +18,14 @@
             <button type="submit" class="loginbutton btn btn-primary">Change password</button>
         </form>
     </div>
+
+    <div class="changewrap">
+        <form action="/user/{{ current_user }}/edit" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" value="image" name="change">
+            <input type="file" class="logininput form-control" name="avatar" accept="image/jpg" style="margin-top: 10px;">
+            <button type="submit" class="loginbutton btn btn-primary">Change user image</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

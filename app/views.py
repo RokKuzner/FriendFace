@@ -51,11 +51,12 @@ def unfollow(request, user):
 def editprofile(request, user):
     if user != request.session['current_user']:
         return redirect("/logout")
+    
+    redirect_url = "/user/"+user+"/edit"
 
     if request.method == 'POST' and request.POST["change"] == "password":
         old_password = request.POST["oldpassword"]
         new_password = request.POST["newpassword"]
-        redirect_url = "/user/"+user+"/edit"
 
         if old_password == new_password:
             messages.error(request, "The provided passwords are the same")
@@ -69,6 +70,19 @@ def editprofile(request, user):
         
         db.change_password(user, new_password)
         messages.success(request, "Succesfully changed password")
+        return redirect(redirect_url)
+    
+    if request.method == 'POST' and request.POST["change"] == "image":
+        filename = os.path.join(BASE_DIR, "media", "avatars", str(db.get_users_id_by_username(user)+'.jpg'))
+
+        if os.path.exists(filename):
+            os.remove(filename)
+
+        image = Image.open(request.FILES['avatar'])
+        croped_img = image.crop(box=(0, 0, min(image.size), min(image.size)))
+        croped_img.convert("RGB").save(filename)
+
+        messages.success(request, "Succesfully changed user image")
         return redirect(redirect_url)
 
     return render(request, 'editprofile.html', {'logged_in':True, 'current_user':request.session['current_user'],
