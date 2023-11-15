@@ -53,6 +53,7 @@ def editprofile(request, user):
         return redirect("/logout")
     
     redirect_url = "/user/"+user+"/edit"
+    allowed_image_type = ["image/jpg", "image/jpeg", "image/png"]
 
     if request.method == 'POST' and request.POST["change"] == "password":
         old_password = request.POST["oldpassword"]
@@ -73,6 +74,10 @@ def editprofile(request, user):
         return redirect(redirect_url)
     
     if request.method == 'POST' and request.POST["change"] == "image":
+        if ("avatar" not in request.FILES) or (request.FILES['avatar'].content_type not in allowed_image_type):
+            messages.success(request, "Invalid image type")
+            return redirect(redirect_url)
+
         filename = os.path.join(BASE_DIR, "media", "avatars", str(db.get_users_id_by_username(user)+'.jpg'))
 
         if os.path.exists(filename):
@@ -88,7 +93,6 @@ def editprofile(request, user):
     return render(request, 'editprofile.html', {'logged_in':True, 'current_user':request.session['current_user'],
                                                 'current_user_id': db.get_users_id_by_username(request.session['current_user'])})
         
-
 @login_required
 def getpost(request, post_id):
     return render(request, "post.html", {'logged_in':True, 'current_user':request.session['current_user'],
