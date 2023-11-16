@@ -12,6 +12,9 @@
                     {{ message }}
                 </div>
             {% endfor %}
+            <div class="loginregistererror alert alert-warning" role="alert" id="dynamicalert">
+                {{ message }}
+            </div>
             {% csrf_token %}
             <input type="text" class="logininput form-control" placeholder="Username" aria-label="Username" name="user" aria-describedby="basic-addon1">
             <input type="password" class="logininput form-control" placeholder="Password" aria-label="Password" name="password" aria-describedby="basic-addon1" style="margin-top: 10px;">
@@ -23,4 +26,5 @@
             <a href="login" class="loginlink">Login?</a>
         </div>
     </div>
+    <script src="/static/register.js"></script>
 {% endblock %}
