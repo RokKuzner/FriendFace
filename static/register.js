@@ -6,12 +6,15 @@ const password_2 = inputs[3]
 const image_input = inputs[4]
 const submit_button = document.querySelector("form button")
 
+let last_username_value = username.value+"1"
+let last_usename_avalible_respone = null
+
 const alert_div = document.getElementById("dynamicalert")
 alert_div.style.display = "none"
 
 async function check_inputs() {
     let to_disable = false
-    let username_avalible_return = await check_user_avalible()
+    let username_avalible_return = await check_username_avalible()
 
     if (username_avalible_return && to_disable == false) {
         to_disable = true
@@ -87,11 +90,17 @@ function check_image() {
     return false
 }
 
-async function check_user_avalible() {
+async function check_username_avalible() {
+    if (last_username_value == username.value) {
+        return last_usename_avalible_respone
+    }
+    last_username_value = username.value
+
     let request_url = window.location.origin + "/userexists?user=" + username.value;
-    const response = await fetch(request_url);
-    const json_response = await response.json();
+    let response = await fetch(request_url);
+    let json_response = await response.json();
+    last_usename_avalible_respone = json_response["user_exists"]
     return json_response["user_exists"];
-  }
+}
 
 setInterval(check_inputs, 300)
