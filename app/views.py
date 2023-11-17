@@ -131,6 +131,12 @@ def comment(request):
         db.new_comment(request.session['current_user'], content, parrent_id)
     return redirect(redirect_to)
 
+def userexists(request):
+    user = request.GET.get('user', None)
+    if user == None:
+        return JsonResponse({"status": "error", "description":"user not provided"}, status=500)
+    return JsonResponse({"status": "succes", "user":user, "user_exists":db.user_exists(user)})
+
 @login_required
 def post(request):
     user_posting = request.GET.get('user', None)
