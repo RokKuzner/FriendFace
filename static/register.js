@@ -9,10 +9,16 @@ const submit_button = document.querySelector("form button")
 const alert_div = document.getElementById("dynamicalert")
 alert_div.style.display = "none"
 
-function check_inputs() {
+async function check_inputs() {
     let to_disable = false
+    let username_avalible_return = await check_user_avalible()
 
-    if (username.value.length == 0 && to_disable == false) {
+    if (username_avalible_return && to_disable == false) {
+        to_disable = true
+        username.style.border = "2px red solid"
+
+        alert_div.innerText = "Username allready taken"
+    } else if (username.value.length == 0 && to_disable == false) {
         to_disable = true
         username.style.border = "2px red solid"
 
@@ -80,5 +86,12 @@ function check_image() {
     if (image_input.files.length == 0) {return true}
     return false
 }
+
+async function check_user_avalible() {
+    let request_url = window.location.origin + "/userexists?user=" + username.value;
+    const response = await fetch(request_url);
+    const json_response = await response.json();
+    return json_response["user_exists"];
+  }
 
 setInterval(check_inputs, 300)
