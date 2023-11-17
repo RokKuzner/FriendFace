@@ -181,6 +181,9 @@ def register(request):
         elif "," in username:
             messages.error(request, "Username cannot contain a comma")
             return redirect('/register')
+        elif len(username) == 0:
+            messages.error(request, "You must set a username")
+            return redirect('/register')
         else:
             try:
                 a = request.FILES['avatar']
