@@ -12,23 +12,25 @@ let last_usename_avalible_respone = null
 const alert_div = document.getElementById("dynamicalert")
 alert_div.style.display = "none"
 
+const border_error = "2px red solid"
+
 async function check_inputs() {
     let to_disable = false
     let username_avalible_return = await check_username_avalible()
 
     if (username_avalible_return && to_disable == false) {
         to_disable = true
-        username.style.border = "2px red solid"
+        username.style.border = border_error
 
         alert_div.innerText = "Username allready taken"
     } else if (username.value.length == 0 && to_disable == false) {
         to_disable = true
-        username.style.border = "2px red solid"
+        username.style.border = border_error
 
         alert_div.innerText = "You must set a username"
     } else if (username.value.includes(",") && to_disable == false) {
         to_disable = true
-        username.style.border = "2px red solid"
+        username.style.border = border_error
 
         alert_div.innerText = "Username cannot contain a comma"
     } else {
@@ -37,7 +39,7 @@ async function check_inputs() {
 
     if (check_password1() && to_disable == false) {
         to_disable = true
-        password_1.style.border = "2px red solid"
+        password_1.style.border = border_error
 
         alert_div.innerText = "Password must be at least 6 characters long"
     } else {
@@ -46,7 +48,7 @@ async function check_inputs() {
 
     if (check_password2()  && to_disable == false) {
             to_disable = true
-            password_2.style.border = "2px red solid"
+            password_2.style.border = border_error
 
             alert_div.innerText = "Passwords don't match"
     } else {
@@ -55,7 +57,7 @@ async function check_inputs() {
 
     if (check_image()  && to_disable == false) {
         to_disable = true
-        image_input.style.border = "2px red solid"
+        image_input.style.border = border_error
 
         alert_div.innerText = "You must select your profile image"
     } else {
