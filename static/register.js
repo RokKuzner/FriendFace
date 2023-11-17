@@ -12,7 +12,7 @@ let last_usename_avalible_respone = null
 const alert_div = document.getElementById("dynamicalert")
 alert_div.style.display = "none"
 
-const border_error = "2px red solid"
+const border_error = "2px rgb(35, 111, 221) solid"
 
 async function check_inputs() {
     let to_disable = false
