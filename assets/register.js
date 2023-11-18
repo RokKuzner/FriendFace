@@ -6,20 +6,31 @@ const password_2 = inputs[3]
 const image_input = inputs[4]
 const submit_button = document.querySelector("form button")
 
+let last_username_value = username.value+"1"
+let last_usename_avalible_respone = null
+
 const alert_div = document.getElementById("dynamicalert")
 alert_div.style.display = "none"
 
-function check_inputs() {
-    let to_disable = false
+const border_error = "2px rgb(35, 111, 221) solid"
 
-    if (username.value.length == 0 && to_disable == false) {
+async function check_inputs() {
+    let to_disable = false
+    let username_avalible_return = await check_username_avalible()
+
+    if (username_avalible_return && to_disable == false) {
         to_disable = true
-        username.style.border = "2px red solid"
+        username.style.border = border_error
+
+        alert_div.innerText = "Username allready taken"
+    } else if (username.value.length == 0 && to_disable == false) {
+        to_disable = true
+        username.style.border = border_error
 
         alert_div.innerText = "You must set a username"
     } else if (username.value.includes(",") && to_disable == false) {
         to_disable = true
-        username.style.border = "2px red solid"
+        username.style.border = border_error
 
         alert_div.innerText = "Username cannot contain a comma"
     } else {
@@ -28,7 +39,7 @@ function check_inputs() {
 
     if (check_password1() && to_disable == false) {
         to_disable = true
-        password_1.style.border = "2px red solid"
+        password_1.style.border = border_error
 
         alert_div.innerText = "Password must be at least 6 characters long"
     } else {
@@ -37,7 +48,7 @@ function check_inputs() {
 
     if (check_password2()  && to_disable == false) {
             to_disable = true
-            password_2.style.border = "2px red solid"
+            password_2.style.border = border_error
 
             alert_div.innerText = "Passwords don't match"
     } else {
@@ -46,7 +57,7 @@ function check_inputs() {
 
     if (check_image()  && to_disable == false) {
         to_disable = true
-        image_input.style.border = "2px red solid"
+        image_input.style.border = border_error
 
         alert_div.innerText = "You must select your profile image"
     } else {
@@ -79,6 +90,19 @@ function check_password2() {
 function check_image() {
     if (image_input.files.length == 0) {return true}
     return false
+}
+
+async function check_username_avalible() {
+    if (last_username_value == username.value) {
+        return last_usename_avalible_respone
+    }
+    last_username_value = username.value
+
+    let request_url = window.location.origin + "/userexists?user=" + username.value;
+    let response = await fetch(request_url);
+    let json_response = await response.json();
+    last_usename_avalible_respone = json_response["user_exists"]
+    return json_response["user_exists"];
 }
 
 setInterval(check_inputs, 300)
