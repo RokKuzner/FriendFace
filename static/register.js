@@ -8,6 +8,7 @@ const submit_button = document.querySelector("form button")
 
 let last_username_value = username.value+"1"
 let last_usename_avalible_respone = null
+let previous_usernames = []
 
 const alert_div = document.getElementById("dynamicalert")
 alert_div.style.display = "none"
@@ -93,7 +94,12 @@ function check_image() {
 }
 
 async function check_username_avalible() {
+    if (previous_usernames[username.value] != null) {
+        return previous_usernames[username.value]
+    }
+
     if (last_username_value == username.value) {
+        previous_usernames[username.value] = last_usename_avalible_respone
         return last_usename_avalible_respone
     }
     last_username_value = username.value
@@ -102,6 +108,7 @@ async function check_username_avalible() {
     let response = await fetch(request_url);
     let json_response = await response.json();
     last_usename_avalible_respone = json_response["user_exists"]
+    previous_usernames[username.value] = json_response["user_exists"]
     return json_response["user_exists"];
 }
 
