@@ -38,7 +38,10 @@
         <div class="comments">
             {% for comment in post.7 %}
                 <div class="comment">
-                    <div class="commentuser"><img class="commentusericon round" src="/media/avatars/{{ comment.4 }}.jpg" alt="User logo img">{{ comment.0 }}</div>
+                    <div class="commentuser">
+                        <img class="commentusericon round" src="/media/avatars/{{ comment.4 }}.jpg" alt="User logo img">
+                        <a href="/user/{{ comment.0 }}" class="commentusernameatag"><div>{{ comment.0 }}</div></a>
+                    </div>
                     <div class="commentcontent">{{ comment.1 }}</div>
                 </div>
                 <br>
