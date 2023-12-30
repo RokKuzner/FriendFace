@@ -5,7 +5,7 @@
 {% block content %}
     <div class="userpagewelcome">
         <div class="userpageuseravatardiv round">
-            <img src="/media/avatars/{{ user_page_id }}.jpg" alt="User logo img" class="userpageuseravatarimg round">
+            <img src="/files/media/profileimg?user={{ user_page_id }}" alt="User logo img" class="userpageuseravatarimg round">
         </div>
 
         <div class="userwelcom">
@@ -41,16 +41,16 @@
     {% for post in posts %}
         <div class="post" id="{{ post.4 }}">
             <div class="postuserdiv">
-                <img class="postusericon round" src="/media/avatars/{{ post.8 }}.jpg" alt="User logo img">
+                <img class="postusericon round" src="/files/media/profileimg?user={{ post.8 }}" alt="User logo img">
                 <div class="postuser">{{ post.0 }}</div>
             </div>
             <div class="postcontent">{{ post.1 }}</div>
             <div class="likedstuff">
                 {% if  post.6 == True%}
-                    <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.4 }}"><img src="/static/icons/liked.png" alt="like" class="likeimg" id="like"></a>
+                    <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.4 }}"><img src="/files/static/icons?file=liked.png" alt="like" class="likeimg" id="like"></a>
                     <div class="likediv">{{ post.2 }}</div>
                 {% else %}
-                    <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.4 }}"><img src="/static/icons/like.png" alt="like" class="likeimg" id="like"></a>
+                    <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.4 }}"><img src="/files/static/icons?file=like.png" alt="like" class="likeimg" id="like"></a>
                     <div class="likediv">{{ post.2 }}</div>
                 {% endif %}
             </div>
@@ -70,7 +70,7 @@
                     <a href="/getpost/{{ post.4 }}">Comments ({{ post.9 }})</a>
                 </div>
                 <div class="commentoption sharediv" title="copy share link to clipboard">
-                    <img src="/static/icons/share.png" alt="Share">
+                    <img src="/files/static/icons?file=share.png" alt="Share">
                 </div>
             </div>
         </div>
@@ -78,6 +78,6 @@
     <script>
         let current_user = "{{ current_user }}"
     </script>
-    <script src="/static/index_post.js"></script>
-    <script src="/static/share_post.js"></script>
+    <script src="/files/static/js?file=index_post"></script>
+    <script src="/files/static/js?file=share_post"></script>
 {% endblock %}

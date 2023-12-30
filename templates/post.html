@@ -5,16 +5,16 @@
 {% block content %}
     <div class="post" id="{{ post.4 }}" style="margin-top: 20px;">
         <div class="postuserdiv">
-            <img class="postusericon round" src="/media/avatars/{{ post.8 }}.jpg" alt="User logo img">
+            <img class="postusericon round" src="/files/media/profileimg?user={{ post.8 }}" alt="User logo img">
             <a href="/user/{{ post.0 }}" class="postusernameatag"><div class="postuser">{{ post.0 }}</div></a>
         </div>
         <div class="postcontent">{{ post.1 }}</div>
         <div class="likedstuff">
             {% if  post.6 == True%}
-                <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.4 }}"><img src="/static/icons/liked.png" alt="like" class="likeimg" id="like"></a>
+                <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.4 }}"><img src="/files/static/icons?file=liked.png" alt="like" class="likeimg" id="like"></a>
                 <div class="likediv">{{ post.2 }}</div>
             {% else %}
-                <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.4 }}"><img src="/static/icons/like.png" alt="like" class="likeimg" id="like"></a>
+                <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.4 }}"><img src="/files/static/icons?file=like.png" alt="like" class="likeimg" id="like"></a>
                 <div class="likediv">{{ post.2 }}</div>
             {% endif %}
         </div>
@@ -31,7 +31,7 @@
 
         <div class="commentoptions">
             <div class="commentoption sharediv" title="copy share link to clipboard">
-                <img src="/static/icons/share.png" alt="Share">
+                <img src="/files/static/icons?file=share.png" alt="Share">
             </div>
         </div>
 
@@ -39,7 +39,7 @@
             {% for comment in post.7 %}
                 <div class="comment">
                     <div class="commentuser">
-                        <img class="commentusericon round" src="/media/avatars/{{ comment.4 }}.jpg" alt="User logo img">
+                        <img class="commentusericon round" src="/files/media/profileimg?user={{ comment.4 }}" alt="User logo img">
                         <a href="/user/{{ comment.0 }}" class="commentusernameatag"><div>{{ comment.0 }}</div></a>
                     </div>
                     <div class="commentcontent">{{ comment.1 }}</div>
@@ -48,5 +48,5 @@
             {% endfor %}
         </div>
     </div>
-    <script src="/static/share_post.js"></script>
+    <script src="/files/static/js?file=share_post"></script>
 {% endblock %}
