@@ -10,6 +10,8 @@ import os
 from PIL import Image
 import algorythms as alg
 
+allowed_image_type = ["image/jpg", "image/jpeg", "image/png"]
+
 # Create your views here.
 @login_required
 def home(request):
@@ -53,7 +55,6 @@ def editprofile(request, user):
         return redirect("/logout")
     
     redirect_url = "/user/"+user+"/edit"
-    allowed_image_type = ["image/jpg", "image/jpeg", "image/png"]
 
     if request.method == 'POST' and request.POST["change"] == "password":
         old_password = request.POST["oldpassword"]
@@ -192,6 +193,9 @@ def register(request):
             return redirect('/register')
         elif "\\" in username:
             messages.error(request, "Username cannot contain '\\'")
+            return redirect('/register')
+        elif request.FILES['avatar'].content_type not in allowed_image_type:
+            messages.error(request, "Invalid image type")
             return redirect('/register')
         else:
             try:

@@ -5,6 +5,7 @@ const password_1 = inputs[2]
 const password_2 = inputs[3]
 const image_input = inputs[4]
 const submit_button = document.querySelector("form button")
+const allowed_image_type = ["image/jpg", "image/jpeg", "image/png"]
 
 let last_username_value = username.value+"1"
 let last_usename_avalible_respone = null
@@ -71,11 +72,16 @@ async function check_inputs() {
             password_2.style.border = ""
     }
 
-    if (check_image()  && to_disable == false) {
+    if (check_image() && to_disable == false) {
         to_disable = true
         image_input.style.border = border_error
 
         alert_div.innerText = "You must select your profile image"
+    } else if (!check_image() && (!allowed_image_type.includes(image_input.files[0].type)) && to_disable == false) {
+        to_disable = true
+        image_input.style.border = border_error
+
+        alert_div.innerText = "You must select a valid image type"
     } else {
         image_input.style.border = ""
     }
@@ -104,7 +110,7 @@ function check_password2() {
 }
 
 function check_image() {
-    if (image_input.files.length == 0) {return true}
+    if (image_input.files.length != 1) {return true}
     return false
 }
 
