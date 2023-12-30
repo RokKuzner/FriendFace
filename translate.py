@@ -6,10 +6,7 @@ def detect_lang(text:str):
 
     return detected_language
 
-def translate(text:str, from_lang="auto", to_lang="en"):
-    if from_lang == "auto":
-        from_lang = detect_lang(text)
-
+def translate(text:str, from_lang:str, to_lang="en"):
     if from_lang == to_lang:
         return text
 
