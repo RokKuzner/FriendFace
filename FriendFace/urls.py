@@ -18,17 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    #servemedia urls
+    path('files/', include('servemedia.urls')),
+
+    #Main app urls
     path('', include('app.urls')),
-    path('login', include('app.urls')),
-    path('register', include('app.urls')),
-    path('logout', include('app.urls')),
-    path('post', include('app.urls')),
-    path('like', include('app.urls')),
-    path('comment', include('app.urls')),
-    path('user', include('app.urls')),
-    path('follow', include('app.urls')),
-    path('unfollow', include('app.urls')),
-    path('getpost', include('app.urls')),
-    path('readpost', include('app.urls')),
-    path('userexists', include('app.urls'))
 ]
