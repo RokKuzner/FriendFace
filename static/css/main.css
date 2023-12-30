@@ -417,9 +417,20 @@ hr.postseperator {
     max-width: max-content;
 }
 
+.errorcode {
+    display: flex;
+    margin-top: 80px;
+    padding-left: 10px;
+    padding-top: 10px;
+    text-align: left;
+}
+
+.grayexplain {
+    color: rgb(168, 169, 169);
+}
+
 .underdevelopmentmessage {
-    display: block;
-    margin-top: 100px;
+    margin-top: 0px;
     padding: 10px;
     text-align: center;
 }
@@ -467,6 +478,12 @@ hr.postseperator {
     .infoaboutuser div div:nth-child(2) {
         margin-top: 10px;
     }
+
+    .errorcode {
+        width: max-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 @media (max-device-width: 380px), (max-width: 380px){
@@ -493,18 +510,8 @@ hr.postseperator {
 }
 
 @media (max-device-width: 518px), (max-width: 518px){
-    .underdevelopmentmessage {
-        margin-top: 80px;
-    }
-
     .loginregistererror {
         width: 90%;
-    }
-}
-
-@media (max-device-width: 411px), (max-width: 411px){
-    .underdevelopmentmessage {
-        margin-top: 70px;
     }
 }
 

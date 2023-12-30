@@ -4,9 +4,15 @@
 
 {% block content %}
 <div class="underdevelepmentwrap">
-    <p class="underdevelopmentmessage">
-        The requested url was <strong>not found</strong> on this server.
-    </p>
+    <div class="secondaryerrorwrap">
+        <div class="errorcode">
+            <div><strong>404.</strong></div><div class="grayexplain">&nbspThat's an error.</div>
+        </div>
+
+        <div class="underdevelopmentmessage">
+            The requested url was not found on this server.
+        </div>
+    </div>
     <div class="underdevelopmentimgdiv">
         <img class="underdevelopmentimg" src="/files/static/icons?file=brokenrobot.jpg" alt="">
     </div>
