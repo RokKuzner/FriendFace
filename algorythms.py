@@ -5,6 +5,7 @@ import tensorflow_hub as hub
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
+import translate
 
 def get_personalized_posts(user:str):
     user_following = db.get_users_following(user)
@@ -74,6 +75,14 @@ def get_post_genre(post_content:str):
         content_modifyed = content_modifyed[:len(content_modifyed)-1]
     post_content = content_modifyed.lower()
 
+    #Translate content to english (only for prediction)
+    language = translate.detect_lang(post_content)
+    if language != "en":
+        post_content = translate.translate(post_content, language)
+
+    print(post_content)
+
+    #Prediction
     content = [post_content]
     content = np.array(content)
     content = tf.convert_to_tensor(content, dtype=tf.string)
