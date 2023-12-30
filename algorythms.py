@@ -80,8 +80,6 @@ def get_post_genre(post_content:str):
     if language != "en":
         post_content = translate.translate(post_content, language)
 
-    print(post_content)
-
     #Prediction
     content = [post_content]
     content = np.array(content)
