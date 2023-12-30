@@ -184,6 +184,15 @@ def register(request):
         elif len(username) == 0:
             messages.error(request, "You must set a username")
             return redirect('/register')
+        elif ".." in username:
+            messages.error(request, "Username cannot contain '..'")
+            return redirect('/register')
+        elif "/" in username:
+            messages.error(request, "Username cannot contain '..'")
+            return redirect('/register')
+        elif "\\" in username:
+            messages.error(request, "Username cannot contain '\\'")
+            return redirect('/register')
         else:
             try:
                 a = request.FILES['avatar']

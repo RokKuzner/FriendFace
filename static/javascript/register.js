@@ -34,6 +34,21 @@ async function check_inputs() {
         username.style.border = border_error
 
         alert_div.innerText = "Username cannot contain a comma"
+    } else if (username.value.includes("..") && to_disable == false) {
+        to_disable = true
+        username.style.border = border_error
+
+        alert_div.innerText = "Username cannot contain '..'"
+    } else if (username.value.includes("/") && to_disable == false) {
+        to_disable = true
+        username.style.border = border_error
+
+        alert_div.innerText = "Username cannot contain '/'"
+    } else if (username.value.includes("\\") && to_disable == false) {
+        to_disable = true
+        username.style.border = border_error
+
+        alert_div.innerText = "Username cannot contain '\\'"
     } else {
         username.style.border = ""
     }
