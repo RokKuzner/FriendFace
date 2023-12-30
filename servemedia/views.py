@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from FriendFace.settings import BASE_DIR
 import os
+import datetime
 
 STATIC_URL = os.path.join(BASE_DIR, "static")
 JAVASCRIPT_URL = os.path.join(STATIC_URL, "javascript")
@@ -31,6 +32,7 @@ def profileimg(request):
 
         # Set the Content-Disposition header
         response["Content-Disposition"] = f"inline; filename={image_name}"
+        response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
 
         return response
     
