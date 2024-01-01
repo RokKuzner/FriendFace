@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from FriendFace.settings import BASE_DIR
 import os
 import datetime
@@ -15,14 +15,15 @@ AVATARS_URL = os.path.join(MEDIA_URL, "avatars")
 # Views
 def profileimg(request):
     user_id = request.GET.get('user', None)
+    image_name = f"{user_id}.jpg"
 
     image_path = os.path.join(AVATARS_URL, f"{user_id}.jpg")
-    image_name = f"{user_id}.jpg"
+    image_path = os.path.realpath(image_path) #Normailize the image_path
 
     #If file doesn't exist or it's outside the avatars folder
     if os.path.exists(image_path) == False or image_path.startswith(AVATARS_URL) == False:
-        response = HttpResponse()
-        response['Content-Type'] = 'image/jpeg'
+        response = JsonResponse({"message": "the file doesn't exists or the requested file is outside static folder"})
+        response['Content-Type'] = 'application/json'
         return response
 
 
@@ -39,14 +40,15 @@ def profileimg(request):
     
 def js(request):
     file = request.GET.get('file', None)
+    file_name = f"{file}.js"
 
     file_path = os.path.join(JAVASCRIPT_URL, f"{file}.js")
-    file_name = f"{file}.js"
+    file_path = os.path.realpath(file_path) #Normailize the file_path
 
     #If file doesn't exist or it's outside the javascript folder
     if os.path.exists(file_path) == False or file_path.startswith(JAVASCRIPT_URL) == False:
-        response = HttpResponse()
-        response['Content-Type'] = 'text/javascript'
+        response = JsonResponse({"message": "the file doesn't exists or the requested file is outside static folder"})
+        response['Content-Type'] = 'application/json'
         return response
 
     # Open the file in binary mode
@@ -61,14 +63,15 @@ def js(request):
     
 def css(request):
     file = request.GET.get('file', None)
+    file_name = f"{file}.css"
 
     file_path = os.path.join(CSS_URL, f"{file}.css")
-    file_name = f"{file}.css"
+    file_path = os.path.realpath(file_path) #Normailize the file_path
 
     #If file doesn't exist or it's outside the css folder
     if os.path.exists(file_path) == False or file_path.startswith(CSS_URL) == False:
-        response = HttpResponse()
-        response['Content-Type'] = 'text/css'
+        response = JsonResponse({"message": "the file doesn't exists or the requested file is outside static folder"})
+        response['Content-Type'] = 'application/json'
         return response
 
     # Open the file in binary mode
@@ -109,14 +112,15 @@ def favicon(request):
 
 def icons(request):
     file = request.GET.get('file', None)
+    file_name = file
 
     file_path = os.path.join(ICONS_URL, file)
-    file_name = file
+    file_path = os.path.realpath(file_path) #Normailize the file_path
 
     #If file doesn't exist or it's outside the icons folder
     if os.path.exists(file_path) == False or file_path.startswith(ICONS_URL) == False:
-        response = HttpResponse()
-        response['Content-Type'] = 'image/png'
+        response = JsonResponse({"message": "the file doesn't exists or the requested file is outside static folder"})
+        response['Content-Type'] = 'application/json'
         return response
     
     #Get file extension
