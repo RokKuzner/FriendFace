@@ -19,18 +19,19 @@ def profileimg(request):
     image_path = os.path.join(AVATARS_URL, f"{user_id}.jpg")
     image_name = f"{user_id}.jpg"
 
+    #If file doesn't exist
     if os.path.exists(image_path) == False:
         response = HttpResponse()
         response['Content-Type'] = 'image/jpeg'
         return response
 
 
-    # Open the image file in binary mode
+    # Open the image in binary mode
     with open(image_path, "rb") as f:
         # Create an HttpResponse object
         response = HttpResponse(f.read(), content_type="image/jpeg")
 
-        # Set the Content-Disposition header
+        # Set the Content-Disposition and Cache-Control header
         response["Content-Disposition"] = f"inline; filename={image_name}"
         response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
 
@@ -42,6 +43,7 @@ def js(request):
     file_path = os.path.join(JAVASCRIPT_URL, f"{file}.js")
     file_name = f"{file}.js"
 
+    #If file doesn't exist
     if os.path.exists(file_path) == False:
         response = HttpResponse()
         response['Content-Type'] = 'text/javascript'
@@ -63,6 +65,7 @@ def css(request):
     file_path = os.path.join(CSS_URL, f"{file}.css")
     file_name = f"{file}.css"
 
+    #If file doesn't exist
     if os.path.exists(file_path) == False:
         response = HttpResponse()
         response['Content-Type'] = 'text/css'
@@ -110,17 +113,19 @@ def icons(request):
     file_path = os.path.join(ICONS_URL, file)
     file_name = file
 
+    #If file doesn't exist
     if os.path.exists(file_path) == False:
         response = HttpResponse()
         response['Content-Type'] = 'image/png'
         return response
     
+    #Get file extension
     not_important, file_extension = os.path.splitext(file_path)
 
     if file_extension == ".jpg":
         file_extension = ".jpeg"
 
-    # Open the file in binary mode
+    # Open the image in binary mode
     with open(file_path, "rb") as f:
         # Create an HttpResponse object
         response = HttpResponse(f.read(), content_type=f"image/{file_extension[1:]}")
