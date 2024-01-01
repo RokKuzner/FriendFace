@@ -1,3 +1,4 @@
+//Vasriables
 const inputs = document.querySelectorAll("form input")
 
 const username = inputs[1]
@@ -5,7 +6,6 @@ const password_1 = inputs[2]
 const password_2 = inputs[3]
 const image_input = inputs[4]
 const submit_button = document.querySelector("form button")
-const allowed_image_type = ["image/jpg", "image/jpeg", "image/png"]
 
 let last_username_value = username.value+"1"
 let last_usename_avalible_respone = null
@@ -15,7 +15,9 @@ const alert_div = document.getElementById("dynamicalert")
 alert_div.style.display = "none"
 
 const border_error = "2px rgb(35, 111, 221) solid"
+const allowed_image_type = ["image/jpg", "image/jpeg", "image/png"]
 
+//Functions
 async function check_inputs() {
     let to_disable = false
     let username_avalible_return = await check_username_avalible()
@@ -133,4 +135,11 @@ async function check_username_avalible() {
     return json_response["user_exists"];
 }
 
-setInterval(check_inputs, 300)
+//When page loads disable submit button
+submit_button.classList.add("disabled")
+
+//Check for every input change
+username.addEventListener("input", (event) => check_inputs());
+password_1.addEventListener("input", (event) => check_inputs());
+password_2.addEventListener("input", (event) => check_inputs());
+image_input.addEventListener("input", (event) => check_inputs());
