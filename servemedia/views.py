@@ -19,8 +19,8 @@ def profileimg(request):
     image_path = os.path.join(AVATARS_URL, f"{user_id}.jpg")
     image_name = f"{user_id}.jpg"
 
-    #If file doesn't exist
-    if os.path.exists(image_path) == False:
+    #If file doesn't exist or it's outside the avatars folder
+    if os.path.exists(image_path) == False or image_path.startswith(AVATARS_URL) == False:
         response = HttpResponse()
         response['Content-Type'] = 'image/jpeg'
         return response
@@ -43,8 +43,8 @@ def js(request):
     file_path = os.path.join(JAVASCRIPT_URL, f"{file}.js")
     file_name = f"{file}.js"
 
-    #If file doesn't exist
-    if os.path.exists(file_path) == False:
+    #If file doesn't exist or it's outside the javascript folder
+    if os.path.exists(file_path) == False or file_path.startswith(JAVASCRIPT_URL) == False:
         response = HttpResponse()
         response['Content-Type'] = 'text/javascript'
         return response
@@ -65,8 +65,8 @@ def css(request):
     file_path = os.path.join(CSS_URL, f"{file}.css")
     file_name = f"{file}.css"
 
-    #If file doesn't exist
-    if os.path.exists(file_path) == False:
+    #If file doesn't exist or it's outside the css folder
+    if os.path.exists(file_path) == False or file_path.startswith(CSS_URL) == False:
         response = HttpResponse()
         response['Content-Type'] = 'text/css'
         return response
@@ -113,8 +113,8 @@ def icons(request):
     file_path = os.path.join(ICONS_URL, file)
     file_name = file
 
-    #If file doesn't exist
-    if os.path.exists(file_path) == False:
+    #If file doesn't exist or it's outside the icons folder
+    if os.path.exists(file_path) == False or file_path.startswith(ICONS_URL) == False:
         response = HttpResponse()
         response['Content-Type'] = 'image/png'
         return response
