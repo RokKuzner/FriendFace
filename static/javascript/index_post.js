@@ -1,5 +1,3 @@
-console.info("Current user: "+current_user)
-
 let post_btn = document.getElementById("postbtn")
 let post_text = document.getElementById("posttext")
 
