@@ -8,16 +8,20 @@ from sklearn.preprocessing import LabelEncoder
 import translate
 
 def get_personalized_posts(user:str):
-    user_following = db.get_users_following(user)
     posts_with_grade = {}
 
     for post in db.get_posts(user):
         grade = grade_post(user, post)
+
+        while grade in posts_with_grade:
+            grade += 0.000001
+
         posts_with_grade[grade] = post
 
 
     sorted_keys = list(posts_with_grade)
     sorted_keys.sort()
+
     to_return = []
     for key in sorted_keys:
         to_return.append(posts_with_grade[key])
@@ -35,7 +39,7 @@ def grade_post(user:str, post):
     elif post[0] in users_following_users_following:
         total_points += 5
 
-    total_points += (time_posted) / (current_time/5)
+    total_points += scale_to_range(time_posted, 0, current_time)
 
     if db.get_post_genre(post[4]) in db.get_user_interests(user):
         total_points += 15
@@ -52,6 +56,16 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
+
+
+def scale_to_range(value, x, y):
+    # Calculate the normalized value within the range [x, y]
+    normalized_value = (value - x) / (y - x)
+
+    # Scale the normalized value to the range [0, 10]
+    scaled_value = normalized_value * 10
+
+    return scaled_value
 
 #Genre prediction
 custom_objects = {"KerasLayer": hub.KerasLayer}
