@@ -15,15 +15,19 @@ allowed_image_type = ["image/jpg", "image/jpeg", "image/png"]
 # Create your views here.
 @login_required
 def home(request):
+    #Get personalized posts for cuu+rrrent user
     posts = alg.get_personalized_posts(request.session['current_user'])
+
     return render(request, 'index.html', {'logged_in':True, 'current_user':request.session['current_user'],
                                           'current_user_id': db.get_users_id_by_username(request.session['current_user']),
                                           'posts':posts[::-1], 'this_url':str('/')})
 
 @login_required
 def user(request, user_page):
+    #Get all posts posted my user
     posts = db.get_posts_by_user(user_page, request.session['current_user'])
 
+    #Check if user's page is current user's page
     if request.session['current_user'] == user_page:
         is_my_page = True
     else:
@@ -39,24 +43,38 @@ def user(request, user_page):
 
 @login_required
 def follow(request, user):
+    #Get "redirect to" query parameter
     redirect_to = request.GET.get('redirect_to', None)
+
+    #Follow user
     db.follow_user(request.session["current_user"], user)
+
+    #Redirect
     return redirect('/') if redirect_to == None else redirect(redirect_to)
 
 @login_required
 def unfollow(request, user):
+    #Get "redirect to" query parameter
     redirect_to = request.GET.get('redirect_to', None)
+
+    #Unfollow user
     db.unfollow_user(request.session["current_user"], user)
+
+    #Redirect
     return redirect('/') if redirect_to == None else redirect(redirect_to)
 
 @login_required
 def editprofile(request, user):
+    #Redirect to logout if the edit page is not current user's
     if user != request.session['current_user']:
         return redirect("/logout")
     
+    #Construct the redirect url
     redirect_url = "/user/"+user+"/edit"
 
+    #If changing password
     if request.method == 'POST' and request.POST["change"] == "password":
+        #Get the input values
         old_password = request.POST["oldpassword"]
         new_password = request.POST["newpassword"]
 
@@ -102,25 +120,36 @@ def getpost(request, post_id):
 
 @login_required
 def readpost(request):
+    #Get post id query parameter
     post_id = request.GET.get('post', None)
+
     if post_id != None:
         db.read_post(request.session["current_user"], post_id)
         return JsonResponse({"status": "succes"}, status=200)
+
     return JsonResponse({"status": "error", "descriprion":"post_id not provided"}, status=500)
 
 @login_required
 def like(request):
+    #Get query parameters
     post_id = request.GET.get('post', None)
-    user = request.GET.get('user', None)
     redirect_to = request.GET.get('redirect_to', None)
-    if user != request.session["current_user"]:
-        return redirect('/login')
+
+    user = request.session["current_user"]
+
+    #If post is allready liked
     if db.user_liked_post(user, post_id):
+        #Dislike post
         db.dislike_post(user, post_id)
+    #If post isn't allready liked
     else:
+        #Like post
         db.like_post(user, post_id)
+
+        #Add genre to user's interests
         genre = db.get_post_genre(post_id)
         db.add_user_interest(user, genre)
+
     return redirect('/') if redirect_to == None else redirect(redirect_to)
 
 @login_required
@@ -142,18 +171,28 @@ def userexists(request):
 def post(request):
     user_posting = request.GET.get('user', None)
     content = request.GET.get('content', None)
+
     if user_posting == request.session['current_user']:
         db.new_post(user_posting, content)
+
     return redirect('/')
 
 def login(request):
+    #First Logout
+    logged_out = logout(request)
+
+    #Get "then" query parameter
     then = str(request.GET.get('then', None))
+
     if request.method == 'POST':
-        logged_out = logout(request)
+        #Get input values
         username = request.POST['user']
         password = request.POST['password']
+
         if db.validate_user(username, password):
             request.session["current_user"] = username
+
+            #Redirect to then or /
             if then != 'None':
                 return redirect(str(then))
             return redirect('/')
@@ -166,6 +205,7 @@ def login(request):
 
 def register(request):
     if request.method == 'POST':
+        #Get input values
         username = request.POST['user']
         password1 = request.POST['password']
         password2 = request.POST['password2']
@@ -198,15 +238,18 @@ def register(request):
             messages.error(request, "Invalid image type")
             return redirect('/register')
         else:
+            #Try getting the image
             try:
                 a = request.FILES['avatar']
             except:
                 messages.error(request, "You must chose an avatar for yourself")
                 return redirect('/register')
             
+            #Add user and login
             user_id = db.add_user(username, password1)
             request.session["current_user"] = username
 
+            #Load and save the image
             filename = os.path.join(BASE_DIR, "media", "avatars", str(user_id+'.jpg'))
 
             image = Image.open(request.FILES['avatar'])
