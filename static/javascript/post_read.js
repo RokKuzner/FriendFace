@@ -1,3 +1,12 @@
+class Post {
+    constructor(element) {
+        this.element = element
+        this.id = this.element.id
+        this.isread = false
+        this.in_viewport_for = 0
+    }
+}
+
 function isInViewport(element) {
     const rect = element.getBoundingClientRect();
     return (
@@ -8,21 +17,27 @@ function isInViewport(element) {
     );
 }
 
-let posts = document.querySelectorAll(".post")
-let read_posts_this_session = []
+
+let posts_elements = document.querySelectorAll(".post")
 const http = new XMLHttpRequest()
 
-function handle() {
-    let indx = 0
-    while (indx < posts.length) {
-        if (isInViewport(posts[indx]) && (read_posts_this_session.includes(posts[indx]) == false)) {
-            let url = String(window.location.href)+"readpost?post="+posts[indx].id
-            http.open("GET", String(url))
-            http.send()
-            read_posts_this_session.push(posts[indx])
-        }
-        indx ++
-    }
+let posts = []
+for (let post_element of posts_elements) {
+    posts.push(new Post(post_element))
 }
 
-setInterval(handle, 500)
+setInterval(async () => {
+    for (let post of posts) {
+        if (isInViewport(post.element) && (post.isread == false)) {
+            if (post.in_viewport_for >= 2) {
+                await fetch(String(window.location.href)+"readpost?post="+post.id)
+
+                post.isread = true
+            } else {
+                post.in_viewport_for += 0.5
+            }
+        } else {
+            post.in_viewport_for = 0
+        }
+    }
+}, 500)
