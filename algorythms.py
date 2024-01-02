@@ -8,29 +8,36 @@ from sklearn.preprocessing import LabelEncoder
 import translate
 
 def get_personalized_posts(user:str):
-    posts_with_grade = {}
+    #Create a dict for graded posts
+    graded_posts = {}
 
+    #Grade every post on platform
     for post in db.get_posts(user):
         grade = grade_post(user, post)
 
-        while grade in posts_with_grade:
+        #If key allready exists
+        while grade in graded_posts:
             grade += 0.000001
 
-        posts_with_grade[grade] = post
+        #Add garaded post with grade as key to dict
+        graded_posts[grade] = post
 
 
-    sorted_keys = list(posts_with_grade)
+    #Sort dict keys
+    sorted_keys = list(graded_posts)
     sorted_keys.sort()
 
+    #Return sorted values
     to_return = []
     for key in sorted_keys:
-        to_return.append(posts_with_grade[key])
+        to_return.append(graded_posts[key])
 
     return to_return
 
 def grade_post(user:str, post):
     total_points = 0
     current_time = time.time()
+
     time_posted = float(post[5])
     users_following_users_following = db.get_users_following_users_following(user)
 
