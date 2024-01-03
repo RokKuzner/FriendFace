@@ -246,7 +246,11 @@ hr.postseperator {
     color: black;
 }
 
-.sharediv:hover {
+.commentoptionimagediv img{
+    width: 17px;
+}
+
+.commentoptionimagediv:hover {
     cursor: pointer;
 }
 
