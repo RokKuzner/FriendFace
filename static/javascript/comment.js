@@ -8,7 +8,9 @@ for (let form of forms) {
         let data = new FormData(form)
         let payload = new URLSearchParams(data)
 
-        let response = await fetch(String(window.location.origin)+"/apicomment", {
+        let url = String(window.location.origin)+"/apicomment"
+
+        let response = await fetch(url, {
             method: "POST",
             body: payload
         })
