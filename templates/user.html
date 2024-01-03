@@ -55,7 +55,7 @@
                 {% endif %}
             </div>
 
-            <form action="/comment" method="post">
+            <form method="post">
                 {% csrf_token %}
                 <div class="mycommentdiv">
                     <input class="commentdivtextarea" id="posttext" name="comment_content" placeholder="Comment">
@@ -83,4 +83,5 @@
     </script>
     <script src="/files/static/js?file=index_post"></script>
     <script src="/files/static/js?file=share_post"></script>
+    <script src="/files/static/js?file=comment"></script>
 {% endblock %}
