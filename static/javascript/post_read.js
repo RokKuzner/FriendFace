@@ -17,16 +17,7 @@ function isInViewport(element) {
     );
 }
 
-
-let posts_elements = document.querySelectorAll(".post")
-const http = new XMLHttpRequest()
-
-let posts = []
-for (let post_element of posts_elements) {
-    posts.push(new Post(post_element))
-}
-
-setInterval(async () => {
+async function handle() {
     for (let post of posts) {
         if (isInViewport(post.element) && (post.isread == false)) {
             if (post.in_viewport_for >= 2) {
@@ -40,4 +31,17 @@ setInterval(async () => {
             post.in_viewport_for = 0
         }
     }
+}
+
+
+let posts_elements = document.querySelectorAll(".post")
+const http = new XMLHttpRequest()
+
+let posts = []
+for (let post_element of posts_elements) {
+    posts.push(new Post(post_element))
+}
+
+setInterval(async () => {
+    await handle()
 }, 500)
