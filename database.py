@@ -211,7 +211,7 @@ def get_user_interests(user:str):
         c = conn.cursor()
         c.execute('SELECT * FROM interests WHERE user=?', (user,))
         raw = c.fetchone()
-        if raw == ():
+        if raw == None:
             intersets = []
         else:
             intersets = str(raw[1]).split(",")
