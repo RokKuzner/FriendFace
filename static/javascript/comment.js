@@ -21,5 +21,7 @@ for (let form of forms) {
         if (json_response.status == "succes") {
             comment_input.value = ""
         }
+
+        form.parentElement.querySelector(".commentoptions .commentoptioncomments a").innerText = "Comments (" + String(json_response.comments) + ")"
     })
 }

@@ -56,7 +56,10 @@ def comment(request):
         content = request.POST['comment_content']
         parrent_id = request.POST['comment_parrent_id']
         db.new_comment(request.session['current_user'], content, parrent_id)
-        return JsonResponse({"status": "succes"}, status=200)
+
+        number_of_comments = len(db.get_comments_by_parrent_post(parrent_id))
+        return JsonResponse({"status": "succes", "comments":int(number_of_comments)}, status=200)
+
     return JsonResponse({"status": "error", "descriprion":"only post method allowed"}, status=500)
 
 def userexists(request):
