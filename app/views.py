@@ -153,13 +153,21 @@ def like(request):
     return redirect('/') if redirect_to == None else redirect(redirect_to)
 
 @login_required
-def comment(request):
+def api_comment(request):
     if request.method == 'POST':
         content = request.POST['comment_content']
         parrent_id = request.POST['comment_parrent_id']
         db.new_comment(request.session['current_user'], content, parrent_id)
         return JsonResponse({"status": "succes"}, status=200)
     return JsonResponse({"status": "error", "descriprion":"only post method allowed"}, status=500)
+
+def comment(request):
+    if request.method == 'POST':
+        content = request.POST['comment_content']
+        parrent_id = request.POST['comment_parrent_id']
+        redirect_to = request.POST['redirect_to']
+        db.new_comment(request.session['current_user'], content, parrent_id)
+    return redirect(redirect_to)
 
 def userexists(request):
     user = request.GET.get('user', None)
