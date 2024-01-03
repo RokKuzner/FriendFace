@@ -10,6 +10,7 @@ urlpatterns = [
   path('logout', views.logout, name='logout'),
   path('post', views.post, name='post'),
   path('like', views.like, name='like'),
+  path('apilike', views.apilike, name='api like'),
   path('comment', views.comment, name='comment'),
   path('apicomment', views.api_comment, name='api comment'),
   path('user/<str:user_page>', views.user, name='user'),

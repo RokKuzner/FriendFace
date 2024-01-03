@@ -17,10 +17,12 @@
             <div class="postcontent">{{ post.1 }}</div>
             <div class="likedstuff">
                 {% if  post.6 == True%}
-                    <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.4 }}"><img src="/files/static/icons?file=liked.png" alt="like" class="likeimg" id="like"></a>
+                    <img src="/files/static/icons?file=liked.png" alt="like" class="likeimg" id="like">
+                    <input type="hidden" value="{{ post.4 }}">
                     <div class="likediv">{{ post.2 }}</div>
                 {% else %}
-                    <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.4 }}"><img src="/files/static/icons?file=like.png" alt="like" class="likeimg" id="like"></a>
+                    <img src="/files/static/icons?file=like.png" alt="like" class="likeimg" id="like">
+                    <input type="hidden" value="{{ post.4 }}">
                     <div class="likediv">{{ post.2 }}</div>
                 {% endif %}
             </div>
@@ -56,4 +58,5 @@
     <script src="/files/static/js?file=post_read"></script>
     <script src="/files/static/js?file=share_post"></script>
     <script src="/files/static/js?file=comment"></script>
+    <script src="/files/static/js?file=like"></script>
 {% endblock %}

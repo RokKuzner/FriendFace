@@ -153,6 +153,34 @@ def like(request):
     return redirect('/') if redirect_to == None else redirect(redirect_to)
 
 @login_required
+def apilike(request):
+    #Get query parameter
+    post_id = request.GET.get('post', None)
+
+    user = request.session["current_user"]
+
+    #If post is allready liked
+    if db.user_liked_post(user, post_id):
+        #Dislike post
+        db.dislike_post(user, post_id)
+
+        state = "disliked"
+    #If post isn't allready liked
+    else:
+        #Like post
+        db.like_post(user, post_id)
+
+        state = "liked"
+
+        #Add genre to user's interests
+        genre = db.get_post_genre(post_id)
+        db.add_user_interest(user, genre)
+
+    count = int(db.get_post_by_post_id(request.session["current_user"], post_id)[2])
+
+    return JsonResponse({"status": "succes", "state":state, "count":count}, status=200)
+
+@login_required
 def api_comment(request):
     if request.method == 'POST':
         content = request.POST['comment_content']
