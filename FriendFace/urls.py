@@ -21,6 +21,9 @@ urlpatterns = [
     #servemedia urls
     path('files/', include('servemedia.urls')),
 
+    #api urls
+    path('api/', include('api.urls')),
+
     #Main app urls
     path('', include('app.urls')),
 ]

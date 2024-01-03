@@ -6,7 +6,7 @@ for (let like_form of like_forms) {
         let like_count_div = like_form.querySelector(".likediv")
 
         let like_form_id = like_form.querySelector("input").value
-        let url = String(window.location.origin)+"/apilike?post=" + String(like_form_id)
+        let url = String(window.location.origin)+"/api/like?post=" + String(like_form_id)
 
         let response = await fetch(url);
         let json_response = await response.json();

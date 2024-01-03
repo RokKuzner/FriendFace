@@ -127,7 +127,7 @@ async function check_username_avalible() {
     }
     last_username_value = username.value
 
-    let request_url = window.location.origin + "/userexists?user=" + username.value;
+    let request_url = window.location.origin + "/api/userexists?user=" + username.value;
     let response = await fetch(request_url);
     let json_response = await response.json();
     last_usename_avalible_respone = json_response["user_exists"]
