@@ -412,19 +412,21 @@ hr.postseperator {
 }
 
 .underdevelepmentwrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -80%);
+
     display: flex;
-    margin-top: 15vh;
     padding: 10px;
     width: auto;
-    margin-left: auto;
-    margin-right: auto;
     max-width: max-content;
 }
 
 .errorcode {
     display: flex;
     margin-top: 80px;
-    padding-left: 10px;
+    padding-left: 15px;
     padding-top: 10px;
     text-align: left;
 }
