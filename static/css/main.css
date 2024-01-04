@@ -37,6 +37,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
+    z-index: 1;
 }
 
 .navbar {
@@ -350,7 +351,8 @@ hr.postseperator {
 }
 
 .menu {
-    position: absolute;
+    position: fixed;
+    z-index: 2;
     top: 60px;
     right: 5px;
     color: black;

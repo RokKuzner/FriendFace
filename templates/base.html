@@ -18,22 +18,22 @@
                         <li id="user_img_icon" class="navbar-user-img"><img src="/files/media/profileimg?user={{ current_user_id }}" alt="User logo img" style="width:50px;" class="usericomimg round"></li>
                     </ul>
                 </div>
-                <div class="menu hidden" id="user_menu">
-                    <ul>
-                        <li class="mentusername">
-                            <div class="inmenuusericon">
-                                <img src="/files/media/profileimg?user={{ current_user_id }}" alt="User logo img" style="width:100%;" class="usericomimg round">
-                            </div>
-                            <div class="menuusername">
-                                {{ current_user }}
-                            </div>
-                        </li>
-                        <hr>
-                        <li><a href="/user/{{ current_user }}">Profile</a></li>
-                        <li><a href="/logout">Logout</a></li>
-                    </ul>
-                </div>
             </nav>
+            <div class="menu hidden" id="user_menu">
+                <ul>
+                    <li class="mentusername">
+                        <div class="inmenuusericon">
+                            <img src="/files/media/profileimg?user={{ current_user_id }}" alt="User logo img" style="width:100%;" class="usericomimg round">
+                        </div>
+                        <div class="menuusername">
+                            {{ current_user }}
+                        </div>
+                    </li>
+                    <hr>
+                    <li><a href="/user/{{ current_user }}">Profile</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </div>
         {% endif %}
         {% block content %}{% endblock %}
         {% if logged_in == True %}
