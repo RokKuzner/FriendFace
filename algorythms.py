@@ -97,9 +97,17 @@ def get_post_genre(post_content:str):
     post_content = content_modifyed.lower()
 
     #Translate content to english (only for prediction)
-    language = translate.detect_lang(post_content)
-    if language != "en":
-        post_content = translate.translate(post_content, language)
+    all_not_alphaa = True
+
+    for char in post_content:
+        if char.isalpha():
+            all_not_alphaa = False
+            exit
+
+    if all_not_alphaa != True:
+        language = translate.detect_lang(post_content)
+        if language != "en":
+            post_content = translate.translate(post_content, language)
 
     #Prediction
     content = [post_content]
