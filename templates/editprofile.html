@@ -2,6 +2,10 @@
 
 {% block title %}FriendFace - Edit Profile{% endblock %}
 
+{% block head %}
+    <link rel="stylesheet" href="/files/static/css?file=editprofile">
+{% endblock %}
+
 {% block content %}
 <div class="editprofilewrap">
     {% for message in messages %}
@@ -14,7 +18,7 @@
             {% csrf_token %}
             <input type="hidden" value="password" name="change">
             <input type="password" class="changepasswordinput form-control" placeholder="Old Password" aria-label="Old Password" name="oldpassword" aria-describedby="basic-addon1">
-            <input type="password" class="changepasswordinput form-control" placeholder="New Password" aria-label="New Password" name="newpassword" aria-describedby="basic-addon1" style="margin-top: 15px;">
+            <input type="password" class="changepasswordinput form-control" placeholder="New Password" aria-label="New Password" name="newpassword" aria-describedby="basic-addon1">
             <button type="submit" class="loginbutton btn btn-primary">Change password</button>
         </form>
     </div>
