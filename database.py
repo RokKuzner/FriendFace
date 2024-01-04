@@ -226,6 +226,8 @@ def change_password(user:str, new_password:str):
 
 #Posts
 def new_post(user:str, content:str):
+    if content == "" or content == " "*len(content):
+        return "empty post"
     with conn:
         c = conn.cursor()
         thetime = time.time()
@@ -235,6 +237,7 @@ def new_post(user:str, content:str):
         c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?, ?)', (user, content, "0", "", post_id, thetime))
         c.execute('INSERT INTO postgenre VALUES(?, ?)', (post_id, post_genre))
         conn.commit()
+    return "success"
 
 def get_posts(user:str):
     with conn:
@@ -360,10 +363,13 @@ def is_post_read(user:str, post_id:str):
 
 #Comments
 def new_comment(user:str, content:str, parrent_post_id:str):
+    if content == "" or content == " "*len(content):
+        return "empty comment"
     with conn:
         c = conn.cursor()
         c.execute('INSERT INTO comments VALUES(?, ?, ?, ?, ?)', (user, content, parrent_post_id, generate_id("comments", "id"), get_users_id_by_username(user)))
         conn.commit()
+    return "success"
 
 def get_comments_by_parrent_post(parrent_post_id:str):
     with conn:
