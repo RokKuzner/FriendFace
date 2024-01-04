@@ -8,4 +8,5 @@ urlpatterns = [
   path('like', views.like, name='like'),
   path('comment', views.comment, name='comment'),
   path('userexists', views.userexists, name='userexists'),
+  path('post', views.post, name='post'),
 ]

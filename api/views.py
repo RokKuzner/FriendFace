@@ -9,6 +9,7 @@ from FriendFace.settings import BASE_DIR
 import os
 from PIL import Image
 import algorythms as alg
+from django.views.decorators.csrf import csrf_exempt
 
 # Views
 @login_required
@@ -67,3 +68,12 @@ def userexists(request):
     if user == None:
         return JsonResponse({"status": "error", "description":"user not provided"}, status=500)
     return JsonResponse({"status": "succes", "user":user, "user_exists":db.user_exists(user)})
+
+@csrf_exempt
+@login_required
+def post(request):
+    content = request.POST['post_content']
+
+    db.new_post(request.session['current_user'], content)
+
+    return JsonResponse({"status": "succes"}, status=200)

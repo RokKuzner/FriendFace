@@ -149,16 +149,6 @@ def comment(request):
         db.new_comment(request.session['current_user'], content, parrent_id)
     return redirect(redirect_to)
 
-@login_required
-def post(request):
-    user_posting = request.GET.get('user', None)
-    content = request.GET.get('content', None)
-
-    if user_posting == request.session['current_user']:
-        db.new_post(user_posting, content)
-
-    return redirect('/')
-
 def login(request):
     #First Logout
     logged_out = logout(request)
