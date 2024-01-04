@@ -7,7 +7,8 @@ from decorators import login_required
 import database as db
 from FriendFace.settings import BASE_DIR
 import os
-from PIL import Image
+from PIL import Image, ExifTags
+from crop import crop
 import algorythms as alg
 
 allowed_image_type = ["image/jpg", "image/jpeg", "image/png"]
@@ -103,8 +104,7 @@ def editprofile(request, user):
             os.remove(filename)
 
         image = Image.open(request.FILES['avatar'])
-        croped_img = image.crop(box=(0, 0, min(image.size), min(image.size)))
-        croped_img.convert("RGB").save(filename)
+        crop(image).save(filename)
 
         messages.success(request, "Succesfully changed user image")
         return redirect(redirect_url)
@@ -225,8 +225,7 @@ def register(request):
             filename = os.path.join(BASE_DIR, "media", "avatars", str(user_id+'.jpg'))
 
             image = Image.open(request.FILES['avatar'])
-            croped_img = image.crop(box=(0, 0, min(image.size), min(image.size)))
-            croped_img.convert("RGB").save(filename)
+            crop(image).save(filename)
 
             return redirect('/')
 
