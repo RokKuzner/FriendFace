@@ -13,6 +13,8 @@ for (let post of posts) {
             del.classList.remove("hidden")
             over.classList.remove("hidden")
 
+            document.body.style = "overflow-y: hidden;"
+
             currently_deleting = post.id
         })
     }
@@ -30,21 +32,16 @@ del_btn.addEventListener("click", async function(e) {
 
         if (json_response["status"] == "succes") {
             document.getElementById(currently_deleting).parentElement.removeChild(document.getElementById(currently_deleting))
-
-            currently_deleting = null
-
-            del_btn.classList.remove("disabled")
-            del_btn.innerHTML = "Delete"
-            del.classList.add("hidden")
-            over.classList.add("hidden")
-        } else {
-            currently_deleting = null
-
-            del_btn.classList.remove("disabled")
-            del_btn.innerHTML = "Delete"
-            del.classList.add("hidden")
-            over.classList.add("hidden")
         }
+
+        currently_deleting = null
+
+        del_btn.classList.remove("disabled")
+        del_btn.innerHTML = "Delete"
+        del.classList.add("hidden")
+        over.classList.add("hidden")
+
+        document.body.style = "overflow-y: scroll;"
     }
 })
 
@@ -52,4 +49,6 @@ cancel_btn.addEventListener("click", (e) => {
     currently_deleting = null
     del.classList.add("hidden")
     over.classList.add("hidden")
+
+    document.body.style = "overflow-y: scroll;"
 })
