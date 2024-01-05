@@ -56,7 +56,7 @@ post TEXT
 )
 """
 
-READ_POSTS = """
+DELETED_POSTS = """
 CREATE TABLE IF NOT EXISTS deletedposts(
 user TEXT,
 content TEXT,
@@ -74,6 +74,7 @@ c.execute(COMMENTS)
 c.execute(POST_GENRE)
 c.execute(USER_INTERESTS)
 c.execute(READ_POSTS)
+c.execute(DELETED_POSTS)
 
 conn.commit()
 conn.close()
