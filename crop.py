@@ -25,4 +25,6 @@ def crop(image:Image):
 
     croped_img = image.crop(box=(0, 0, min(image.size), min(image.size)))
 
+    croped_img = croped_img.convert('RGB')
+
     return croped_img
