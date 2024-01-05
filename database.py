@@ -239,11 +239,23 @@ def new_post(user:str, content:str):
         conn.commit()
     return "success"
 
-def delete_post(pos_id:str):
+def delete_post(post_id:str):
+    add_post_to_deleted(post_id)
+
     with conn:
         c = conn.cursor()
-        c.execute("DELETE FROM posts WHERE id=?", (pos_id,))
+        c.execute("DELETE FROM posts WHERE id=?", (post_id,))
         conn.commit()
+
+def add_post_to_deleted(post_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute('SELECT * FROM posts WHERE id=?', (post_id,))
+        post = c.fetchone()
+
+        c.execute("INSERT OR IGNORE INTO deletedposts VALUES(?, ?, ?, ?, ?, ?)", (post[0], post[1], post[2], post[3], post[4], post[5]))
+        conn.commit()
+        return "success"
 
 def get_posts(user:str):
     with conn:
