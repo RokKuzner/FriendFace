@@ -21,7 +21,7 @@ async function handle() {
     for (let post of posts) {
         if (isInViewport(post.element) && (post.isread == false)) {
             if (post.in_viewport_for >= 2) {
-                await fetch(String(window.location.href)+"api/readpost?post="+post.id)
+                await fetch(String(window.location.origin)+"/api/readpost?post="+post.id)
 
                 post.isread = true
             } else {
