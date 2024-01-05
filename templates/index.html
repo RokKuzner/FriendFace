@@ -2,6 +2,10 @@
 
 {% block title %}FriendFace{% endblock %}
 
+{% block head %}
+    <link rel="stylesheet" href="/files/static/css?file=delete">
+{% endblock %}
+
 {% block content %}
     <div class="mypostdiv">
         <textarea class="postdivtextarea form-control" id="posttext"></textarea>
@@ -10,9 +14,15 @@
 
     {% for post in posts %}
         <div class="post" id="{{ post.4 }}">
-            <div class="postuserdiv">
-                <img class="postusericon round" src="/files/media/profileimg?user={{ post.8 }}" alt="User logo img">
-                <a href="/user/{{ post.0 }}" class="postusernameatag"><div class="postuser">{{ post.0 }}</div></a>
+            <div class="posttop">
+                <div class="postuserdiv">
+                    <img class="postusericon round" src="/files/media/profileimg?user={{ post.8 }}" alt="User logo img">
+                    <a href="/user/{{ post.0 }}" class="postusernameatag"><div class="postuser">{{ post.0 }}</div></a>
+                </div>
+
+                {% if current_user == post.0 %}
+                    <div class="posttopdelete"><img src="/files/static/icons?file=delete.png" alt=""></div>
+                {% endif %}
             </div>
             <div class="postcontent">{{ post.1 }}</div>
             <div class="likedstuff">
@@ -49,6 +59,9 @@
             </div>
         </div>
     {% endfor %}
+
+    {% include "delete.html" %}
+
     <script>
         let current_user = "{{ current_user }}"
         let current_user_id = "{{ current_user_id }}"

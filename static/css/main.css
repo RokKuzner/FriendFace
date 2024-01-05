@@ -467,6 +467,22 @@ hr.postseperator {
     margin-top: 15px;
 }
 
+.posttop {
+    display: flex;
+}
+
+.posttopdelete {
+    margin-left: auto;
+}
+
+.posttopdelete img {
+    width: 22px;
+}
+
+.posttopdelete img:hover {
+    cursor: pointer;
+}
+
 @media (max-device-width: 480px), (max-width: 575px){
     .post {
         width: 97vw;
