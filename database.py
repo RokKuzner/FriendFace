@@ -239,6 +239,12 @@ def new_post(user:str, content:str):
         conn.commit()
     return "success"
 
+def delete_post(pos_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute("DELETE FROM posts WHERE id=?", (pos_id,))
+        conn.commit()
+
 def get_posts(user:str):
     with conn:
         c = conn.cursor()
