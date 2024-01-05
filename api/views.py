@@ -77,3 +77,22 @@ def post(request):
     db.new_post(request.session['current_user'], content)
 
     return JsonResponse({"status": "succes"}, status=200)
+
+@login_required
+def delete_post(request):
+    id = request.GET.get('id', None)
+
+    if id == None:
+        return JsonResponse({"status": "error", "descriprion":"no post id provided"}, status=500)
+
+    post = db.get_post_by_post_id(request.session['current_user'], id)
+    if not post:
+        return JsonResponse({"status": "error", "descriprion":"no post with that id"}, status=500)
+    
+    post_user = post[0]
+    if post_user != request.session['current_user']:
+        return JsonResponse({"status": "error", "descriprion":"cannot delete posts that aren't yours"}, status=500)
+    
+    db.delete_post(id)
+
+    return JsonResponse({"status": "succes", "post_id":id}, status=200)

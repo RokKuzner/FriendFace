@@ -9,4 +9,5 @@ urlpatterns = [
   path('comment', views.comment, name='comment'),
   path('userexists', views.userexists, name='userexists'),
   path('post', views.post, name='post'),
+  path('deletepost', views.delete_post, name='deletepost'),
 ]
