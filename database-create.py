@@ -56,6 +56,17 @@ post TEXT
 )
 """
 
+READ_POSTS = """
+CREATE TABLE IF NOT EXISTS deletedposts(
+user TEXT,
+content TEXT,
+likes TEXT,
+users_liked TEXT,
+id TEXT UNIQUE,
+time TEXT
+)
+"""
+
 
 c.execute(USERS)
 c.execute(POSTS)
