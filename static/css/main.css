@@ -423,12 +423,13 @@ hr.postseperator {
     padding: 10px;
     width: auto;
     max-width: max-content;
+
+    align-items: center;
 }
 
 .errorcode {
     display: flex;
-    margin-top: 80px;
-    padding-left: 15px;
+    padding-left: 10px;
     padding-top: 10px;
     text-align: left;
 }
@@ -440,7 +441,7 @@ hr.postseperator {
 .underdevelopmentmessage {
     margin-top: 0px;
     padding: 10px;
-    text-align: center;
+    text-align: left;
 }
 
 .underdevelopmentimgdiv {
@@ -483,6 +484,59 @@ hr.postseperator {
     cursor: pointer;
 }
 
+.secondaryerrorwrap {
+    width: max-content;
+}
+
+@media (max-device-width: 900px), (max-width: 900px){
+    .changewrap {
+        width: 80vw;
+    }
+}
+
+@media (max-device-width: 760px), (max-width: 760px){
+    .secondaryerrorwrap {
+        width: 40vw;
+    }
+}
+
+@media (max-device-width: 518px), (max-width: 518px){
+    .loginregistererror {
+        width: 90%;
+    }
+
+    .underdevelepmentwrap {
+        margin-left: 0;
+        margin-right: 0;
+        display: flex;
+        flex-direction: column;
+        margin-top: 5vh;
+    }
+
+    .underdevelopmentmessage {
+        width: 100%;
+        text-align: center;
+    }
+
+    .underdevelopmentimgdiv {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .secondaryerrorwrap {
+        width: 80vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .errorcode {
+        width: max-content;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0;
+    }
+}
+
 @media (max-device-width: 480px), (max-width: 575px){
     .post {
         width: 97vw;
@@ -502,46 +556,5 @@ hr.postseperator {
 
     .infoaboutuser div div:nth-child(2) {
         margin-top: 10px;
-    }
-
-    .errorcode {
-        width: max-content;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-@media (max-device-width: 380px), (max-width: 380px){
-    .underdevelepmentwrap {
-        margin-left: 0;
-        margin-right: 0;
-        display: flex;
-        flex-direction: column;
-        margin-top: 5vh;
-    }
-
-    .underdevelopmentmessage {
-        max-width: max-content;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-
-    .underdevelopmentimgdiv {
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-@media (max-device-width: 518px), (max-width: 518px){
-    .loginregistererror {
-        width: 90%;
-    }
-}
-
-@media (max-device-width: 900px), (max-width: 900px){
-    .changewrap {
-        width: 80vw;
     }
 }
