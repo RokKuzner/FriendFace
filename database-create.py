@@ -67,6 +67,15 @@ time TEXT
 )
 """
 
+ADMIN_USERS = """
+CREATE TABLE IF NOT EXISTS adminusers(
+email TEXT UNIQUE,
+id TEXT UNIQUE,
+password TEXT,
+roles TEXT
+)
+"""
+
 
 c.execute(USERS)
 c.execute(POSTS)
@@ -75,6 +84,7 @@ c.execute(POST_GENRE)
 c.execute(USER_INTERESTS)
 c.execute(READ_POSTS)
 c.execute(DELETED_POSTS)
+c.execute(ADMIN_USERS)
 
 conn.commit()
 conn.close()
