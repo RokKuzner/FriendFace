@@ -1,0 +1,4 @@
+0: super admin (all rights)
+1: mod (delete posts, accounts)
+2: wizzard (restore posts, accounts)
+3: view_only (view database)
