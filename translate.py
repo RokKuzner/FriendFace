@@ -11,6 +11,9 @@ def translate(text:str, from_lang:str, to_lang="en"):
         return text
 
     translator = Translator()
-    translation = translator.translate(text, src=from_lang, dest=to_lang)
+    try:
+        translation = translator.translate(text, src=from_lang, dest=to_lang)
+    except:
+        return {"status": "error"}
 
     return translation.text
