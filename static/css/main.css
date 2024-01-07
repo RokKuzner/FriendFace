@@ -171,7 +171,9 @@ hr.postseperator {
     padding: 10px;
     min-height: 60px;
     border-radius: 10px;
-    word-wrap: break-word
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .likedstuff {
@@ -260,7 +262,10 @@ hr.postseperator {
     border: 2px solid rgba(73, 73, 73, 0.26);
     padding: 15px;
     border-radius: 10px;
-    min-width: max-content;
+    width: auto;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .commentuser {
