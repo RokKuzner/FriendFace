@@ -69,7 +69,6 @@ def userexists(request):
         return JsonResponse({"status": "error", "description":"user not provided"}, status=500)
     return JsonResponse({"status": "succes", "user":user, "user_exists":db.user_exists(user)})
 
-@csrf_exempt
 @login_required
 def post(request):
     content = request.POST['post_content']

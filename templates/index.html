@@ -8,8 +8,11 @@
 
 {% block content %}
     <div class="mypostdiv">
-        <textarea class="postdivtextarea form-control" id="posttext"></textarea>
-        <button type="button" class="postdivpostbtn btn btn-primary" id="postbtn">Post</button>
+        <form id="post-form">
+            {% csrf_token %}
+            <textarea class="postdivtextarea form-control" id="posttext" name="post_content"></textarea>
+            <button type="submit" class="postdivpostbtn btn btn-primary" id="postbtn">Post</button>
+        </form>
     </div>
 
     {% for post in posts %}
@@ -37,7 +40,7 @@
                 {% endif %}
             </div>
 
-            <form>
+            <form class="comment-form">
                 {% csrf_token %}
                 <div class="mycommentdiv">
                     <input class="commentdivtextarea" id="posttext" name="comment_content" placeholder="Comment">

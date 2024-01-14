@@ -1,4 +1,4 @@
-let forms = document.querySelectorAll("form")
+let forms = document.querySelectorAll(".comment-form")
 
 for (let form of forms) {
     form.addEventListener("submit", async function(e){
