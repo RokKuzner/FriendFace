@@ -23,7 +23,9 @@ def crop(image:Image):
                 elif rotation == 8:
                     image = image.transpose(Image.ROTATE_90).transpose(Image.FLIP_TOP_BOTTOM)
 
-    croped_img = image.crop(box=(0, 0, min(image.size), min(image.size)))
+    min_img_axis = min(image.size)
+
+    croped_img = image.crop(box=(0, 0, min_img_axis, min_img_axis))
 
     croped_img = croped_img.convert('RGB')
 
