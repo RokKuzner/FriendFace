@@ -8,7 +8,7 @@
 
 {% block content %}
     <div class="mypostdiv">
-        <form id="post-form">
+        <form autocomplete="off" id="post-form">
             {% csrf_token %}
             <textarea class="postdivtextarea form-control" id="posttext" name="post_content"></textarea>
             <button type="submit" class="postdivpostbtn btn btn-primary" id="postbtn">Post</button>
@@ -40,7 +40,7 @@
                 {% endif %}
             </div>
 
-            <form class="comment-form">
+            <form autocomplete="off" class="comment-form">
                 {% csrf_token %}
                 <div class="mycommentdiv">
                     <input class="commentdivtextarea" id="posttext" name="comment_content" placeholder="Comment">

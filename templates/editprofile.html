@@ -14,7 +14,7 @@
         </div>
     {% endfor %}
     <div class="changewrap">
-        <form action="/user/{{ current_user }}/edit" method="post">
+        <form autocomplete="off" action="/user/{{ current_user }}/edit" method="post">
             {% csrf_token %}
             <input type="hidden" value="password" name="change">
             <input type="password" class="changepasswordinput form-control" placeholder="Old Password" aria-label="Old Password" name="oldpassword" aria-describedby="basic-addon1">
@@ -24,7 +24,7 @@
     </div>
 
     <div class="changewrap">
-        <form action="/user/{{ current_user }}/edit" method="post" enctype="multipart/form-data">
+        <form autocomplete="off" action="/user/{{ current_user }}/edit" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="hidden" value="image" name="change">
             <input type="file" class="logininput form-control" name="avatar" accept="image/jpg" style="margin-top: 10px;">
