@@ -312,8 +312,13 @@ def get_post_genre(post_id:str):
 def get_latest_posts(user:str, n:int):
     with conn:
         c = conn.cursor()
-        c.execute(f"SELECT * FROM posts ORDER BY CAST(time AS FLOAT) DESC LIMIT {n}")
+        c.execute(f"SELECT * FROM posts")
         response = c.fetchall()
+
+        if len(response) <= n:
+            pass
+        else:
+            response = response[len(response)-n:]
 
         to_output = []
 
