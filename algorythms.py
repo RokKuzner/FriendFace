@@ -21,7 +21,7 @@ def get_personalized_posts(user:str):
     users_following = db.get_users_following(user)
     users_following_posts = []
     for user_following in users_following:
-        users_following_posts += db.get_posts_by_user(user_following)
+        users_following_posts += db.get_posts_by_user(user_following, user)[0]
 
     for post in users_following_posts:
         if float(post[5]) < float(first_latest_post[5]):
