@@ -8,11 +8,30 @@ from sklearn.preprocessing import LabelEncoder
 import translate
 
 def get_personalized_posts(user:str):
+    #posts to grade
+    posts_to_grade = []
+
+    #Last 10000 posts
+    latest_posts = db.get_latest_posts(user, 10000)
+    first_latest_post = latest_posts[-1]
+    
+    posts_to_grade += latest_posts
+
+    #posts from all the users subscribed to
+    users_following = db.get_users_following(user)
+    users_following_posts = []
+    for user in users_following:
+        users_following_posts += db.get_posts_by_user(user)
+
+    for post in users_following_posts:
+        if float(post[5]) < float(first_latest_post[5]):
+            posts_to_grade.append(post)
+
     #Create a dict for graded posts
     graded_posts = {}
 
     #Grade every post on platform
-    for post in db.get_posts(user):
+    for post in posts_to_grade:
         grade = grade_post(user, post)
 
         #If key allready exists
