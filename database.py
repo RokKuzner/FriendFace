@@ -315,9 +315,7 @@ def get_latest_posts(user:str, n:int):
         c.execute(f"SELECT * FROM posts")
         response = c.fetchall()
 
-        if len(response) <= n:
-            pass
-        else:
+        if len(response) > n:
             response = response[len(response)-n:]
 
         to_output = []
