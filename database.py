@@ -298,9 +298,9 @@ def get_post_by_post_id(user:str, post_id:str):
         post = c.fetchone()
         post_return = ()
         if user_liked_post(user, post[4]):
-            post_return = (post+(True,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
+            post_return = (post+(True,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0]), str(len(get_comments_by_parrent_post(post[4])))))
         else:
-            post_return = (post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0])))
+            post_return = (post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0]), str(len(get_comments_by_parrent_post(post[4])))))
         return post_return
 
 def get_post_genre(post_id:str):
