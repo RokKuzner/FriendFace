@@ -27,6 +27,14 @@ def get_personalized_posts(user:str):
         if float(post[5]) < float(first_latest_post[5]):
             posts_to_grade.append(post)
 
+    #Latest 200 posts with user's interests
+    for interest in db.get_user_interests(user):
+        posts_with_interest = db.get_latest_posts_by_genre(user, 200, interest)
+
+        for post in posts_with_interest:
+            if (post[0] not in users_following) and (float(post[5]) < float(first_latest_post[5])):
+                posts_to_grade.append(post)
+
     #Create a dict for graded posts
     graded_posts = {}
 
