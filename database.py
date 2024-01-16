@@ -326,6 +326,21 @@ def get_latest_posts(user:str, n:int):
 
         return to_output
 
+def get_latest_posts_by_genre(user:str, n:int, genre:str):
+    with conn:
+        c = conn.cursor()
+        c.execute(f"SELECT * FROM postgenre WHERE genre=?", (genre,))
+        response = c.fetchall()
+
+        if len(response) > n:
+            response = response[len(response)-n:]
+
+        to_output = []
+
+        for post in response:
+            to_output.append(get_post_by_post_id(user, post[0]))
+
+        return to_output
 
 def like_post(user:str, post_id:str):
     with conn:
