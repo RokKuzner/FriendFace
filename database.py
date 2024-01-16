@@ -245,6 +245,7 @@ def delete_post(post_id:str):
     with conn:
         c = conn.cursor()
         c.execute("DELETE FROM posts WHERE id=?", (post_id,))
+        c.execute("DELETE FROM postgenre WHERE postid=?", (post_id,))
         conn.commit()
 
 def add_post_to_deleted(post_id:str):
