@@ -6,3 +6,4 @@ app/__pycache__/
 database-changes.py
 AI_models/genre_prediction/data/
 AI_models/genre_prediction/models/
+env/
