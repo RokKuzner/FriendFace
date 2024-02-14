@@ -265,10 +265,7 @@ def get_posts(user:str):
         posts = c.fetchall()
         posts_return = []
         for post in posts:
-            if user_liked_post(user, post[4]):
-                posts_return.append(post+(True,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0]), str(len(get_comments_by_parrent_post(post[4])))))
-            else:
-                posts_return.append(post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0]), str(len(get_comments_by_parrent_post(post[4])))))
+            posts_return.append(get_post_by_post_id(user, post[4]))
         return posts_return
 
 def get_posts_by_user(user:str, current_user:str):
@@ -285,10 +282,7 @@ def get_posts_by_user(user:str, current_user:str):
         for post in posts:
             total_posts += 1
             total_likes += int(post[2])
-            if user_liked_post(current_user, post[4]):
-                posts_return.append(post+(True,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0]), str(len(get_comments_by_parrent_post(post[4])))))
-            else:
-                posts_return.append(post+(False,get_comments_by_parrent_post(post[4])[::-1], get_users_id_by_username(post[0]), str(len(get_comments_by_parrent_post(post[4])))))
+            posts_return.append(get_post_by_post_id(current_user, post[4]))
 
         return [posts_return, total_likes, total_posts]
 
