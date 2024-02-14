@@ -47,7 +47,7 @@ def like(request):
         genre = db.get_post_genre(post_id)
         db.add_user_interest(user, genre)
 
-    count = int(db.get_post_by_post_id(request.session["current_user"], post_id)[2])
+    count = int(db.get_post_by_post_id(request.session["current_user"], post_id)["likes"])
 
     return JsonResponse({"status": "succes", "state":state, "count":count}, status=200)
 
@@ -88,7 +88,7 @@ def delete_post(request):
     if not post:
         return JsonResponse({"status": "error", "descriprion":"no post with that id"}, status=500)
     
-    post_user = post[0]
+    post_user = post["author_username"]
     if post_user != request.session['current_user']:
         return JsonResponse({"status": "error", "descriprion":"cannot delete posts that aren't yours"}, status=500)
     
