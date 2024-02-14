@@ -13,7 +13,7 @@ def get_personalized_posts(user:str):
 
     #Last 10000 posts
     latest_posts = db.get_latest_posts(user, 10000)
-    first_latest_post = latest_posts[-1]
+    first_latest_post = latest_posts[0]
     
     posts_to_grade += latest_posts
 
