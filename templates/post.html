@@ -7,25 +7,25 @@
 {% endblock %}
 
 {% block content %}
-    <div class="post" id="{{ post.4 }}" style="margin-top: 20px;">
+    <div class="post" id="{{ post.id }}" style="margin-top: 20px;">
         <div class="posttop">
             <div class="postuserdiv">
-                <img class="postusericon round" src="/files/media/profileimg?user={{ post.8 }}" alt="User logo img">
-                <a href="/user/{{ post.0 }}" class="postusernameatag"><div class="postuser">{{ post.0 }}</div></a>
+                <img class="postusericon round" src="/files/media/profileimg?user={{ post.author_id }}" alt="User logo img">
+                <a href="/user/{{ post.author_username }}" class="postusernameatag"><div class="postuser">{{ post.author_username }}</div></a>
             </div>
 
-            {% if current_user == post.0 %}
+            {% if current_user == post.author_username %}
                 <div class="posttopdelete"><img src="/files/static/icons?file=delete.png" alt=""></div>
             {% endif %}
         </div>
-        <div class="postcontent">{{ post.1 }}</div>
+        <div class="postcontent">{{ post.content }}</div>
         <div class="likedstuff">
-            {% if  post.6 == True%}
-                <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.4 }}"><img src="/files/static/icons?file=liked.png" alt="like" class="likeimg" id="like"></a>
-                <div class="likediv">{{ post.2 }}</div>
+            {% if  post.liked == True%}
+                <a href="/like?post={{ post.id }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.id }}"><img src="/files/static/icons?file=liked.png" alt="like" class="likeimg" id="like"></a>
+                <div class="likediv">{{ post.likes }}</div>
             {% else %}
-                <a href="/like?post={{ post.4 }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.4 }}"><img src="/files/static/icons?file=like.png" alt="like" class="likeimg" id="like"></a>
-                <div class="likediv">{{ post.2 }}</div>
+                <a href="/like?post={{ post.id }}&user={{ current_user }}&redirect_to={{ this_url }}#{{ post.id }}"><img src="/files/static/icons?file=like.png" alt="like" class="likeimg" id="like"></a>
+                <div class="likediv">{{ post.likes }}</div>
             {% endif %}
         </div>
 
@@ -33,7 +33,7 @@
             {% csrf_token %}
             <div class="mycommentdiv">
                 <input class="commentdivtextarea" id="posttext" name="comment_content" placeholder="Comment">
-                <input type="hidden" name="comment_parrent_id" value="{{ post.4 }}">
+                <input type="hidden" name="comment_parrent_id" value="{{ post.id }}">
                 <input type="hidden" name="redirect_to" value="{{ this_url }}">
                 <button type="submit" class="commentbtndiv btn btn-primary" id="postbtn">Comment</button>
             </div>
@@ -48,7 +48,7 @@
         {% include "delete.html" %}
 
         <div class="comments">
-            {% for comment in post.7 %}
+            {% for comment in post.comments %}
                 <div class="comment">
                     <div class="commentuser">
                         <img class="commentusericon round" src="/files/media/profileimg?user={{ comment.4 }}" alt="User logo img">
@@ -61,8 +61,8 @@
         </div>
     </div>
     <script>
-        let user = "{{ post.0 }}"
-        let post_id = "{{ post.4 }}"
+        let user = "{{ post.author_username }}"
+        let post_id = "{{ post.id }}"
     </script>
     <script src="/files/static/js?file=share_post"></script>
     <script src="/files/static/js?file=delete_post_page"></script>

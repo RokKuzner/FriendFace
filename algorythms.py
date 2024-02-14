@@ -24,7 +24,7 @@ def get_personalized_posts(user:str):
         users_following_posts += db.get_posts_by_user(user_following, user)[0]
 
     for post in users_following_posts:
-        if float(post[5]) < float(first_latest_post[5]):
+        if float(post["time"]) < float(first_latest_post["time"]):
             posts_to_grade.append(post)
 
     #Latest 200 posts with user's interests
@@ -32,7 +32,7 @@ def get_personalized_posts(user:str):
         posts_with_interest = db.get_latest_posts_by_genre(user, 200, interest)
 
         for post in posts_with_interest:
-            if (post[0] not in users_following) and (float(post[5]) < float(first_latest_post[5])):
+            if (post["author_username"] not in users_following) and (float(post["time"]) < float(first_latest_post["time"])):
                 posts_to_grade.append(post)
 
     #Create a dict for graded posts
@@ -65,20 +65,20 @@ def grade_post(user:str, post):
     total_points = 0
     current_time = time.time()
 
-    time_posted = float(post[5])
+    time_posted = float(post["time"])
     users_following_users_following = db.get_users_following_users_following(user)
 
-    if db.is_following_user(user, post[0]):
+    if db.is_following_user(user, post["author_username"]):
         total_points += 15
-    elif post[0] in users_following_users_following:
+    elif post["author_username"] in users_following_users_following:
         total_points += 5
 
     total_points += scale_to_range(time_posted, 0, current_time)
 
-    if db.get_post_genre(post[4]) in db.get_user_interests(user):
+    if db.get_post_genre(post["id"]) in db.get_user_interests(user):
         total_points += 15
 
-    if db.is_post_read(user, post[4]) == True:
+    if db.is_post_read(user, post["id"]) == True:
         total_points = total_points / 4
 
     return total_points

@@ -16,27 +16,27 @@
     </div>
 
     {% for post in posts %}
-        <div class="post" id="{{ post.4 }}">
+        <div class="post" id="{{ post.id }}">
             <div class="posttop">
                 <div class="postuserdiv">
-                    <img class="postusericon round" src="/files/media/profileimg?user={{ post.8 }}" alt="User logo img">
-                    <a href="/user/{{ post.0 }}" class="postusernameatag"><div class="postuser">{{ post.0 }}</div></a>
+                    <img class="postusericon round" src="/files/media/profileimg?user={{ post.author_id }}" alt="User logo img">
+                    <a href="/user/{{ post.author_username }}" class="postusernameatag"><div class="postuser">{{ post.author_username }}</div></a>
                 </div>
 
-                {% if current_user == post.0 %}
+                {% if current_user == post.author_username %}
                     <div class="posttopdelete"><img src="/files/static/icons?file=delete.png" alt=""></div>
                 {% endif %}
             </div>
-            <div class="postcontent">{{ post.1 }}</div>
+            <div class="postcontent">{{ post.content }}</div>
             <div class="likedstuff">
-                {% if  post.6 == True%}
+                {% if  post.liked == True%}
                     <img src="/files/static/icons?file=liked.png" alt="like" class="likeimg" id="like">
-                    <input type="hidden" value="{{ post.4 }}">
-                    <div class="likediv">{{ post.2 }}</div>
+                    <input type="hidden" value="{{ post.id }}">
+                    <div class="likediv">{{ post.likes }}</div>
                 {% else %}
                     <img src="/files/static/icons?file=like.png" alt="like" class="likeimg" id="like">
-                    <input type="hidden" value="{{ post.4 }}">
-                    <div class="likediv">{{ post.2 }}</div>
+                    <input type="hidden" value="{{ post.id }}">
+                    <div class="likediv">{{ post.likes }}</div>
                 {% endif %}
             </div>
 
@@ -44,17 +44,17 @@
                 {% csrf_token %}
                 <div class="mycommentdiv">
                     <input class="commentdivtextarea" id="posttext" name="comment_content" placeholder="Comment">
-                    <input type="hidden" name="comment_parrent_id" value="{{ post.4 }}">
+                    <input type="hidden" name="comment_parrent_id" value="{{ post.id }}">
                     <button type="submit" class="commentbtndiv btn btn-primary" id="postbtn">Comment</button>
                 </div>
             </form>
 
             <div class="commentoptions">
                 <div class="commentoption commentoptionimagediv commentoptionexpand" title="expand">
-                    <a href="/getpost/{{ post.4 }}"><img src="/files/static/icons?file=expand.png" alt="Expand"></a>
+                    <a href="/getpost/{{ post.id }}"><img src="/files/static/icons?file=expand.png" alt="Expand"></a>
                 </div>
                 <div class="commentoption commentoptioncomments">
-                    <a href="/getpost/{{ post.4 }}">Comments ({{ post.9 }})</a>
+                    <a href="/getpost/{{ post.id }}">Comments ({{ post.commentsN }})</a>
                 </div>
                 <div class="commentoption commentoptionimagediv commentoptionshare" title="copy share link to clipboard">
                     <img src="/files/static/icons?file=share.png" alt="Share">
