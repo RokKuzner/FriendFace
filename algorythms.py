@@ -24,7 +24,7 @@ def get_personalized_posts(user:str):
         users_following_posts += db.get_posts_by_user(user_following, user)[0]
 
     for post in users_following_posts:
-        if float(post[5]) < float(first_latest_post[5]):
+        if float(post["time"]) < float(first_latest_post["time"]):
             posts_to_grade.append(post)
 
     #Latest 200 posts with user's interests
