@@ -1,5 +1,6 @@
 import sqlite3, random, string, time
 import algorythms as alg
+from datetime import datetime, timezone
 
 conn = sqlite3.connect('db.sqlite3', check_same_thread=False)
 
@@ -13,6 +14,52 @@ def generate_id(table_name:str, id_field:str):
                 break
             
         return id
+
+def relative_time(timestamp):
+  """
+  Calculates relative time string from a timestamp in seconds (assumed to be UTC).
+
+  Returns:
+    Relative time string (e.g., "3 hours ago", "4 years ago").
+  """
+  current_time_utc = datetime.now(timezone.utc)
+  utc_timestamp = current_time_utc.timestamp()
+
+  delta = utc_timestamp - timestamp
+
+  seconds = delta
+  minutes = seconds / 60
+  hours = minutes / 60
+  days = hours / 24
+  months = days / 30
+  years = months / 12
+
+  if seconds < 1:
+    return "just now"
+  elif minutes < 1:
+    if int(seconds) == 1:
+        return "1 second ago"
+    return f"{int(seconds)} seconds ago"
+  elif hours < 1:
+    if int(minutes) == 1:
+        return "1 minute ago"
+    return f"{int(minutes)} minutes ago"
+  elif days < 1:
+    if int(hours) == 1:
+        return "1 hour ago"
+    return f"{int(hours)} hours ago"
+  elif months < 1:
+    if int(days) == 1:
+        return "1 day ago"
+    return f"{int(days)} days ago"
+  elif years < 1:
+    if int(months) == 1:
+        return "1 month ago"
+    return f"{int(months)} months ago"
+  else:
+    if int(years) == 1:
+        return "1 year ago"
+    return f"{int(years)} years ago"
 
 #Users
 def validate_user(username:str, password:str):
@@ -230,12 +277,17 @@ def new_post(user:str, content:str):
         return "empty post"
     with conn:
         c = conn.cursor()
-        thetime = time.time()
-        thetime = str(thetime)
+
+        current_time_utc = datetime.now(timezone.utc)
+        utc_timestamp = current_time_utc.timestamp()
+        utc_timestamp = str(utc_timestamp)
+
         post_id = generate_id("posts", "id")
         post_genre = alg.get_post_genre(str(content))
-        c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?, ?)', (user, content, "0", "", post_id, thetime))
+
+        c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?, ?)', (user, content, "0", "", post_id, utc_timestamp))
         c.execute('INSERT INTO postgenre VALUES(?, ?)', (post_id, post_genre))
+
         conn.commit()
     return "success"
 
@@ -301,7 +353,8 @@ def get_post_by_post_id(user:str, post_id:str):
                        "time":post[5],
                        "comments":get_comments_by_parrent_post(post[4])[::-1],
                        "author_id":get_users_id_by_username(post[0]),
-                       "commentsN":str(len(get_comments_by_parrent_post(post[4])))}
+                       "commentsN":str(len(get_comments_by_parrent_post(post[4]))),
+                       "timePretty": relative_time(float(post[5]))}
 
         post_return["liked"] = True if user_liked_post(user, post_return["id"]) else False
 
