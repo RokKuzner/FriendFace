@@ -156,7 +156,14 @@ hr.postseperator {
     margin-bottom: 5px;
 }
 
+.posttime {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
 .postuserdiv {
+    align-items: center;
     display: inline-flex;
     margin-bottom: 5px;
 }

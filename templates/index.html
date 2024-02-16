@@ -21,6 +21,7 @@
                 <div class="postuserdiv">
                     <img class="postusericon round" src="/files/media/profileimg?user={{ post.author_id }}" alt="User logo img">
                     <a href="/user/{{ post.author_username }}" class="postusernameatag"><div class="postuser">{{ post.author_username }}</div></a>
+                    <div class="posttime">{{ post.timePretty }}</div>
                 </div>
 
                 {% if current_user == post.author_username %}
