@@ -6,9 +6,9 @@ let cancel_btn = document.getElementById("delete-cancel")
 
 let post_element = document.querySelector(".post")
 
-let a = post_element.querySelector(".posttop .posttopdelete")
-if (a) {
-    a.addEventListener("click", (e) => {
+let post_top_del_btn = post_element.querySelector(".posttop .postpagetopdelete")
+if (post_top_del_btn) {
+    post_top_del_btn.addEventListener("click", (e) => {
         del.classList.remove("hidden")
         over.classList.remove("hidden")
 
