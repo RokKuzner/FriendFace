@@ -15,8 +15,12 @@
                 <div class="posttime">{{ post.timePretty }}</div>
             </div>
 
+            <div class="postpagesharediv commentoptionimagediv commentoptionshare" title="copy share link to clipboard">
+                <img src="/files/static/icons?file=share.png" alt="Share">
+            </div>
+
             {% if current_user == post.author_username %}
-                <div class="posttopdelete"><img src="/files/static/icons?file=delete.png" alt=""></div>
+                <div class="postpagetopdelete"><img src="/files/static/icons?file=delete.png" alt=""></div>
             {% endif %}
         </div>
         <div class="postcontent">{{ post.content }}</div>
@@ -39,12 +43,6 @@
                 <button type="submit" class="commentbtndiv btn btn-primary" id="postbtn">Comment</button>
             </div>
         </form>
-
-        <div class="commentoptions">
-            <div class="commentoption commentoptionimagediv commentoptionshare" title="copy share link to clipboard">
-                <img src="/files/static/icons?file=share.png" alt="Share">
-            </div>
-        </div>
 
         {% include "delete.html" %}
 

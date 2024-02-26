@@ -196,6 +196,11 @@ hr.postseperator {
     margin-left: 8px;
 }
 
+.postpagesharediv {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
 .mycommentdiv {
     margin-top: 10px;
 }
@@ -488,11 +493,11 @@ hr.postseperator {
     margin-left: auto;
 }
 
-.posttopdelete img {
+.posttopdelete img, .postpagetopdelete img {
     width: 22px;
 }
 
-.posttopdelete img:hover {
+.posttopdelete img:hover, .postpagetopdelete img:hover {
     cursor: pointer;
 }
 
