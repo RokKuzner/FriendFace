@@ -74,8 +74,8 @@ body {
 .navbar-link {
     text-decoration: none;
     color: white;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     display: block;
     background-color: #33333300;
 }
@@ -96,6 +96,18 @@ body {
 .navbar-user-img {
     margin-left: auto;
     margin-right: 10px;
+}
+
+.search-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.search-li {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 1rem;
 }
 
 .mypostdiv {
