@@ -617,4 +617,8 @@ hr.postseperator {
         margin-left: 4px;
         margin-right: 4px;
     }
+
+    .menu {
+        width: 50vw;
+    }
 }
