@@ -610,12 +610,15 @@ hr.postseperator {
     }
 
     .search-wrapper input {
-        display: none;
+        width: 100%;
     }
 
-    .search-icon {
-        margin-left: 4px;
-        margin-right: 4px;
+    .search-wrapper {
+        width: 100%;
+    }
+
+    .search-li {
+        width: 40vw;
     }
 
     .menu {
