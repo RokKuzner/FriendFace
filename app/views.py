@@ -212,7 +212,7 @@ def register(request):
         else:
             #Try getting the image
             try:
-                a = request.FILES['avatar']
+                request.FILES['avatar']
             except:
                 messages.error(request, "You must chose an avatar for yourself")
                 return redirect('/register')
