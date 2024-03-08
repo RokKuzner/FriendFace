@@ -10,10 +10,16 @@ body {
     padding-right: 10px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20vh;
     font-size: 2rem;
     background-color: rgb(29, 111, 225);
     color: rgb(255, 255, 255);
+}
+
+.loginwrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -70%);
 }
 
 .logininput {
