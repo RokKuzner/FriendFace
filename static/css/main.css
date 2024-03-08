@@ -114,6 +114,10 @@ body {
     display: inline-flex;
     align-items: center;
     margin-right: 1rem;
+
+    /*remove below when search is active */
+    pointer-events: none;
+    cursor: none;
 }
 
 .search-wrapper {
