@@ -357,7 +357,8 @@ def get_post_by_post_id(user:str, post_id:str):
                        "comments":get_comments_by_parrent_post(post[4])[::-1],
                        "author_id":get_users_id_by_username(post[0]),
                        "commentsN":str(len(get_comments_by_parrent_post(post[4]))),
-                       "timePretty": relative_time(float(post[5]))}
+                       "timePretty": relative_time(float(post[5])),
+                       "keywords":post[6].split(",")}
 
         post_return["liked"] = True if user_liked_post(user, post_return["id"]) else False
 
