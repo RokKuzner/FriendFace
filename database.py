@@ -1,5 +1,6 @@
 import sqlite3, random, string, time
 import algorythms as alg
+import keywordextractor
 from datetime import datetime, timezone
 
 conn = sqlite3.connect('db.sqlite3', check_same_thread=False)
@@ -285,7 +286,9 @@ def new_post(user:str, content:str):
         post_id = generate_id("posts", "id")
         post_genre = alg.get_post_genre(str(content))
 
-        c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?, ?)', (user, content, "0", "", post_id, utc_timestamp))
+        keywords = keywordextractor.extract_keywords(content)
+
+        c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?, ?, ?)', (user, content, "0", "", post_id, utc_timestamp, ",".join(keywords)))
         c.execute('INSERT INTO postgenre VALUES(?, ?)', (post_id, post_genre))
 
         conn.commit()
