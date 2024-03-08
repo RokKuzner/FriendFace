@@ -1,4 +1,4 @@
-def find_closes_char(str:str, char:str, start_index:int):
+def find_closest_char(str:str, char:str, start_index:int):
     closes_char = 0
     pointer = start_index
     found = False
@@ -29,8 +29,8 @@ def common_char_sequences(str1:str, str2:str):
 
             common_char_sequences += 1
         else:
-            closest_to_next_same_char_in_str2 = find_closes_char(str2, str1[pointer_1], pointer_2)
-            closest_to_next_same_char_in_str1 = find_closes_char(str1, str2[pointer_2], pointer_1)
+            closest_to_next_same_char_in_str2 = find_closest_char(str2, str1[pointer_1], pointer_2)
+            closest_to_next_same_char_in_str1 = find_closest_char(str1, str2[pointer_2], pointer_1)
 
             if closest_to_next_same_char_in_str2 and closest_to_next_same_char_in_str1:
                 if closest_to_next_same_char_in_str2 < closest_to_next_same_char_in_str1:
