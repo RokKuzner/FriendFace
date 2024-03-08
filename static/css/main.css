@@ -611,6 +611,7 @@ hr.postseperator {
 
     .search-wrapper input {
         width: 100%;
+        min-width: 50px;
     }
 
     .search-wrapper {
@@ -618,10 +619,14 @@ hr.postseperator {
     }
 
     .search-li {
-        width: 40vw;
+        width: 185px;
     }
 
     .menu {
         width: 50vw;
+    }
+
+    .navbar {
+        overflow-x: scroll;
     }
 }
