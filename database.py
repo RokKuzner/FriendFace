@@ -495,11 +495,11 @@ def add_post_to_keyword(post_id:str, keywords:list[str]):
         with conn:
             c = conn.cursor()
             c.execute('SELECT posts FROM keywords WHERE keyword=?', (keyword,))
-            posts = c.fetchone()[0]
+            posts = c.fetchone()
 
             if posts == None:
                 c.execute('INSERT INTO keywords VALUES(?,?)', (keyword, post_id))
             else:
-                c.execute('UPDATE keywords SET posts=? WHERE keyword=?', (str(post_id+","+posts), keyword))
+                c.execute('UPDATE keywords SET posts=? WHERE keyword=?', (str(post_id+","+posts[0]), keyword))
                 
             conn.commit()
