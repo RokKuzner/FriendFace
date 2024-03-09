@@ -287,8 +287,9 @@ def new_post(user:str, content:str):
         post_genre = alg.get_post_genre(str(content))
 
         keywords = keywordextractor.extract_keywords(content)
+        joined_keywords = ",".join(keywords)
 
-        c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?, ?, ?)', (user, content, "0", "", post_id, utc_timestamp, ",".join(keywords)))
+        c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?, ?, ?)', (user, content, "0", "", post_id, utc_timestamp, joined_keywords))
         c.execute('INSERT INTO postgenre VALUES(?, ?)', (post_id, post_genre))
 
         conn.commit()
