@@ -291,6 +291,7 @@ def new_post(user:str, content:str):
 
         c.execute('INSERT INTO posts VALUES(?, ?, ?, ?, ?, ?, ?)', (user, content, "0", "", post_id, utc_timestamp, joined_keywords))
         c.execute('INSERT INTO postgenre VALUES(?, ?)', (post_id, post_genre))
+        add_post_to_keyword(post_id, keywords)
 
         conn.commit()
     return "success"
