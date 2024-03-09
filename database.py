@@ -487,3 +487,18 @@ def get_comments_by_parrent_post(parrent_post_id:str):
         c = conn.cursor()
         c.execute('SELECT * FROM comments WHERE parrent_id=?', (parrent_post_id,))
         return c.fetchall()
+    
+#Search
+def add_post_to_keyword(post_id:str, keywords:list[str]):
+    for keyword in keywords:
+        with conn:
+            c = conn.cursor()
+            c.execute('SELECT posts FROM keywords WHERE keyword=?', (keyword,))
+            posts = c.fetchone()[0]
+
+            if posts == None:
+                c.execute('INSERT INTO keywords VALUES(?,?)', (keyword, post_id))
+            else:
+                c.execute('UPDATE keywords SET posts=? WHERE keyword=?', (str(post_id+","+posts), keyword))
+                
+            conn.commit()
