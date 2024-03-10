@@ -149,6 +149,17 @@ def comment(request):
         db.new_comment(request.session['current_user'], content, parrent_id)
     return redirect(redirect_to)
 
+def search(request):
+    if request.method == "GET":
+       return render(request, "search.html", {'logged_in':True, 'current_user':request.session['current_user'],
+                                          'current_user_id': db.get_users_id_by_username(request.session['current_user']),
+                                          'this_url':str('/search')})
+    elif request.method == "POST":
+        query = request.POST['query']
+        return render(request, "search.html", {'logged_in':True, 'current_user':request.session['current_user'],
+                                          'current_user_id': db.get_users_id_by_username(request.session['current_user']),
+                                          'this_url':str('/search'), 'query':query})
+
 def login(request):
     #First Logout
     logged_out = logout(request)
