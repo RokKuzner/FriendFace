@@ -1,3 +1,5 @@
+import database as db
+
 def find_closest_char(str:str, char:str, start_index:int):
     closes_char = 0
     pointer = start_index
@@ -49,4 +51,41 @@ def common_char_sequences(str1:str, str2:str):
 
     return common_char_sequences
 
-#print(common_char_sequences("The new iPhone 15 pro max".lower(), "iPhone pro max".lower()))
+def search(query:str):
+    #Get keywords in database that match the query
+    keywords = db.get_all_keywords()
+    matching_keywords = []
+    for keyword in keywords:
+        keyword_possibilities = [keyword] + keyword.split()
+
+        for possibility in keyword_possibilities:
+            min_chars_for_match = len(possibility)-1 if len(possibility) >= 5 else len(possibility)
+
+            if common_char_sequences(query, possibility) >= min_chars_for_match:
+                matching_keywords.append(keyword)
+                break
+
+    #Grade posts by keyword count
+    posts = {}
+    for keyword in matching_keywords:
+        for post in db.get_posts_by_keyword(keyword):
+            try:
+                posts[post] += 1
+            except KeyError:
+                posts[post] = 1
+
+    posts_by_keyword_count = {}
+    for post in posts:
+        try:
+            posts_by_keyword_count[posts[post]].append(post)
+        except KeyError:
+            posts_by_keyword_count[posts[post]] = [post]
+
+    sorted_keys = list(posts_by_keyword_count.keys())
+    sorted_keys.sort(reverse=True)
+
+    sorted_posts = []
+    for key in sorted_keys:
+        sorted_posts += posts_by_keyword_count[key]
+
+    return sorted_posts
