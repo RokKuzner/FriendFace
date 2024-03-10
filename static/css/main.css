@@ -114,10 +114,6 @@ body {
     display: inline-flex;
     align-items: center;
     margin-right: 1rem;
-
-    /*remove below when search is active */
-    pointer-events: none;
-    cursor: none;
 }
 
 .search-wrapper {
@@ -139,6 +135,8 @@ body {
     transition: 0.5s;
     width: 170px;
     margin-right: 10px;
+    pointer-events: none;
+    cursor: none;
 }
 
 .search-wrapper input:focus {
