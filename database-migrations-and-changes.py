@@ -15,7 +15,6 @@ for post in posts:
     c.execute('UPDATE posts SET keywords=? WHERE id =?', (",".join(post_keywords_lower), post[4]))
 
 #Create keywords table
-
 CREATE_KEYWORDS_TABLE = """
 CREATE TABLE IF NOT EXISTS keywords(
 keyword TEXT UNIQUE,
