@@ -15,4 +15,5 @@ urlpatterns = [
   path('unfollow/<str:user>', views.unfollow, name='unfollow'),
   path('user/<str:user>/edit', views.editprofile, name='editprofile'),
   path('getpost/<str:post_id>', views.getpost, name='editprofile'),
+  path('search', views.search, name='search'),
 ]
