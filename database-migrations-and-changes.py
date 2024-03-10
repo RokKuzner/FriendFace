@@ -3,6 +3,19 @@ import sqlite3
 conn = sqlite3.connect('db.sqlite3')
 c = conn.cursor()
 
+#Change keywors in database to lower case
+c.execute('SELECT * FROM posts')
+posts = c.fetchall()
+
+for post in posts:
+    post_keywords = post[6].split(",")
+    post_keywords_lower = []
+    for keyword in post_keywords:
+        post_keywords_lower.append(keyword.lower())
+    c.execute('UPDATE posts SET keywords=? WHERE id =?', (",".join(post_keywords_lower), post[4]))
+
+#Create keywords table
+
 CREATE_KEYWORDS_TABLE = """
 CREATE TABLE IF NOT EXISTS keywords(
 keyword TEXT UNIQUE,
