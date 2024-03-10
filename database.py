@@ -473,6 +473,14 @@ def is_post_read(user:str, post_id:str):
             return False
         return True
 
+def get_post_keywords(post_id:str) -> list[str]:
+    with conn:
+        c = conn.cursor()
+        c.execute('SELECT keywords FROM posts WHERE id=?', (post_id,))
+        response = c.fetchone()
+
+        return response[0].split(",") if response!= None else []
+
 #Comments
 def new_comment(user:str, content:str, parrent_post_id:str):
     if content == "" or content == " "*len(content):
@@ -513,5 +521,5 @@ def remove_post_from_keyword(post_id:str, keyword:str):
         if posts != None:
             posts = str(posts[0]).split(",")
             posts.remove(post_id)
-            c.execute('UPDATE keywords SET posts=? WHERE keyword=?', (str(posts), keyword))
+            c.execute('UPDATE keywords SET posts=? WHERE keyword=?', (",".join(posts), keyword))
             conn.commit()
