@@ -300,6 +300,9 @@ def new_post(user:str, content:str):
 def delete_post(post_id:str):
     add_post_to_deleted(post_id)
 
+    for keyword in get_post_keywords(post_id):
+        remove_post_from_keyword(post_id, keyword)
+
     with conn:
         c = conn.cursor()
         c.execute("DELETE FROM posts WHERE id=?", (post_id,))
