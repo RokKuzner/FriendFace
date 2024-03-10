@@ -10,6 +10,7 @@ import os
 from PIL import Image, ExifTags
 from crop import crop
 import algorythms as alg
+import search as s
 
 allowed_image_type = ["image/jpg", "image/jpeg", "image/png"]
 
@@ -156,9 +157,15 @@ def search(request):
                                           'this_url':str('/search')})
     elif request.method == "POST":
         query = request.POST['query']
+
+        return_post_ids = s.search(query)
+        return_posts = []
+        for post_id in return_post_ids:
+            return_posts.append(db.get_post_by_post_id(request.session['current_user'], post_id))
+
         return render(request, "search.html", {'logged_in':True, 'current_user':request.session['current_user'],
                                           'current_user_id': db.get_users_id_by_username(request.session['current_user']),
-                                          'this_url':str('/search'), 'query':query})
+                                          'this_url':str('/search'), 'posts':return_posts})
 
 def login(request):
     #First Logout
