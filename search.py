@@ -52,6 +52,7 @@ def common_char_sequences(str1:str, str2:str):
     return common_char_sequences
 
 def search(query:str):
+    query = query.lower()
     #Get keywords in database that match the query
     keywords = db.get_all_keywords()
     matching_keywords = []
