@@ -21,7 +21,8 @@ content TEXT,
 likes TEXT,
 users_liked TEXT,
 id TEXT UNIQUE,
-time TEXT
+time TEXT,
+keywords TEXT
 )
 """
 
