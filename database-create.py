@@ -77,6 +77,12 @@ roles TEXT
 )
 """
 
+KEYWORDS = """
+CREATE TABLE IF NOT EXISTS keywords(
+keyword TEXT UNIQUE,
+posts TEXT
+)
+"""
 
 c.execute(USERS)
 c.execute(POSTS)
@@ -86,6 +92,7 @@ c.execute(USER_INTERESTS)
 c.execute(READ_POSTS)
 c.execute(DELETED_POSTS)
 c.execute(ADMIN_USERS)
+c.execute(KEYWORDS)
 
 conn.commit()
 conn.close()
