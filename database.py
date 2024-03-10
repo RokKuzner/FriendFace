@@ -503,3 +503,15 @@ def add_post_to_keyword(post_id:str, keywords:list[str]):
                 c.execute('UPDATE keywords SET posts=? WHERE keyword=?', (str(post_id+","+posts[0]), keyword))
                 
             conn.commit()
+
+def remove_post_from_keyword(post_id:str, keyword:str):
+    with conn:
+        c = conn.cursor()
+        c.execute('SELECT posts FROM keywords WHERE keyword=?', (keyword,))
+        posts = c.fetchone()
+
+        if posts != None:
+            posts = str(posts[0]).split(",")
+            posts.remove(post_id)
+            c.execute('UPDATE keywords SET posts=? WHERE keyword=?', (str(posts), keyword))
+            conn.commit()
