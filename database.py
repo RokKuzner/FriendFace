@@ -540,7 +540,7 @@ def remove_post_from_keyword(post_id:str, keyword:str):
         posts = c.fetchone()
 
         if posts != None:
-            posts = str(posts[0]).split(",")
+            posts = posts[0].split(",")
             posts.remove(post_id)
             c.execute('UPDATE keywords SET posts=? WHERE keyword=?', (",".join(posts), keyword))
             conn.commit()
