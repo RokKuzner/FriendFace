@@ -482,6 +482,15 @@ def get_post_keywords(post_id:str) -> list[str]:
 
         return response[0].split(",") if response!= None else []
 
+def get_all_keywords():
+    with conn:
+        c = conn.cursor()
+        c.execute('SELECT keyword FROM keywords')
+        response = c.fetchall()
+
+        keywords = [tuple[0] for tuple in response]
+        return keywords
+
 #Comments
 def new_comment(user:str, content:str, parrent_post_id:str):
     if content == "" or content == " "*len(content):
