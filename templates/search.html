@@ -4,6 +4,7 @@
 
 {% block head %}
     <link rel="stylesheet" href="/files/static/css?file=search">
+    <link rel="stylesheet" href="/files/static/css?file=delete">
 {% endblock %}
 
 {% block content %}
@@ -16,4 +17,61 @@
         <input type="text" placeholder="Search FriendFace" name="query">
     </form>
 </div>
+
+{% for post in posts %}
+    <div class="post" id="{{ post.id }}">
+        <div class="posttop">
+            <div class="postuserdiv">
+                <img class="postusericon round" src="/files/media/profileimg?user={{ post.author_id }}" alt="User logo img">
+                <a href="/user/{{ post.author_username }}" class="postusernameatag"><div class="postuser">{{ post.author_username }}</div></a>
+                <div class="posttime">{{ post.timePretty }}</div>
+            </div>
+
+            {% if current_user == post.author_username %}
+                <div class="posttopdelete"><img src="/files/static/icons?file=delete.png" alt=""></div>
+            {% endif %}
+        </div>
+        <div class="postcontent">{{ post.content }}</div>
+        <div class="likedstuff">
+            {% if  post.liked == True%}
+                <img src="/files/static/icons?file=liked.png" alt="like" class="likeimg" id="like">
+                <input type="hidden" value="{{ post.id }}">
+                <div class="likediv">{{ post.likes }}</div>
+            {% else %}
+                <img src="/files/static/icons?file=like.png" alt="like" class="likeimg" id="like">
+                <input type="hidden" value="{{ post.id }}">
+                <div class="likediv">{{ post.likes }}</div>
+            {% endif %}
+        </div>
+
+        <form autocomplete="off" class="comment-form">
+            {% csrf_token %}
+            <div class="mycommentdiv">
+                <input class="commentdivtextarea" id="posttext" name="comment_content" placeholder="Comment">
+                <input type="hidden" name="comment_parrent_id" value="{{ post.id }}">
+                <button type="submit" class="commentbtndiv btn btn-primary" id="postbtn">Comment</button>
+            </div>
+        </form>
+
+        <div class="commentoptions">
+            <div class="commentoption commentoptionimagediv commentoptionexpand" title="expand">
+                <a href="/getpost/{{ post.id }}"><img src="/files/static/icons?file=expand.png" alt="Expand"></a>
+            </div>
+            <div class="commentoption commentoptioncomments">
+                <a href="/getpost/{{ post.id }}">Comments ({{ post.commentsN }})</a>
+            </div>
+            <div class="commentoption commentoptionimagediv commentoptionshare" title="copy share link to clipboard">
+                <img src="/files/static/icons?file=share.png" alt="Share">
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+{% include "delete.html" %}
+
+<script src="/files/static/js?file=post_read"></script>
+<script src="/files/static/js?file=share_post"></script>
+<script src="/files/static/js?file=comment"></script>
+<script src="/files/static/js?file=like"></script>
+<script src="/files/static/js?file=delete"></script>
 {% endblock %}
