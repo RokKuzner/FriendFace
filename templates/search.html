@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}FriendFace - Search{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/files/static/css?file=search">
+{% endblock %}
+
+{% block content %}
+<div class="search-wrap">
+    <form autocomplete="off" action="/search" method="post">
+        {% csrf_token %}
+        <button type="submit" class="search-submit">
+            <img class="search-icon" src="/files/static/icons?file=search.png" alt="search">
+        </button>
+        <input type="text" placeholder="Search FriendFace" name="query">
+    </form>
+</div>
+{% endblock %}

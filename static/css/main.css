@@ -639,4 +639,9 @@ hr.postseperator {
     .navbar {
         overflow-x: scroll;
     }
+
+    .search-wrap {
+        width: 97vw !important;
+        margin-top: 30px !important;
+    }
 }

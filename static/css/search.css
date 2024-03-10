@@ -1,0 +1,32 @@
+.search-wrap {
+    width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+
+.search-wrap form {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+}
+
+.search-wrap form input {
+    width: 100%;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+    transition: 0.5s;
+    margin-right: 10px;
+}
+
+.search-wrap form input:focus {
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
+}
+
+.search-submit {
+    border: 0;
+}
