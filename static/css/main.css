@@ -73,15 +73,18 @@ body {
     width: max-content;
 }
 
-.navbar-links li:hover {
+.logo-li:hover, .navbar-user-img:hover {
     cursor: pointer;
 }
 
-.navbar-link {
-    text-decoration: none;
-    color: white;
+.logo-li {
     margin-left: 1rem;
     margin-right: 1rem;
+}
+
+.logo-li a {
+    text-decoration: none;
+    color: white;
     display: block;
     background-color: #33333300;
 }
