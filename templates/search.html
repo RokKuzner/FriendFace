@@ -5,6 +5,10 @@
 {% block head %}
     <link rel="stylesheet" href="/files/static/css?file=search">
     <link rel="stylesheet" href="/files/static/css?file=delete">
+
+    {% if not query %}
+    <link rel="stylesheet" href="/files/static/css?file=search-blank">
+    {% endif %}
 {% endblock %}
 
 {% block content %}
