@@ -16,12 +16,15 @@
                     <ul>
                         <li class="logo-li"><a href="/" class="navbar-link"><div class="navlogo">FriendFace</div></a></li>
                         <li class="search-li">
-                            <a href="/search">
+                            <form autocomplete="off" action="/search" method="post">
+                                {% csrf_token %}
                                 <div class="search-wrapper">
-                                    <img class="search-icon" src="/files/static/icons?file=search.png" alt="search">
-                                    <input type="text" placeholder="Search FriendFace">
+                                    <button type="submit">
+                                        <img class="search-icon" src="/files/static/icons?file=search.png" alt="search">
+                                    </button>
+                                    <input type="text" placeholder="Search FriendFace" name="query">
                                 </div>
-                            </a>
+                            </form>
                         </li>
                         <li id="user_img_icon" class="navbar-user-img"><img src="/files/media/profileimg?user={{ current_user_id }}" alt="User logo img" style="width:50px;" class="usericomimg round"></li>
                     </ul>

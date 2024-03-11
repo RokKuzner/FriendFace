@@ -119,6 +119,11 @@ body {
     margin-right: 1rem;
 }
 
+.search-li form .search-wrapper button {
+    border: 0;
+    background: rgba(0, 0, 0, 0);
+}
+
 .search-wrapper {
     width: max-content;
     display: inline-flex;
@@ -138,8 +143,6 @@ body {
     transition: 0.5s;
     width: 170px;
     margin-right: 10px;
-    pointer-events: none;
-    cursor: none;
 }
 
 .search-wrapper input:focus {
