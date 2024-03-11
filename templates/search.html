@@ -14,7 +14,7 @@
         <button type="submit" class="search-submit">
             <img class="search-icon" src="/files/static/icons?file=search.png" alt="search">
         </button>
-        <input type="text" placeholder="Search FriendFace" name="query">
+        <input type="text" placeholder="Search FriendFace" name="query" id="search-input">
     </form>
 </div>
 
@@ -68,6 +68,13 @@
 {% endfor %}
 
 {% include "delete.html" %}
+
+{% if query %}
+<script>
+    let searchInput = document.querySelector(".search-wrap form #search-input");
+    searchInput.value = "{{ query }}";
+</script>
+{% endif %}
 
 <script src="/files/static/js?file=post_read"></script>
 <script src="/files/static/js?file=share_post"></script>
