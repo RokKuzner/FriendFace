@@ -165,7 +165,7 @@ def search(request):
 
         return render(request, "search.html", {'logged_in':True, 'current_user':request.session['current_user'],
                                           'current_user_id': db.get_users_id_by_username(request.session['current_user']),
-                                          'this_url':str('/search'), 'posts':return_posts})
+                                          'this_url':str('/search'), 'posts':return_posts, "query":query})
 
 def login(request):
     #First Logout
