@@ -623,17 +623,13 @@ hr.postseperator {
         margin-top: 10px;
     }
 
+    .search-icon {
+        margin-right: 7px;
+        margin-left: 7px;
+    }
+
     .search-wrapper input {
-        width: 100%;
-        min-width: 50px;
-    }
-
-    .search-wrapper {
-        width: 100%;
-    }
-
-    .search-li {
-        width: 185px;
+        display: none;
     }
 
     .menu {
