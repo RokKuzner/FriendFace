@@ -151,7 +151,7 @@ def comment(request):
     return redirect(redirect_to)
 
 def search(request):
-    if request.method == "GET":
+    if request.method == "GET" or request.method == "POST" and request.POST['query'] == "":
        return render(request, "search.html", {'logged_in':True, 'current_user':request.session['current_user'],
                                           'current_user_id': db.get_users_id_by_username(request.session['current_user']),
                                           'this_url':str('/search')})
