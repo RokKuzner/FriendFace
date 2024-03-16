@@ -2,6 +2,7 @@ import sqlite3, random, string, time
 import algorythms as alg
 import keywordextractor
 from datetime import datetime, timezone
+import encryption
 
 conn = sqlite3.connect('db.sqlite3', check_same_thread=False)
 
@@ -66,16 +67,20 @@ def relative_time(timestamp):
 def validate_user(username:str, password:str):
     with conn:
         c = conn.cursor()
-        c.execute('SELECT * FROM users WHERE email=? AND password=?',
-                (username, password))
+        c.execute('SELECT * FROM users WHERE email=?',(username,))
         data = c.fetchone()
-        return (data is not None and username == data[0] and password == data[2])
+
+        if data is None:
+            return False
+
+        correct_password = encryption.decrypt(data[2])
+        return password == correct_password
 
 def add_user(username:str, password:str):
     with conn:
         c = conn.cursor()
         user_id = generate_id('users', 'id')
-        c.execute('INSERT INTO users VALUES(?, ?, ?, ?, ?, ?)', (username, user_id, password, '', '', '0'))
+        c.execute('INSERT INTO users VALUES(?, ?, ?, ?, ?, ?)', (username, user_id, encryption.encrypt(password), '', '', '0'))
         c.execute('INSERT INTO interests VALUES(?, ?)', (username, ""))
         conn.commit()
         return user_id
@@ -269,7 +274,7 @@ def get_user_interests(user:str):
 def change_password(user:str, new_password:str):
     with conn:
         c = conn.cursor()
-        c.execute('UPDATE users SET password=? WHERE email=?', (new_password, user))
+        c.execute('UPDATE users SET password=? WHERE email=?', (encryption.encrypt(new_password), user))
         conn.commit()
 
 #Posts
