@@ -38,7 +38,7 @@ def get_personalized_posts(user:str):
     #Create a dict for graded posts
     graded_posts = {}
 
-    #Grade every post on platform
+    #Grade posts
     for post in posts_to_grade:
         grade = grade_post(user, post)
 
