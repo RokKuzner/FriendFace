@@ -365,7 +365,7 @@ def get_post_by_post_id(user:str, post_id:str):
                        "users_liked":post[3],
                        "id":post[4],
                        "time":post[5],
-                       "comments":get_comments_by_parrent_post(post[4])[::-1],
+                       "comments":get_comments_by_parrent_post(post[4]),
                        "author_id":get_users_id_by_username(post[0]),
                        "commentsN":str(len(get_comments_by_parrent_post(post[4]))),
                        "timePretty": relative_time(float(post[5])),
