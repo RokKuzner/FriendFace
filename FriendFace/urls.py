@@ -21,6 +21,9 @@ urlpatterns = [
     #servemedia urls
     path('files/', include('servemedia.urls')),
 
+    #favicon.ico url
+    path('favicon.ico/', include('servemedia.favicon_url')),
+
     #api urls
     path('api/', include('api.urls')),
 
