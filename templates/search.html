@@ -22,6 +22,20 @@
     </form>
 </div>
 
+{% if not posts and query %}
+    <div class="no-results-wrap">
+        <div class="no-results-img-div">
+            <img src="/files/static/icons?file=emptysearch.png" alt="">
+        </div>
+        <div class="no-results-heading">
+            No results
+        </div>
+        <div class="no-results-explain">
+            Try searching for for keywords in short queries.
+        </div>
+    </div>
+{% endif %}
+
 {% for post in posts %}
     <div class="post" id="{{ post.id }}">
         <div class="posttop">
