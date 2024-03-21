@@ -35,7 +35,6 @@ async function handle() {
 
 
 let posts_elements = document.querySelectorAll(".post")
-const http = new XMLHttpRequest()
 
 let posts = []
 for (let post_element of posts_elements) {
