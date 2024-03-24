@@ -19,11 +19,11 @@
         </div>
         
         <div class="infoaboutuser">
-            <div class="subinfoP1">
+            <div class="subinfoP1 subinfo-wrap">
                 <div class="subinfo">{{ total_likes }} likes</div>
                 <div class="subinfo">{{ total_posts }} posts</div>
             </div>
-            <div class="subinfoP2">
+            <div class="subinfoP2 subinfo-wrap">
                 <div class="subinfo">{{ followers }} followers</div>
                 {% if is_my_page == True %}
                 <a class="btn btn-primary" href="/user/{{ current_user }}/edit">Edit your profile</a>
