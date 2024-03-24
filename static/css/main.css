@@ -411,8 +411,8 @@ hr.postseperator {
 
 .subinfo {
     font-weight: bold;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .menu {
@@ -621,6 +621,21 @@ hr.postseperator {
 
     .infoaboutuser div div:nth-child(2) {
         margin-top: 10px;
+    }
+
+    .subinfo {
+        font-weight: bold;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    .subinfo-wrap {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    .subinfo-wrap .btn {
+        margin-top: 7px;
     }
 
     .search-icon {
