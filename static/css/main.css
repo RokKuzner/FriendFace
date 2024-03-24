@@ -2,6 +2,11 @@ body {
     overflow-x: hidden;
 }
 
+.content-wrap {
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
 .loginwelcometxt {
     width: max-content;
     padding-top: 5px;
@@ -50,6 +55,7 @@ body {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
+    overflow-x: auto;
 
     display: flex;
     background-color: rgb(29, 111, 225);
@@ -649,10 +655,6 @@ hr.postseperator {
 
     .menu {
         width: 50vw;
-    }
-
-    .navbar {
-        overflow-x: scroll;
     }
 
     .search-wrap {
