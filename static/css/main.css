@@ -110,7 +110,7 @@ body {
 
 .navbar-user-img {
     margin-left: auto;
-    margin-right: 10px;
+    margin-right: 0 !important;
 }
 
 .search-icon {
