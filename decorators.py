@@ -1,7 +1,4 @@
-from django.shortcuts import render
-from django.contrib import messages
-from django.shortcuts import render, HttpResponseRedirect, redirect
-from django.urls import reverse
+from django.shortcuts import redirect
 
 def login_required(f):
     def decorated_function(request, *args, **kwargs):
