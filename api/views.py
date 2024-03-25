@@ -1,9 +1,9 @@
 from django.http import JsonResponse
-from decorators import login_required
+from decorators import login_required_json_response
 import database as db
 
 # Views
-@login_required
+@login_required_json_response
 def readpost(request):
     #Get post id query parameter
     post_id = request.GET.get('post', None)
@@ -14,7 +14,7 @@ def readpost(request):
 
     return JsonResponse({"status": "error", "descriprion":"post_id not provided"}, status=500)
 
-@login_required
+@login_required_json_response
 def like(request):
     #Get query parameter
     post_id = request.GET.get('post', None)
@@ -42,7 +42,7 @@ def like(request):
 
     return JsonResponse({"status": "succes", "state":state, "count":count}, status=200)
 
-@login_required
+@login_required_json_response
 def comment(request):
     if request.method == 'POST':
         content = request.POST['comment_content']
@@ -60,7 +60,7 @@ def userexists(request):
         return JsonResponse({"status": "error", "description":"user not provided"}, status=500)
     return JsonResponse({"status": "succes", "user":user, "user_exists":db.user_exists(user)})
 
-@login_required
+@login_required_json_response
 def post(request):
     content = request.POST['post_content']
 
@@ -68,7 +68,7 @@ def post(request):
 
     return JsonResponse({"status": "succes"}, status=200)
 
-@login_required
+@login_required_json_response
 def delete_post(request):
     id = request.GET.get('id', None)
 
