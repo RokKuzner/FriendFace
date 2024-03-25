@@ -1,15 +1,6 @@
-from django.shortcuts import render
-from django.contrib import messages
-from django.shortcuts import render, HttpResponseRedirect, redirect
-from django.urls import reverse
 from django.http import JsonResponse
 from decorators import login_required
 import database as db
-from FriendFace.settings import BASE_DIR
-import os
-from PIL import Image
-import algorythms as alg
-from django.views.decorators.csrf import csrf_exempt
 
 # Views
 @login_required
