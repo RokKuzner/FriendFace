@@ -1,4 +1,4 @@
-from PIL import Image, ExifTags
+from PIL import Image
 from PIL.ExifTags import TAGS
 
 def crop(image:Image):

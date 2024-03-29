@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.contrib import messages
-from django.shortcuts import render, HttpResponseRedirect, redirect
-from django.urls import reverse
-from django.http import JsonResponse
+from django.shortcuts import render, redirect
+
+import os
+from PIL import Image
+
 from decorators import login_required
 import database as db
 from FriendFace.settings import BASE_DIR
-import os
-from PIL import Image, ExifTags
 from crop import crop
 import algorythms as alg
 import search as s
