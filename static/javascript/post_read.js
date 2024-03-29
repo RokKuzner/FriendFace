@@ -9,6 +9,8 @@ function isInViewport(element) {
 }
 
 async function handle() {
+    try { if (document.hidden == true) {return} } catch (e) {}
+
     for (let post of posts) {
         if (isInViewport(post.element) && (post.isread == false)) {
             if (post.in_viewport_for >= 2) {
