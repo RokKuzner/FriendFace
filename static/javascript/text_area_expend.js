@@ -8,10 +8,13 @@ window.addEventListener("load", (e) => {
 
 function handle_textarea_input() {
     let element = this
+    let computed_style = window.getComputedStyle(element)
 
     let required_height = element.scrollHeight
-    if (required_height > 200) {
-        required_height = 200
+    let max_height = Number(computed_style.maxHeight.slice(0, -2)) //slice(0, -2) returns only the number (ex. 200) instead of ex. 200px
+
+    if (required_height > max_height) {
+        required_height = max_height + "px"
         element.style.overflowY = "scroll"
     }
 
