@@ -175,6 +175,7 @@ textarea {
 .postdivtextarea {
     min-height: 10vh !important;
     height: 10vh;
+    max-height: 200px;
 }
 
 .postdivpostbtn {
@@ -274,6 +275,7 @@ hr.postseperator {
     width: 100%;
     min-height: 30px;
     height: 30px;
+    max-height: 100px;
     transition: border-color 0.3s ease;
 }
 
