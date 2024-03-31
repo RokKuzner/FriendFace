@@ -2,6 +2,10 @@ body {
     overflow-x: hidden;
 }
 
+textarea {
+    overflow: hidden;
+}
+
 .content-wrap {
     overflow-x: hidden;
     overflow-y: scroll;
@@ -169,6 +173,7 @@ body {
 }
 
 .postdivtextarea {
+    min-height: 10vh !important;
     height: 10vh;
 }
 
@@ -267,6 +272,8 @@ hr.postseperator {
     border-radius: 0%;
     margin-bottom: 10px;
     width: 100%;
+    min-height: 30px;
+    height: 30px;
     transition: border-color 0.3s ease;
 }
 
