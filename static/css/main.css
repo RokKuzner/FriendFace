@@ -4,6 +4,7 @@ body {
 
 textarea {
     overflow: hidden;
+    resize: none;
 }
 
 .content-wrap {
