@@ -44,7 +44,7 @@
             <form autocomplete="off" class="comment-form">
                 {% csrf_token %}
                 <div class="mycommentdiv">
-                    <input class="commentdivtextarea" id="posttext" name="comment_content" placeholder="Comment">
+                    <textarea class="commentdivtextarea" id="posttext" name="comment_content" placeholder="Comment"></textarea>
                     <input type="hidden" name="comment_parrent_id" value="{{ post.id }}">
                     <button type="submit" class="commentbtndiv btn btn-primary" id="postbtn">Comment</button>
                 </div>
