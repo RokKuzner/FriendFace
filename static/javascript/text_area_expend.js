@@ -16,6 +16,8 @@ function handle_textarea_input() {
     if (required_height > max_height) {
         required_height = max_height + "px"
         element.style.overflowY = "scroll"
+    } else {
+        element.style.overflowY = "none"
     }
 
     element.style.height = required_height.toString() + "px"
