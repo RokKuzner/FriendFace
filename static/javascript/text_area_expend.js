@@ -20,5 +20,5 @@ function handle_textarea_input() {
         element.style.overflowY = "none"
     }
 
-    element.style.height = required_height.toString() + "px"
+    element.style.height = required_height + "px"
 }
