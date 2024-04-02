@@ -10,6 +10,8 @@ function handle_textarea_input() {
     let element = this
     let computed_style = window.getComputedStyle(element)
 
+    element.style.height = computed_style.minHeight //temporarily set to min height for scrollHeight to work properly when removing text
+
     let required_height = element.scrollHeight
     let max_height = Number(computed_style.maxHeight.slice(0, -2)) //slice(0, -2) returns only the number (ex. 200) instead of ex. 200px
 
