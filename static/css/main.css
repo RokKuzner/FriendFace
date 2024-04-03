@@ -666,10 +666,7 @@ hr.postseperator {
     }
 
     .search-wrapper {
-        padding-top: 8px;
-        padding-bottom: 8px;
-        padding-left: 2px;
-        padding-right: 2px;
+        padding: 8px 3px;
     }
 
     .search-wrapper input {
