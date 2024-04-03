@@ -665,6 +665,10 @@ hr.postseperator {
         margin-left: 7px;
     }
 
+    .search-wrapper {
+        padding: 8px 3px;
+    }
+
     .search-wrapper input {
         display: none;
     }
