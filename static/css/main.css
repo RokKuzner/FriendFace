@@ -57,9 +57,7 @@ textarea {
 }
 
 .navbar {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
+    position: relative;
     overflow-x: auto;
 
     display: flex;
@@ -71,11 +69,15 @@ textarea {
     padding: 0;
 }
 
+.navbar-links {
+    width: 100%;
+}
+
 .navbar-links ul {
     margin: 0;
     padding: 0;
     display: flex;
-    width: 99vw;
+    width: 100%;
     align-items: center;
 }
 
@@ -89,8 +91,8 @@ textarea {
 }
 
 .logo-li {
-    margin-left: 1rem;
-    margin-right: 1rem;
+    margin-left: 5px;
+    margin-right: 10px;
 }
 
 .logo-li a {
@@ -115,7 +117,7 @@ textarea {
 
 .navbar-user-img {
     margin-left: auto;
-    margin-right: 0 !important;
+    margin-right: 5px;
 }
 
 .search-icon {
