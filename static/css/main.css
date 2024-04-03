@@ -440,7 +440,7 @@ hr.postseperator {
 .menu {
     position: fixed;
     z-index: 2;
-    top: 60px;
+    top: calc(var(--nav-height) - 5px);
     right: 5px;
     color: black;
     background-color: white;
