@@ -36,30 +36,30 @@ def get_personalized_posts(user:str):
                 posts_to_grade.append(post)
 
     #Create a dict for graded posts
-    graded_posts = {}
+    graded_posts_by_grade = {}
 
     #Grade posts
     for post in posts_to_grade:
         grade = grade_post(user, post)
 
         #If key allready exists
-        while grade in graded_posts:
+        while grade in graded_posts_by_grade:
             grade += 0.000001
 
         #Add garaded post with grade as key to dict
-        graded_posts[grade] = post
+        graded_posts_by_grade[grade] = post
 
 
     #Sort dict keys
-    sorted_keys = list(graded_posts)
-    sorted_keys.sort()
+    sorted_grades = list(graded_posts_by_grade)
+    sorted_grades.sort()
 
     #Return sorted values
-    to_return = []
-    for key in sorted_keys:
-        to_return.append(graded_posts[key])
+    sorted_graded_posts = []
+    for key in sorted_grades:
+        sorted_graded_posts.append(graded_posts_by_grade[key])
 
-    return to_return
+    return sorted_graded_posts
 
 def grade_post(user:str, post):
     total_points = 0
