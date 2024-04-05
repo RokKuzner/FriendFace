@@ -133,7 +133,7 @@ textarea {
 .search-li {
     display: inline-flex;
     align-items: center;
-    margin-right: 1rem;
+    margin-right: 10px;
 }
 
 .search-li form .search-wrapper button {
