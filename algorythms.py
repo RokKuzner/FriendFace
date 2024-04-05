@@ -66,7 +66,7 @@ def grade_post(user:str, post):
     current_time = time.time()
 
     time_posted = float(post["time"])
-    users_following_users_following = db.get_users_following_users_following(user)
+    users_following_users_following = db.get_users_following_users_following(user) #this are the users that are followed by users that the user follows
 
     if db.is_following_user(user, post["author_username"]):
         total_points += 15
