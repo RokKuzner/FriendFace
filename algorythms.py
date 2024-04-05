@@ -73,7 +73,7 @@ def grade_post(user:str, post):
     if post["author_username"] in users_following_users_following:
         total_points += 3
 
-    total_points += scale_to_range(time_posted, 0, current_time)
+    total_points += scale_to_range(time_posted, 0, current_time, 10)
 
     if db.get_post_genre(post["id"]) in db.get_user_interests(user):
         total_points += 15
@@ -92,12 +92,12 @@ def get_client_ip(request):
     return ip
 
 
-def scale_to_range(value, x, y):
-    # Calculate the normalized value within the range [x, y]
-    normalized_value = (value - x) / (y - x)
+def scale_to_range(value, x_original_scale, y_original_scale, new_scale_max):
+    # Calculate the normalized value within the range [x_original_scale, y_original_scale]
+    normalized_value = (value - x_original_scale) / (y_original_scale - x_original_scale)
 
-    # Scale the normalized value to the range [0, 10]
-    scaled_value = normalized_value * 10
+    # Scale the normalized value to the range [0, new_scale_max]
+    scaled_value = normalized_value * new_scale_max
 
     return scaled_value
 
