@@ -24,7 +24,7 @@ def get_personalized_posts(user:str):
         users_following_posts += db.get_posts_by_user(user_following, user)[0]
 
     for post in users_following_posts:
-        if float(post["time"]) < float(first_latest_post["time"]):
+        if float(post["time"]) < float(first_latest_post["time"]): #if the post isn't already one of the latest 10000 posts
             posts_to_grade.append(post)
 
     #Latest 200 posts with user's interests
@@ -32,7 +32,7 @@ def get_personalized_posts(user:str):
         posts_with_interest = db.get_latest_posts_by_genre(user, 200, interest)
 
         for post in posts_with_interest:
-            if (post["author_username"] not in users_following) and (float(post["time"]) < float(first_latest_post["time"])):
+            if (post["author_username"] not in users_following) and (float(post["time"]) < float(first_latest_post["time"])): #if the post isn't posted my a user that is followed or already one of the latest 10000 posts
                 posts_to_grade.append(post)
 
     #Create a dict for graded posts
