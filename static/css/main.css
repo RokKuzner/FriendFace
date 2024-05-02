@@ -477,14 +477,13 @@ hr.postseperator {
 
 .mentusername {
     font-weight: bold;
+    display: flex;
+
+    width: calc(100% - 20px) !important;
 }
 
 .hidden {
     display: none;
-}
-
-.mentusername {
-    display: flex;
 }
 
 .inmenuusericon {
