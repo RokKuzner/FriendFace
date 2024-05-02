@@ -448,7 +448,9 @@ hr.postseperator {
     border-radius: 8px;
     margin: 0px;
     padding: 5px;
-    width: 20%;
+    width: 20% !important;
+    max-width: 20% !important;
+    min-width: 20% !important;
     min-width: max-content;
 }
 
@@ -493,6 +495,11 @@ hr.postseperator {
 .menuusername {
     margin-left: 5px;
     margin-top: 3px;
+    width: calc(100% - 5px - 35px);
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .round {
