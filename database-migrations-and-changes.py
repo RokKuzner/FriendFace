@@ -1,17 +1,28 @@
 import sqlite3
-import encryption
 
 conn = sqlite3.connect('db.sqlite3')
 c = conn.cursor()
 
-#Encrypt passwords
-c.execute("SELECT * FROM users")
-users = c.fetchall()
+FRIENDCHAT_DMS = """
+CREATE TABLE IF NOT EXISTS chat_dms(
+user1 TEXT,
+user2 TEXT,
+dm_id TEXT UNIQUE
+)
+"""
 
-for user in users:
-    password = user[2]
-    id = user[1]
-    c.execute('UPDATE users SET password=? WHERE id=?', (encryption.encrypt(password), id))
+FRIENDCHAT_MESSAGES = """
+CREATE TABLE IF NOT EXISTS chat_msgs(
+dm_id TEXT,
+message_id TEXT UNIQUE,
+sender TEXT,
+time TEXT,
+content TEXT
+)
+"""
+
+c.execute(FRIENDCHAT_DMS)
+c.execute(FRIENDCHAT_MESSAGES)
 
 conn.commit()
 conn.close()
