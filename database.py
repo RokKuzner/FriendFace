@@ -578,3 +578,18 @@ def get_dm_members(dm_id:str):
         c = conn.cursor()
         c.execute("SELECT user1, user2 FROM chat_dms WHERE dm_id=?", (dm_id,))
         return list(c.fetchone())
+    
+def new_message(dm_id:str, sender_id:str, content:str):
+    if sender_id not in get_dm_members(dm_id):
+        return "User not in dm"
+    
+    current_time_utc = datetime.now(timezone.utc)
+    utc_timestamp = current_time_utc.timestamp()
+    utc_timestamp = str(utc_timestamp)
+
+    encrypted_content = encryption.encrypt(content)
+
+    with conn:
+        c = conn.cursor()
+        c.execute("INSERT INTO chat_msgs VALUES(?, ?, ?, ?, ?)", (dm_id, generate_id("chat_msgs", "message_id"), sender_id, utc_timestamp, encrypted_content))
+        conn.commit()
