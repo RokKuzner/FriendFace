@@ -27,6 +27,9 @@ urlpatterns = [
     #api urls
     path('api/', include('api.urls')),
 
+    #FriendChat urls
+    path('chat/', include('friendchat.urls')),
+
     #Main app urls
     path('', include('app.urls')),
 ]
