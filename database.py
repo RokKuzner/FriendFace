@@ -1,5 +1,5 @@
 import sqlite3, random, string, time
-#import algorythms as alg
+import algorythms as alg
 import keywordextractor
 from datetime import datetime, timezone
 import encryption
