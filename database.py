@@ -572,3 +572,9 @@ def create_dm(user_creating_id:str, user_participating_id:str):
         c = conn.cursor()
         c.execute("INSERT INTO chat_dms VALUES(?, ?, ?)", (user_creating_id, user_participating_id, generate_id("chat_dms", "dm_id")))
         conn.commit()
+
+def get_dm_members(dm_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute("SELECT user1, user2 FROM chat_dms WHERE dm_id=?", (dm_id,))
+        return list(c.fetchone())
