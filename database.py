@@ -93,6 +93,12 @@ def get_users_id_by_username(username:str):
 
         return data[1] if data != None else None
 
+def get_username_by_user_id(user_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute('SELECT email FROM users WHERE id=?', (user_id,))
+        return c.fetchone()[0]
+
 def user_exists(username:str):
     with conn:
         c = conn.cursor()
@@ -593,3 +599,26 @@ def new_message(dm_id:str, sender_id:str, content:str):
         c = conn.cursor()
         c.execute("INSERT INTO chat_msgs VALUES(?, ?, ?, ?, ?)", (dm_id, generate_id("chat_msgs", "message_id"), sender_id, utc_timestamp, encrypted_content))
         conn.commit()
+
+def get_dm_messages(dm_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute("SELECT * FROM chat_msgs WHERE dm_id=?", (dm_id,))
+        messages = c.fetchall()
+
+    messages_to_return = []
+
+    for message in messages:
+        messages_to_return.append(
+            {
+                "dm_id": message[0],
+                "message_id": message[1],
+                "sender_id": message[2],
+                "sender_username": get_username_by_user_id(message[2]),
+                "timestamp": float(message[3]),
+                "time_pretty": relative_time(float(message[3])),
+                "content": encryption.decrypt(message[4])
+            }
+        )
+
+    return messages_to_return
