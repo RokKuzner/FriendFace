@@ -1,5 +1,5 @@
 import sqlite3, random, string, time
-import algorythms as alg
+#import algorythms as alg
 import keywordextractor
 from datetime import datetime, timezone
 import encryption
@@ -549,3 +549,26 @@ def remove_post_from_keyword(post_id:str, keyword:str):
             posts.remove(post_id)
             c.execute('UPDATE keywords SET posts=? WHERE keyword=?', (",".join(posts), keyword))
             conn.commit()
+
+#FriendChat
+def dm_exists(user1_id:str, user2_id:str):
+    with conn:
+        c = conn.cursor()
+
+        c.execute("SELECT * FROM chat_dms WHERE user1=? AND user2=?", (user1_id, user2_id))
+        return_1 = c.fetchone()
+        c.execute("SELECT * FROM chat_dms WHERE user1=? AND user2=?", (user2_id, user1_id))
+        return_2 = c.fetchone()
+
+        if return_1 != None or return_2 != None:
+            return True
+        return False
+
+def create_dm(user_creating_id:str, user_participating_id:str):
+    if dm_exists(user_creating_id, user_participating_id):
+        return "DM allready exists"
+
+    with conn:
+        c = conn.cursor()
+        c.execute("INSERT INTO chat_dms VALUES(?, ?, ?)", (user_creating_id, user_participating_id, generate_id("chat_dms", "dm_id")))
+        conn.commit()
