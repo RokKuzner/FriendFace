@@ -635,6 +635,8 @@ def get_all_users_dm_companions(user_id:str):
 
     for dm in dms:
         if dm[0] == user_id:
-            output.append((dm[1], dm[2]))
+            output.append((dm[1], get_username_by_user_id(dm[1]), dm[2]))
         else:
-            output.append((dm[0], dm[2]))
+            output.append((dm[0], get_username_by_user_id(dm[0]), dm[2]))
+
+    return output
