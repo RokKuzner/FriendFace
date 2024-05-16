@@ -622,3 +622,9 @@ def get_dm_messages(dm_id:str):
         )
 
     return messages_to_return
+
+def get_users_dm(user_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute("SELECT * FROM chat_dms WHERE user1=? OR user2=?", (user_id, user_id))
+        return c.fetchall()
