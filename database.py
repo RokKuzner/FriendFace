@@ -623,8 +623,18 @@ def get_dm_messages(dm_id:str):
 
     return messages_to_return
 
-def get_users_dm(user_id:str):
+def get_users_dms(user_id:str):
     with conn:
         c = conn.cursor()
         c.execute("SELECT * FROM chat_dms WHERE user1=? OR user2=?", (user_id, user_id))
         return c.fetchall()
+    
+def get_all_users_dm_companions(user_id:str):
+    output = []
+    dms = get_users_dms(user_id)
+
+    for dm in dms:
+        if dm[0] == user_id:
+            output.append((dm[1], dm[2]))
+        else:
+            output.append((dm[0], dm[2]))
