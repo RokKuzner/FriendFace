@@ -8,6 +8,14 @@
 
 {% block content %}
     <div class="people">
+        <div class="dm-icon">
+            <a href="/chat/find">
+                <img src="/files/static/icons?file=blue-plus-icon.png" class="round dm-icon-image">
+                <div class="dm-icon-name dm-icon-add">
+                    Find people
+                </div>
+            </a>
+        </div>
         {% for dm in dms %}
             <div class="dm-icon">
                 <a href="/chat/{{ dm.2 }}">
