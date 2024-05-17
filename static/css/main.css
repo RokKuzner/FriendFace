@@ -448,10 +448,8 @@ hr.postseperator {
     border-radius: 8px;
     margin: 0px;
     padding: 5px;
-    width: 20% !important;
-    max-width: 20% !important;
-    min-width: 20% !important;
-    min-width: max-content;
+    width: max-content;
+    max-width: 80% !important;
 }
 
 .menu ul li {
