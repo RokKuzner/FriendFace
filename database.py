@@ -24,7 +24,7 @@ def relative_time(timestamp):
   Returns:
     Relative time string (e.g., "3 hours ago", "4 years ago").
   """
-  utc_timestamp = get_utc_timestamp()
+  utc_timestamp = float(get_utc_timestamp())
 
   delta = utc_timestamp - timestamp
 
