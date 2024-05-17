@@ -88,7 +88,8 @@ FRIENDCHAT_DMS = """
 CREATE TABLE IF NOT EXISTS chat_dms(
 user1 TEXT,
 user2 TEXT,
-dm_id TEXT UNIQUE
+dm_id TEXT UNIQUE,
+last_activity TEXT
 )
 """
 
