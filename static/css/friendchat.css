@@ -38,10 +38,10 @@
 }
 
 .dm-preview {
-    width: 50vw;
+    width: 70vw;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10px;
+    margin-top: 15px;
 
     padding: 5px;
 
@@ -51,6 +51,9 @@
 
 .dm-preview a {
     text-decoration: none !important;
+
+    display: flex;
+    align-items: center;
 }
 
 .dm-preview-user-info {
@@ -72,4 +75,15 @@
 
     font-size: 1rem !important;
     color: black !important;
+}
+
+.latest-chat {
+    font-size: 1rem !important;
+    color: black !important;
+    text-decoration: none !important;
+    margin-left: 10px;
+
+    width: 100%;
+    height: 1.5rem;
+    overflow: hidden;
 }

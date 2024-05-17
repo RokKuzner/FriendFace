@@ -42,7 +42,7 @@
                     {% if message.message_id == None %}
                         {{ message.content }}
                     {% else %}
-                        
+                        <strong>{{ message.sender_username }}:</strong> {{ message.content }}
                     {% endif %}
                 </div>
 
