@@ -651,4 +651,17 @@ def get_latest_active_dms_by_user(user_id:str):
         return c.fetchall()
     
 def get_latest_dm_message(dm_id:str):
-    return get_dm_messages(dm_id)[-1]
+    dm_messages =  get_dm_messages(dm_id)
+
+    if dm_messages != []:
+        return dm_messages[-1]
+    else:
+        return {
+                "dm_id": None,
+                "message_id": None,
+                "sender_id": None,
+                "sender_username": None,
+                "timestamp": None,
+                "time_pretty": None,
+                "content": "You have no messages in this dm."
+            }
