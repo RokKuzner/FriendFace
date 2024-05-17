@@ -650,18 +650,30 @@ def get_latest_active_dms_by_user(user_id:str):
         c.execute("SELECT * FROM chat_dms WHERE user1=? OR user2=? ORDER BY last_activity DESC", (user_id, user_id))
         return c.fetchall()
     
-def get_latest_dm_message(dm_id:str):
+def get_dm_coresponder(dm_id:str, user_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute("SELECT user1, user2 FROM chat_dms WHERE dm_id=?", (dm_id,))
+        dm = c.fetchone()
+
+        if dm[0] == user_id:
+            return dm[1]
+        else:
+            return dm[0]
+
+def get_latest_dm_message(dm_id:str, current_user_id:str):
     dm_messages =  get_dm_messages(dm_id)
 
     if dm_messages != []:
         return dm_messages[-1]
     else:
+        coresponder_id = get_dm_coresponder(dm_id, current_user_id)
         return {
-                "dm_id": None,
+                "dm_id": dm_id,
                 "message_id": None,
-                "sender_id": None,
-                "sender_username": None,
-                "timestamp": None,
-                "time_pretty": None,
-                "content": "You have no messages in this dm."
+                "content": "You have no messages in this dm.",
+                "sender_id": coresponder_id,
+                "sender_username": get_username_by_user_id(coresponder_id),
+                "coresponder_id": coresponder_id,
+                "coresponder_username": get_username_by_user_id(coresponder_id)
             }
