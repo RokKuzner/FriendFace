@@ -643,3 +643,9 @@ def get_all_users_dm_companions(user_id:str):
             output.append((dm[0], get_username_by_user_id(dm[0]), dm[2]))
 
     return output
+
+def get_latest_active_dms_by_user(user_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute("SELECT * FROM chat_dms WHERE user1=? OR user2=? ORDER BY last_activity DESC", (user_id, user_id))
+        return c.fetchall()
