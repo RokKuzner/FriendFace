@@ -24,8 +24,7 @@ def relative_time(timestamp):
   Returns:
     Relative time string (e.g., "3 hours ago", "4 years ago").
   """
-  current_time_utc = datetime.now(timezone.utc)
-  utc_timestamp = current_time_utc.timestamp()
+  utc_timestamp = get_utc_timestamp()
 
   delta = utc_timestamp - timestamp
 
@@ -62,6 +61,11 @@ def relative_time(timestamp):
     if int(years) == 1:
         return "1 year ago"
     return f"{int(years)} years ago"
+
+def get_utc_timestamp():
+    current_time_utc = datetime.now(timezone.utc)
+    utc_timestamp = current_time_utc.timestamp()
+    return str(utc_timestamp)
 
 #Users
 def validate_user(username:str, password:str):
@@ -290,9 +294,7 @@ def new_post(user:str, content:str):
     with conn:
         c = conn.cursor()
 
-        current_time_utc = datetime.now(timezone.utc)
-        utc_timestamp = current_time_utc.timestamp()
-        utc_timestamp = str(utc_timestamp)
+        utc_timestamp = get_utc_timestamp()
 
         post_id = generate_id("posts", "id")
         post_genre = alg.get_post_genre(str(content))
@@ -589,9 +591,7 @@ def new_message(dm_id:str, sender_id:str, content:str):
     if sender_id not in get_dm_members(dm_id):
         return "User not in dm"
     
-    current_time_utc = datetime.now(timezone.utc)
-    utc_timestamp = current_time_utc.timestamp()
-    utc_timestamp = str(utc_timestamp)
+    utc_timestamp = get_utc_timestamp()
 
     encrypted_content = encryption.encrypt(content)
 
