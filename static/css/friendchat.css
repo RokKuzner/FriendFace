@@ -87,3 +87,9 @@
     height: 1.5rem;
     overflow: hidden;
 }
+
+@media (max-device-width: 480px), (max-width: 675px){
+    .dm-preview {
+        width: 97vw;
+    }
+}
