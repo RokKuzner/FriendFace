@@ -575,6 +575,8 @@ def dm_exists(user1_id:str, user2_id:str):
 def create_dm(user_creating_id:str, user_participating_id:str):
     if dm_exists(user_creating_id, user_participating_id):
         return "DM allready exists"
+    if user_creating_id == user_participating_id:
+        return "Can't create dm with yourself"
 
     with conn:
         c = conn.cursor()
