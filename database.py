@@ -649,3 +649,6 @@ def get_latest_active_dms_by_user(user_id:str):
         c = conn.cursor()
         c.execute("SELECT * FROM chat_dms WHERE user1=? OR user2=? ORDER BY last_activity DESC", (user_id, user_id))
         return c.fetchall()
+    
+def get_latest_dm_message(dm_id:str):
+    return get_dm_messages(dm_id)[-1]
