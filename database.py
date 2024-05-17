@@ -578,7 +578,7 @@ def create_dm(user_creating_id:str, user_participating_id:str):
 
     with conn:
         c = conn.cursor()
-        c.execute("INSERT INTO chat_dms VALUES(?, ?, ?)", (user_creating_id, user_participating_id, generate_id("chat_dms", "dm_id")))
+        c.execute("INSERT INTO chat_dms VALUES(?, ?, ?, ?)", (user_creating_id, user_participating_id, generate_id("chat_dms", "dm_id"), get_utc_timestamp()))
         conn.commit()
 
 def get_dm_members(dm_id:str):
@@ -598,6 +598,7 @@ def new_message(dm_id:str, sender_id:str, content:str):
     with conn:
         c = conn.cursor()
         c.execute("INSERT INTO chat_msgs VALUES(?, ?, ?, ?, ?)", (dm_id, generate_id("chat_msgs", "message_id"), sender_id, utc_timestamp, encrypted_content))
+        c.execute('UPDATE chat_dms SET last_activity=? WHERE dm_id=?', (utc_timestamp, dm_id))
         conn.commit()
 
 def get_dm_messages(dm_id:str):
