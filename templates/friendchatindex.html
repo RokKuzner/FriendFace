@@ -16,6 +16,7 @@
                 </div>
             </a>
         </div>
+
         {% for dm in dms %}
             <div class="dm-icon">
                 <a href="/chat/{{ dm.2 }}">
@@ -25,4 +26,27 @@
             </div>
         {% endfor %}
     </div>
+
+    {% for message in latest_messages %}
+
+    
+        <div class="dm-preview">
+            <a href="/chat/{{ message.dm_id }}">
+
+                <div class="dm-preview-user-info">
+                    <img src="/files/media/profileimg?user={{ message.sender_id }}" class="round dm-preview-user-image">
+                    <div class="dm-preview-username">{{ message.sender_username }}</div>
+                </div>
+
+                <div class="latest-chat">
+                    {% if message.message_id == None %}
+                        {{ message.content }}
+                    {% else %}
+                        
+                    {% endif %}
+                </div>
+
+            </a>
+        </div>
+    {% endfor %}
 {% endblock %}

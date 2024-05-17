@@ -36,3 +36,40 @@
 .dm-icon-add {
     font-weight: bold;
 }
+
+.dm-preview {
+    width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+
+    padding: 5px;
+
+    border-radius: 10px;
+    border: 1px solid #0000004f;
+}
+
+.dm-preview a {
+    text-decoration: none !important;
+}
+
+.dm-preview-user-info {
+    width: max-content;
+    text-align: center;
+}
+
+.dm-preview-user-image {
+    width: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dm-preview-username {
+    margin-left: auto;
+    margin-right: auto;
+
+    width: max-content;
+
+    font-size: 1rem !important;
+    color: black !important;
+}
