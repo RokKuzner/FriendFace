@@ -10,4 +10,4 @@ def home(request):
                                           'current_user_id': current_user_id,
                                           'this_url':str('/'),
                                           "dms":db.get_all_users_dm_companions(current_user_id),
-                                          "latest_messages": [db.get_latest_dm_message(dm[2]) for dm in db.get_users_dms(current_user_id)]})
+                                          "latest_messages": [db.get_latest_dm_message(dm[2], current_user_id) for dm in db.get_users_dms(current_user_id)]})
