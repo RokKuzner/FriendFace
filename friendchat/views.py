@@ -9,4 +9,5 @@ def home(request):
     return render(request, 'friendchatindex.html', {'logged_in':True, 'current_user':request.session['current_user'],
                                           'current_user_id': current_user_id,
                                           'this_url':str('/'),
-                                          "dms":db.get_all_users_dm_companions(current_user_id)})
+                                          "dms":db.get_all_users_dm_companions(current_user_id),
+                                          "latest_messages": [db.get_latest_dm_message(dm[2]) for dm in db.get_users_dms(current_user_id)]})
