@@ -559,7 +559,7 @@ def remove_post_from_keyword(post_id:str, keyword:str):
             conn.commit()
 
 #FriendChat
-def dm_exists(user1_id:str, user2_id:str):
+def dm_exists_by_users(user1_id:str, user2_id:str):
     with conn:
         c = conn.cursor()
 
@@ -573,7 +573,7 @@ def dm_exists(user1_id:str, user2_id:str):
         return False
 
 def create_dm(user_creating_id:str, user_participating_id:str):
-    if dm_exists(user_creating_id, user_participating_id):
+    if dm_exists_by_users(user_creating_id, user_participating_id):
         return "DM allready exists"
     if user_creating_id == user_participating_id:
         return "Can't create dm with yourself"
