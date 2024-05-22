@@ -659,7 +659,7 @@ def get_latest_active_dms_by_user(user_id:str):
         c.execute("SELECT * FROM chat_dms WHERE user1=? OR user2=? ORDER BY last_activity DESC", (user_id, user_id))
         return c.fetchall()
     
-def get_dm_coresponder(dm_id:str, user_id:str):
+def get_dm_corresponder(dm_id:str, user_id:str):
     with conn:
         c = conn.cursor()
         c.execute("SELECT user1, user2 FROM chat_dms WHERE dm_id=?", (dm_id,))
@@ -676,13 +676,13 @@ def get_latest_dm_message(dm_id:str, current_user_id:str):
     if dm_messages != []:
         return dm_messages[-1]
     else:
-        coresponder_id = get_dm_coresponder(dm_id, current_user_id)
+        corresponder_id = get_dm_corresponder(dm_id, current_user_id)
         return {
                 "dm_id": dm_id,
                 "message_id": None,
                 "content": "Tap to chat",
-                "sender_id": coresponder_id,
-                "sender_username": get_username_by_user_id(coresponder_id),
-                "coresponder_id": coresponder_id,
-                "coresponder_username": get_username_by_user_id(coresponder_id)
+                "sender_id": corresponder_id,
+                "sender_username": get_username_by_user_id(corresponder_id),
+                "corresponder_id": corresponder_id,
+                "corresponder_username": get_username_by_user_id(corresponder_id)
             }
