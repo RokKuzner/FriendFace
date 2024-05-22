@@ -19,7 +19,7 @@
 
         {% for dm in dms %}
             <div class="dm-icon">
-                <a href="/chat/{{ dm.2 }}">
+                <a href="/chat/dm/{{ dm.2 }}">
                     <img src="/files/media/profileimg?user={{ dm.0 }}" class="round dm-icon-image">
                     <div class="dm-icon-name">{{ dm.1 }}</div>
                 </a>
@@ -30,7 +30,7 @@
     {% for message in latest_messages %}
 
     
-        <a href="/chat/{{ message.dm_id }}" class="dm-preview">
+        <a href="/chat/dm/{{ message.dm_id }}" class="dm-preview">
 
             <img src="/files/media/profileimg?user={{ message.sender_id }}" class="round dm-preview-user-image">
 
