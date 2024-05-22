@@ -572,6 +572,15 @@ def dm_exists_by_users(user1_id:str, user2_id:str):
             return True
         return False
 
+def dm_exists_by_id(dm_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute("SELECT * FROM chat_dms WHERE dm_id=?", (dm_id,))
+
+        if c.fetchone() == None:
+            return False
+        return True
+
 def create_dm(user_creating_id:str, user_participating_id:str):
     if dm_exists_by_users(user_creating_id, user_participating_id):
         return "DM allready exists"
