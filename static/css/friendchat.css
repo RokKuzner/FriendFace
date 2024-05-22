@@ -1,6 +1,6 @@
 :root {
     --dm-preview-user-image-width-height: 60px;
-    --dm-preview-padding: 5px;
+    --dm-preview-padding: 10px;
 }
 
 .people {
@@ -49,7 +49,7 @@
     margin-right: auto;
     margin-top: 15px;
 
-    padding: 5px;
+    padding: var(--dm-preview-padding);
 
     border-radius: 10px;
     border: 1px solid #0000004f;
