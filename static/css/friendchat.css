@@ -75,6 +75,8 @@
 
 .dm-preview-body .content {
     overflow: hidden !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 @media (max-device-width: 480px), (max-width: 675px){
