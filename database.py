@@ -671,7 +671,7 @@ def get_latest_dm_message(dm_id:str, current_user_id:str):
         return {
                 "dm_id": dm_id,
                 "message_id": None,
-                "content": "You have no messages in this dm.",
+                "content": "Tap to chat",
                 "sender_id": coresponder_id,
                 "sender_username": get_username_by_user_id(coresponder_id),
                 "coresponder_id": coresponder_id,

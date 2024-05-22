@@ -30,23 +30,15 @@
     {% for message in latest_messages %}
 
     
-        <div class="dm-preview">
-            <a href="/chat/{{ message.dm_id }}">
+        <a href="/chat/{{ message.dm_id }}" class="dm-preview">
 
-                <div class="dm-preview-user-info">
-                    <img src="/files/media/profileimg?user={{ message.sender_id }}" class="round dm-preview-user-image">
-                    <div class="dm-preview-username">{{ message.sender_username }}</div>
-                </div>
+            <img src="/files/media/profileimg?user={{ message.sender_id }}" class="round dm-preview-user-image">
 
-                <div class="latest-chat">
-                    {% if message.message_id == None %}
-                        {{ message.content }}
-                    {% else %}
-                        <strong>{{ message.sender_username }}:</strong> {{ message.content }}
-                    {% endif %}
-                </div>
+            <div class="dm-preview-body">
+                <div class="username"><strong>{{ message.sender_username }}</strong></div>
+                <div class="content">{{ message.content }}</div>
+            </div>
 
-            </a>
-        </div>
+        </a>
     {% endfor %}
 {% endblock %}

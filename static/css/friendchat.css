@@ -1,3 +1,8 @@
+:root {
+    --dm-preview-user-image-width-height: 60px;
+    --dm-preview-padding: 5px;
+}
+
 .people {
     width: 100%;
     margin-top: 10px;
@@ -38,7 +43,8 @@
 }
 
 .dm-preview {
-    width: 70vw;
+    width: calc(70vw + var(--dm-preview-padding));
+    height: calc(var(--dm-preview-user-image-width-height) + var(--dm-preview-padding));
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
@@ -47,45 +53,28 @@
 
     border-radius: 10px;
     border: 1px solid #0000004f;
-}
 
-.dm-preview a {
     text-decoration: none !important;
+    color: black !important;
 
     display: flex;
     align-items: center;
-}
 
-.dm-preview-user-info {
-    width: max-content;
-    text-align: center;
+    overflow: hidden !important;
 }
 
 .dm-preview-user-image {
-    width: 50px;
-    margin-left: auto;
-    margin-right: auto;
+    width: var(--dm-preview-user-image-width-height);
+    margin-right: 10px;
 }
 
-.dm-preview-username {
-    margin-left: auto;
-    margin-right: auto;
-
-    width: max-content;
-
-    font-size: 1rem !important;
-    color: black !important;
-}
-
-.latest-chat {
-    font-size: 1rem !important;
-    color: black !important;
-    text-decoration: none !important;
-    margin-left: 10px;
-
+.dm-preview-body {
     width: 100%;
-    height: 1.5rem;
-    overflow: hidden;
+    overflow: hidden !important;
+}
+
+.dm-preview-body .content {
+    overflow: hidden !important;
 }
 
 @media (max-device-width: 480px), (max-width: 675px){
