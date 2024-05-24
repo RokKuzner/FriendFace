@@ -7,38 +7,22 @@
 {% endblock %}
 
 {% block content %}
-    <div class="people">
-        <div class="dm-icon">
-            <a href="/chat/find">
-                <img src="/files/static/icons?file=blue-plus-icon.png" class="round dm-icon-image">
-                <div class="dm-icon-name dm-icon-add">
-                    Find people
-                </div>
-            </a>
-        </div>
+    {% for dm in dms %}
+        <a href="/chat/dm/{{ dm.dm_id }}" class="dm-preview">
 
-        {% for dm in dms %}
-            <div class="dm-icon">
-                <a href="/chat/dm/{{ dm.2 }}">
-                    <img src="/files/media/profileimg?user={{ dm.0 }}" class="round dm-icon-image">
-                    <div class="dm-icon-name">{{ dm.1 }}</div>
-                </a>
-            </div>
-        {% endfor %}
-    </div>
-
-    {% for message in latest_messages %}
-
-    
-        <a href="/chat/dm/{{ message.dm_id }}" class="dm-preview">
-
-            <img src="/files/media/profileimg?user={{ message.sender_id }}" class="round dm-preview-user-image">
+            <img src="/files/media/profileimg?user={{ dm.dm_corresponder_id }}" class="round dm-preview-user-image">
 
             <div class="dm-preview-body">
-                <div class="username"><strong>{{ message.sender_username }}</strong></div>
-                <div class="content">{{ message.content }}</div>
-            </div>
+                <div class="username"><strong>{{ dm.dm_corresponder_username }}</strong></div>
 
+                <div class="content">
+                    {% if  dm.dm_messages_count == 0 %}
+                        Tap to start chatting
+                    {% else %}
+                        {{ dm.dm_last_message.content }}
+                    {% endif %}
+                </div>
+            </div>
         </a>
     {% endfor %}
 {% endblock %}
