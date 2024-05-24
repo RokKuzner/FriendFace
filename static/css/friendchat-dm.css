@@ -1,0 +1,14 @@
+.top-corresponder-info {
+    display: flex;
+    align-items: center;
+    margin: 10px 10px 0px 10px;
+}
+
+.top-corresponder-info-user-image {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.top-corresponder-info-username {
+    font-size: 1.5rem;
+}

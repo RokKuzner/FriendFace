@@ -7,7 +7,8 @@
 {% endblock %}
 
 {% block content %}
-
-    Welcome to your dm with {{ corresponder_username }} aka {{ coresponed_id }}
-    
+    <div class="top-corresponder-info">
+        <img src="/files/media/profileimg?user={{ coresponed_id }}" class="round top-corresponder-info-user-image">
+        <div class="top-corresponder-info-username"><strong>{{ corresponder_username }}</strong></div>
+    </div>
 {% endblock %}
