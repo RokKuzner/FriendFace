@@ -1,7 +1,14 @@
 .top-corresponder-info {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+
+    width: 100%;
+
     display: flex;
     align-items: center;
-    margin: 10px 10px 0px 10px;
+    padding: 10px 10px 10px 5px;
+    border-bottom: 1px solid #0000004f;
 }
 
 .top-corresponder-info-user-image {
@@ -11,4 +18,9 @@
 
 .top-corresponder-info-username {
     font-size: 1.5rem;
+}
+
+.top-corresponder-info-return-image {
+    width: 40px;
+    margin-right: 20px;
 }
