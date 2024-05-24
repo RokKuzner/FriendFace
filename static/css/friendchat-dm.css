@@ -1,7 +1,5 @@
 .top-corresponder-info {
-    position: fixed;
-    top: var(--nav-height);
-    left: 0;
+    position: relative;
 
     width: 100%;
 
