@@ -34,6 +34,11 @@
     overflow: hidden !important;
 }
 
+.dm-preview-body .username {
+    overflow: hidden !important;
+    white-space: nowrap;
+}
+
 .dm-preview-body .content {
     overflow: hidden !important;
     white-space: nowrap;
