@@ -670,17 +670,26 @@ def get_dm_corresponder(dm_id:str, user_id:str):
         else:
             return dm[0]
 
-def get_latest_dm_message(dm_id:str, current_user_id:str):
-    dm_messages =  get_dm_messages(dm_id)
+def get_dm_preview(dm_id:str, current_user_id:str):
+    if not dm_exists_by_id(dm_id):
+        return {"error": "dm does not exist"}
 
-    if dm_messages != []:
-        return dm_messages[-1]
-    else:
-        corresponder_id = get_dm_corresponder(dm_id, current_user_id)
-        return {
-                "dm_id": dm_id,
-                "message_id": None,
-                "content": "Tap to chat",
-                "sender_id": corresponder_id,
-                "sender_username": get_username_by_user_id(corresponder_id),
-            }
+    dm_members = get_dm_members(dm_id)
+    
+    if not current_user_id in dm_members:
+        return {"error": "user not in dm"}
+
+    dm_messages =  get_dm_messages(dm_id)
+    dm_corresponder_id = get_dm_corresponder(dm_id, current_user_id)
+
+    return_object = {
+        "dm_id": dm_id,
+        "dm_members": dm_members,
+        "dm_corresponder_id": dm_corresponder_id,
+        "dm_corresponder_username": get_username_by_user_id(dm_corresponder_id),
+        "dm_messages": dm_messages,
+        "dm_messages_count": len(dm_messages),
+        "dm_last_message": dm_messages[-1] if dm_messages!= [] else None,
+    }
+
+    return return_object
