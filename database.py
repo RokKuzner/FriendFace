@@ -683,6 +683,4 @@ def get_latest_dm_message(dm_id:str, current_user_id:str):
                 "content": "Tap to chat",
                 "sender_id": corresponder_id,
                 "sender_username": get_username_by_user_id(corresponder_id),
-                "corresponder_id": corresponder_id,
-                "corresponder_username": get_username_by_user_id(corresponder_id)
             }
