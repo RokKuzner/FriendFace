@@ -26,4 +26,5 @@ def dm(request, dm_id):
                                           "current_user_id": current_user_id,
                                           "this_url":str("/"),
                                           "corresponder_username": corresponder_username,
-                                          "coresponed_id": corresponder_id})
+                                          "coresponed_id": corresponder_id,
+                                          "messages": db.get_dm_messages(dm_id)})
