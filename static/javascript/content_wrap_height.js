@@ -28,5 +28,7 @@ let resize_observer = new ResizeObserver(entries => {
 })
 
 elements_to_subtract.forEach(element => {
-    resize_observer.observe(element)
+    if (element) {
+        resize_observer.observe(element)
+    }
 })
