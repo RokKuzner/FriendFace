@@ -40,6 +40,10 @@ async function display_messages() {
 
             content_wrap_element.appendChild(message_div)
         }
+        
+        //Scroll to bottom
+        content_wrap_element = document.querySelector(".content-wrap")
+        content_wrap_element.scrollTop = content_wrap_element.scrollHeight
     }
 }
 
