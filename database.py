@@ -606,11 +606,15 @@ def new_message(dm_id:str, sender_id:str, content:str):
 
     encrypted_content = encryption.encrypt(content)
 
+    new_message_id = generate_id("chat_msgs", "message_id")
+
     with conn:
         c = conn.cursor()
-        c.execute("INSERT INTO chat_msgs VALUES(?, ?, ?, ?, ?)", (dm_id, generate_id("chat_msgs", "message_id"), sender_id, utc_timestamp, encrypted_content))
+        c.execute("INSERT INTO chat_msgs VALUES(?, ?, ?, ?, ?)", (dm_id, new_message_id, sender_id, utc_timestamp, encrypted_content))
         c.execute('UPDATE chat_dms SET last_activity=? WHERE dm_id=?', (utc_timestamp, dm_id))
         conn.commit()
+
+    return new_message_id
 
 def get_dm_messages(dm_id:str):
     with conn:
