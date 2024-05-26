@@ -86,3 +86,21 @@ def delete_post(request):
     db.delete_post(id)
 
     return JsonResponse({"status": "succes", "post_id":id}, status=200)
+
+@login_required_json_response
+def new_dm_message(request):
+    if request.method == 'POST':
+        message_content = request.POST['message_content']
+        dm_id = request.POST['dm_id']
+
+        if not db.dm_exists_by_id(dm_id):
+            return JsonResponse({"status": "error", "descriprion":"dm does not exist"}, status=500)
+
+        if db.get_users_id_by_username(request.session["current_user"]) not in db.get_dm_members(dm_id):
+            return JsonResponse({"status": "error", "descriprion":"user not in dm"}, status=500)
+
+        new_message_id = db.new_message(dm_id, request.session["current_user"], message_content)
+
+        return JsonResponse({"status": "succes", "new message id":new_message_id}, status=200)
+
+    return JsonResponse({"status": "error", "descriprion":"only post method allowed"}, status=500)

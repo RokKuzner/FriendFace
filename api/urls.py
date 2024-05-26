@@ -10,4 +10,5 @@ urlpatterns = [
   path('userexists', views.userexists, name='userexists'),
   path('post', views.post, name='post'),
   path('deletepost', views.delete_post, name='deletepost'),
+  path('newdmmessage', views.new_dm_message, name='deletepost'),
 ]
