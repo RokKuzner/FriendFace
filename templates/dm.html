@@ -4,6 +4,11 @@
 
 {% block head %}
     <link rel="stylesheet" href="/files/static/css?file=friendchat-dm">
+
+    <script>
+        let dm_id = "{{ dm_id }}"
+        let current_user_id = "{{ current_user_id }}"
+    </script>
 {% endblock %}
 
 {% block navbars %}
@@ -16,16 +21,6 @@
     </div>
 {% endblock %}
 
-{% block content %}
-    {% for message in messages %}
-        <div class="message message-{% if message.sender_id == current_user_id %}mine{% else %}other{% endif %}">
-            <div class="content">
-                {{ message.content }}
-            </div>
-        </div>
-    {% endfor %}
-{% endblock %}
-
 {% block bottom %}
 
     <form autocomplete="off" class="send-message-form">
@@ -36,4 +31,5 @@
     </form>
     
     <script src="/files/static/js?file=send_dm_message"></script>
+    <script src="/files/static/js?file=dm_messages_update"></script>
 {% endblock %}
