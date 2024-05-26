@@ -25,3 +25,14 @@
         </div>
     {% endfor %}
 {% endblock %}
+
+{% block bottom %}
+
+    <form autocomplete="off" class="send-message-form">
+        {% csrf_token %}
+        <textarea class="send-message-textarea" name="message_content" placeholder="Message"></textarea>
+        <input type="hidden" name="dm_id" value="{{ dm_id }}">
+        <button type="submit" class="btn btn-primary send-button">Send</button>
+    </form>
+    
+{% endblock %}
