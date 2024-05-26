@@ -1,6 +1,6 @@
 let content_wrap_element = document.querySelector(".content-wrap")
 
-let element_classes_to_subtract = ["navbar", "top-corresponder-info"]
+let element_classes_to_subtract = ["navbar", "top-corresponder-info", "send-message-form"]
 
 let elements_to_subtract = []
 for (let element_class_to_subtract of element_classes_to_subtract) {
