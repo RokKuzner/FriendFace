@@ -82,3 +82,10 @@
 .send-message-form button.send-button {
     margin-left: 15px;
 }
+
+
+@media (max-device-width: 400px), (max-width: 400px){
+    .send-message-form {
+        width: 99vw;
+    }
+}
