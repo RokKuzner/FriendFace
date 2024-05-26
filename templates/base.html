@@ -51,6 +51,7 @@
         <div class="content-wrap">
             {% block content %}{% endblock %}
         </div>
+        {% block bottom %}{% endblock %}
         {% if logged_in == True %}
             <script src="/files/static/js?file=navbar_user_hover"></script>
         {% endif %}
