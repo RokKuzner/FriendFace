@@ -22,3 +22,29 @@
     width: 40px;
     margin-right: 20px;
 }
+
+.message {
+    width: max-content;
+    max-width: 80vw;
+
+    border-radius: 25px;
+
+    padding: 10px 20px;
+    margin: 5px;
+}
+
+.message .content {
+    width: 100%;
+}
+
+.message-mine {
+    background-color: rgb(17, 120, 250);
+    color: white;
+    margin-left: auto;
+}
+
+.message-other {
+    background-color: rgb(238, 238, 238);
+    color: black;
+    margin-right: auto;
+}

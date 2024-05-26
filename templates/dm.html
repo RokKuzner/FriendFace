@@ -18,6 +18,10 @@
 
 {% block content %}
     {% for message in messages %}
-        {{ message }}
+        <div class="message message-{% if message.sender_id == current_user_id %}mine{% else %}other{% endif %}">
+            <div class="content">
+                {{ message.content }}
+            </div>
+        </div>
     {% endfor %}
 {% endblock %}
