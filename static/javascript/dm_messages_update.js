@@ -29,15 +29,18 @@ async function display_messages() {
                 message_div.classList.add("message-other")
             }
 
+            //create a new div element for message time
+            let message_time_div = document.createElement("div")
+            message_time_div.classList.add("time")
+            message_time_div.innerText = message.time_pretty
+            message_div.appendChild(message_time_div)
+
             //create a new div element for message content
             let message_content_div = document.createElement("div")
             message_content_div.classList.add("content")
             message_content_div.innerText = message.content
-
-            //appent the message content div to the message div
             message_div.appendChild(message_content_div)
-
-
+            
             content_wrap_element.appendChild(message_div)
         }
         
