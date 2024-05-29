@@ -21,6 +21,7 @@ async function display_messages() {
 
             //create a new div element for the message
             let message_div = document.createElement("div")
+            message_div.id = message.message_id
             message_div.classList.add("message")
 
             if (message.sender_id == current_user_id) {
@@ -47,6 +48,17 @@ async function display_messages() {
         //Scroll to bottom
         content_wrap_element = document.querySelector(".content-wrap")
         content_wrap_element.scrollTop = content_wrap_element.scrollHeight
+    } else {
+        for (let message of messages) {
+            let message_element = document.getElementById(message.message_id)
+
+            if (message_element == null) {
+                continue
+            }
+
+            let message_time_div = message_element.querySelector(".time")
+            message_time_div.innerText = message.time_pretty
+        }
     }
 }
 
