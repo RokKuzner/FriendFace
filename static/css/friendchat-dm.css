@@ -37,16 +37,28 @@
     width: 100%;
 }
 
+.message .time {
+    font-size: 0.7rem;
+}
+
 .message-mine {
     background-color: rgb(17, 120, 250);
     color: white;
     margin-left: auto;
 }
 
+.message-mine .time {
+    color: rgb(161, 204, 255);
+}
+
 .message-other {
     background-color: rgb(221, 221, 221);
     color: black;
     margin-right: auto;
+}
+
+.message-other .time {
+    color: gray;
 }
 
 .send-message-form {
