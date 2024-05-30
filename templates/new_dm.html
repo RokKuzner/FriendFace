@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}FriendChat{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/files/static/css?file=new-dm">
+{% endblock %}
+
+{% block content %}
+    <div class="new-dm-wrap">
+        <div class="new-dm-errors alert alert-warning hidden">
+            This is an error
+        </div>
+        <form autocomplete="off" class="new-dm-form">
+            {% csrf_token %}
+            <input class="new-dm-input" name="message_content" placeholder="Username"></textarea>
+            <button type="submit" class="btn btn-primary new-dm-submit-button">Create dm</button>
+        </form>
+    </div>
+{% endblock %}
