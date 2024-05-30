@@ -685,3 +685,18 @@ def get_dm_preview(dm_id:str, current_user_id:str):
     }
 
     return return_object
+
+def get_dm_id_by_member(user1_id:str, user2_id:str):
+    with conn:
+        c = conn.cursor()
+
+        c.execute("SELECT dm_id FROM chat_dms WHERE user1=? AND user2=?", (user1_id, user2_id))
+        return_1 = c.fetchone()
+        c.execute("SELECT dm_id FROM chat_dms WHERE user1=? AND user2=?", (user2_id, user1_id))
+        return_2 = c.fetchone()
+
+        if return_1 != None:
+            return return_1[0]
+        if return_2 != None:
+            return return_2[0]
+        return False
