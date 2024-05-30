@@ -686,7 +686,7 @@ def get_dm_preview(dm_id:str, current_user_id:str):
 
     return return_object
 
-def get_dm_id_by_member(user1_id:str, user2_id:str):
+def get_dm_id_by_members(user1_id:str, user2_id:str):
     with conn:
         c = conn.cursor()
 
