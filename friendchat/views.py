@@ -28,3 +28,11 @@ def dm(request, dm_id):
                                           "coresponed_id": corresponder_id,
                                           "messages": db.get_dm_messages(dm_id),
                                           "dm_id": dm_id})
+
+@login_required
+def new_dm(request):
+    current_user_id = db.get_users_id_by_username(request.session["current_user"])
+
+    return render(request, "new_dm.html", {"logged_in":True, "current_user":request.session["current_user"],
+                                          "current_user_id": current_user_id,
+                                          "this_url":str("/")})
