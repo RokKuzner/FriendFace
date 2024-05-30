@@ -9,9 +9,9 @@
 {% block content %}
     <div class="new-dm-wrap">
         <div class="new-dm-errors alert alert-warning hidden"></div>
-        <form autocomplete="off" class="new-dm-form">
+        <form autocomplete="off" action="/chat/new" class="new-dm-form">
             {% csrf_token %}
-            <input class="new-dm-input" name="message_content" placeholder="Username"></textarea>
+            <input class="new-dm-input" name="user-username-to-add" placeholder="Username"></textarea>
             <button type="submit" class="btn btn-primary new-dm-submit-button disabled">Create dm</button>
         </form>
     </div>
