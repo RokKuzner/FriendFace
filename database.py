@@ -589,8 +589,13 @@ def create_dm(user_creating_id:str, user_participating_id:str):
 
     with conn:
         c = conn.cursor()
-        c.execute("INSERT INTO chat_dms VALUES(?, ?, ?, ?)", (user_creating_id, user_participating_id, generate_id("chat_dms", "dm_id"), get_utc_timestamp()))
+
+        dm_id = generate_id("chat_dms", "dm_id")
+
+        c.execute("INSERT INTO chat_dms VALUES(?, ?, ?, ?)", (user_creating_id, user_participating_id, dm_id, get_utc_timestamp()))
         conn.commit()
+
+        return dm_id
 
 def get_dm_members(dm_id:str):
     with conn:
