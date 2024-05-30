@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}FriendChat{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/files/static/css?file=new-dm">
+{% endblock %}
+
+{% block content %}
+    <div class="new-dm-wrap">
+        <div class="new-dm-errors alert alert-warning hidden"></div>
+        <form autocomplete="off" action="/chat/new" method="POST" class="new-dm-form">
+            {% csrf_token %}
+            <input class="new-dm-input" name="user-username-to-add" placeholder="Username"></textarea>
+            <button type="submit" class="btn btn-primary new-dm-submit-button disabled">Create dm</button>
+        </form>
+    </div>
+
+    <script>
+        let current_user_username = "{{ current_user }}"
+    </script>
+    <script src="/files/static/js?file=new_dm"></script>
+{% endblock %}

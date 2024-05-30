@@ -84,6 +84,25 @@ posts TEXT
 )
 """
 
+FRIENDCHAT_DMS = """
+CREATE TABLE IF NOT EXISTS chat_dms(
+user1 TEXT,
+user2 TEXT,
+dm_id TEXT UNIQUE,
+last_activity TEXT
+)
+"""
+
+FRIENDCHAT_MESSAGES = """
+CREATE TABLE IF NOT EXISTS chat_msgs(
+dm_id TEXT,
+message_id TEXT UNIQUE,
+sender TEXT,
+time TEXT,
+content TEXT
+)
+"""
+
 c.execute(USERS)
 c.execute(POSTS)
 c.execute(COMMENTS)
@@ -93,6 +112,8 @@ c.execute(READ_POSTS)
 c.execute(DELETED_POSTS)
 c.execute(ADMIN_USERS)
 c.execute(KEYWORDS)
+c.execute(FRIENDCHAT_DMS)
+c.execute(FRIENDCHAT_MESSAGES)
 
 conn.commit()
 conn.close()

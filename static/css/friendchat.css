@@ -1,0 +1,70 @@
+:root {
+    --dm-preview-user-image-width-height: 60px;
+    --dm-preview-padding: 10px;
+}
+
+.dm-preview {
+    width: calc(70vw + var(--dm-preview-padding));
+    height: calc(var(--dm-preview-user-image-width-height) + var(--dm-preview-padding));
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+
+    padding: var(--dm-preview-padding);
+
+    border-radius: 10px;
+    border: 1px solid #0000004f;
+
+    text-decoration: none !important;
+    color: black !important;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden !important;
+}
+
+.dm-preview-user-image {
+    width: var(--dm-preview-user-image-width-height);
+    margin-right: 10px;
+}
+
+.dm-preview-body {
+    width: 100%;
+    overflow: hidden !important;
+}
+
+.dm-preview-body .username {
+    overflow: hidden !important;
+    white-space: nowrap;
+}
+
+.dm-preview-body .content {
+    overflow: hidden !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+a.new-dm {
+    width: max-content;
+    margin: 15px auto;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.new-dm-image {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.new-dm-text {
+    color: black;
+    font-size: 1.3rem;
+}
+
+@media (max-device-width: 480px), (max-width: 675px){
+    .dm-preview {
+        width: 97vw;
+    }
+}

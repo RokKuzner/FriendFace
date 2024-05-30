@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}FriendChat with {{ corresponder_username }}{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/files/static/css?file=friendchat-dm">
+
+    <script>
+        let dm_id = "{{ dm_id }}"
+        let current_user_id = "{{ current_user_id }}"
+    </script>
+{% endblock %}
+
+{% block navbars %}
+    <div class="top-corresponder-info">
+        <a href="/chat" class="top-corresponder-info-return-a">
+            <img src="/files/static/icons?file=return.png" class="top-corresponder-info-return-image">
+        </a>
+        <img src="/files/media/profileimg?user={{ coresponed_id }}" class="round top-corresponder-info-user-image">
+        <div class="top-corresponder-info-username"><strong>{{ corresponder_username }}</strong></div>
+    </div>
+{% endblock %}
+
+{% block bottom %}
+
+    <form autocomplete="off" class="send-message-form">
+        {% csrf_token %}
+        <textarea class="send-message-textarea" name="message_content" placeholder="Message"></textarea>
+        <input type="hidden" name="dm_id" value="{{ dm_id }}">
+        <button type="submit" class="btn btn-primary send-button">Send</button>
+    </form>
+    
+    <script src="/files/static/js?file=send_dm_message"></script>
+    <script src="/files/static/js?file=dm_messages_update"></script>
+{% endblock %}

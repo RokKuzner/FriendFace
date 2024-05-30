@@ -1,0 +1,103 @@
+.top-corresponder-info {
+    position: relative;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    padding: 10px 10px 10px 5px;
+    border-bottom: 1px solid #0000004f;
+}
+
+.top-corresponder-info-user-image {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.top-corresponder-info-username {
+    font-size: 1.5rem;
+}
+
+.top-corresponder-info-return-image {
+    width: 40px;
+    margin-right: 20px;
+}
+
+.message {
+    width: max-content;
+    max-width: 80vw;
+
+    border-radius: 25px;
+
+    padding: 10px 20px;
+    margin: 5px;
+}
+
+.message .content {
+    width: 100%;
+}
+
+.message .time {
+    font-size: 0.7rem;
+}
+
+.message-mine {
+    background-color: rgb(17, 120, 250);
+    color: white;
+    margin-left: auto;
+}
+
+.message-mine .time {
+    color: rgb(161, 204, 255);
+}
+
+.message-other {
+    background-color: rgb(221, 221, 221);
+    color: black;
+    margin-right: auto;
+}
+
+.message-other .time {
+    color: gray;
+}
+
+.send-message-form {
+    width: 80vw;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.send-message-form .send-message-textarea {
+    width: 100%;
+
+    min-height: 45px;
+    height: 45px;
+    max-height: 100px;
+
+    border: 1px solid gray;
+    border-radius: 25px;
+
+    padding: 10px;
+
+    transition: border-color 0.3s ease;
+}
+
+.send-message-form .send-message-textarea:focus {
+    outline: none;
+}
+
+.send-message-form button.send-button {
+    margin-left: 15px;
+}
+
+
+@media (max-device-width: 450px), (max-width: 450px){
+    .send-message-form {
+        width: 99vw;
+    }
+}

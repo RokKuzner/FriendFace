@@ -20,7 +20,7 @@ const allowed_image_type = ["image/jpg", "image/jpeg", "image/png"]
 //Functions
 async function check_inputs() {
     let to_disable = false
-    let username_avalible_return = await check_username_avalible()
+    let username_avalible_return = await check_username_taken()
 
     if (username_avalible_return && to_disable == false) {
         to_disable = true
@@ -116,7 +116,7 @@ function check_image() {
     return false
 }
 
-async function check_username_avalible() {
+async function check_username_taken() {
     if (previous_usernames[username.value] != null) {
         return previous_usernames[username.value]
     }

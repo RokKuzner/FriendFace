@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}FriendChat{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/files/static/css?file=friendchat">
+{% endblock %}
+
+{% block content %}
+    <a href="/chat/new" class="new-dm">
+        <img src="/files/static/icons?file=blue-plus-icon.png" class="new-dm-image">
+        <div class="new-dm-text">New DM</div>
+    </a>
+
+    {% for dm in dms %}
+        <a href="/chat/dm/{{ dm.dm_id }}" class="dm-preview">
+
+            <img src="/files/media/profileimg?user={{ dm.dm_corresponder_id }}" class="round dm-preview-user-image">
+
+            <div class="dm-preview-body">
+                <div class="username"><strong>{{ dm.dm_corresponder_username }}</strong></div>
+
+                <div class="content">
+                    {% if  dm.dm_messages_count == 0 %}
+                        Tap to start chatting
+                    {% else %}
+                        {{ dm.dm_last_message.content }}
+                    {% endif %}
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+{% endblock %}

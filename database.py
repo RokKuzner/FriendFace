@@ -24,8 +24,7 @@ def relative_time(timestamp):
   Returns:
     Relative time string (e.g., "3 hours ago", "4 years ago").
   """
-  current_time_utc = datetime.now(timezone.utc)
-  utc_timestamp = current_time_utc.timestamp()
+  utc_timestamp = float(get_utc_timestamp())
 
   delta = utc_timestamp - timestamp
 
@@ -63,6 +62,11 @@ def relative_time(timestamp):
         return "1 year ago"
     return f"{int(years)} years ago"
 
+def get_utc_timestamp():
+    current_time_utc = datetime.now(timezone.utc)
+    utc_timestamp = current_time_utc.timestamp()
+    return str(utc_timestamp)
+
 #Users
 def validate_user(username:str, password:str):
     with conn:
@@ -92,6 +96,12 @@ def get_users_id_by_username(username:str):
         data = c.fetchone()
 
         return data[1] if data != None else None
+
+def get_username_by_user_id(user_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute('SELECT email FROM users WHERE id=?', (user_id,))
+        return c.fetchone()[0]
 
 def user_exists(username:str):
     with conn:
@@ -284,9 +294,7 @@ def new_post(user:str, content:str):
     with conn:
         c = conn.cursor()
 
-        current_time_utc = datetime.now(timezone.utc)
-        utc_timestamp = current_time_utc.timestamp()
-        utc_timestamp = str(utc_timestamp)
+        utc_timestamp = get_utc_timestamp()
 
         post_id = generate_id("posts", "id")
         post_genre = alg.get_post_genre(str(content))
@@ -549,3 +557,151 @@ def remove_post_from_keyword(post_id:str, keyword:str):
             posts.remove(post_id)
             c.execute('UPDATE keywords SET posts=? WHERE keyword=?', (",".join(posts), keyword))
             conn.commit()
+
+#FriendChat
+def dm_exists_by_users(user1_id:str, user2_id:str):
+    with conn:
+        c = conn.cursor()
+
+        c.execute("SELECT * FROM chat_dms WHERE user1=? AND user2=?", (user1_id, user2_id))
+        return_1 = c.fetchone()
+        c.execute("SELECT * FROM chat_dms WHERE user1=? AND user2=?", (user2_id, user1_id))
+        return_2 = c.fetchone()
+
+        if return_1 != None or return_2 != None:
+            return True
+        return False
+
+def dm_exists_by_id(dm_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute("SELECT * FROM chat_dms WHERE dm_id=?", (dm_id,))
+
+        if c.fetchone() == None:
+            return False
+        return True
+
+def create_dm(user_creating_id:str, user_participating_id:str):
+    if dm_exists_by_users(user_creating_id, user_participating_id):
+        return "DM allready exists"
+    if user_creating_id == user_participating_id:
+        return "Can't create dm with yourself"
+
+    with conn:
+        c = conn.cursor()
+
+        dm_id = generate_id("chat_dms", "dm_id")
+
+        c.execute("INSERT INTO chat_dms VALUES(?, ?, ?, ?)", (user_creating_id, user_participating_id, dm_id, get_utc_timestamp()))
+        conn.commit()
+
+        return dm_id
+
+def get_dm_members(dm_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute("SELECT user1, user2 FROM chat_dms WHERE dm_id=?", (dm_id,))
+        return list(c.fetchone())
+    
+def new_message(dm_id:str, sender_id:str, content:str):
+    if sender_id not in get_dm_members(dm_id):
+        return "User not in dm"
+    
+    utc_timestamp = get_utc_timestamp()
+
+    encrypted_content = encryption.encrypt(content)
+
+    new_message_id = generate_id("chat_msgs", "message_id")
+
+    with conn:
+        c = conn.cursor()
+        c.execute("INSERT INTO chat_msgs VALUES(?, ?, ?, ?, ?)", (dm_id, new_message_id, sender_id, utc_timestamp, encrypted_content))
+        c.execute('UPDATE chat_dms SET last_activity=? WHERE dm_id=?', (utc_timestamp, dm_id))
+        conn.commit()
+
+    return new_message_id
+
+def get_dm_messages(dm_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute("SELECT * FROM chat_msgs WHERE dm_id=?", (dm_id,))
+        messages = c.fetchall()
+
+    messages_to_return = []
+
+    for message in messages:
+        messages_to_return.append(
+            {
+                "dm_id": message[0],
+                "message_id": message[1],
+                "sender_id": message[2],
+                "sender_username": get_username_by_user_id(message[2]),
+                "timestamp": float(message[3]),
+                "time_pretty": relative_time(float(message[3])),
+                "content": encryption.decrypt(message[4])
+            }
+        )
+
+    return messages_to_return
+
+def get_users_dms(user_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute("SELECT * FROM chat_dms WHERE user1=? OR user2=?", (user_id, user_id))
+        return c.fetchall()
+
+def get_latest_active_dms_by_user(user_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute("SELECT * FROM chat_dms WHERE user1=? OR user2=? ORDER BY last_activity DESC", (user_id, user_id))
+        return c.fetchall()
+    
+def get_dm_corresponder(dm_id:str, user_id:str):
+    with conn:
+        c = conn.cursor()
+        c.execute("SELECT user1, user2 FROM chat_dms WHERE dm_id=?", (dm_id,))
+        dm = c.fetchone()
+
+        if dm[0] == user_id:
+            return dm[1]
+        else:
+            return dm[0]
+
+def get_dm_preview(dm_id:str, current_user_id:str):
+    if not dm_exists_by_id(dm_id):
+        return {"error": "dm does not exist"}
+
+    dm_members = get_dm_members(dm_id)
+    
+    if not current_user_id in dm_members:
+        return {"error": "user not in dm"}
+
+    dm_messages =  get_dm_messages(dm_id)
+    dm_corresponder_id = get_dm_corresponder(dm_id, current_user_id)
+
+    return_object = {
+        "dm_id": dm_id,
+        "dm_members": dm_members,
+        "dm_corresponder_id": dm_corresponder_id,
+        "dm_corresponder_username": get_username_by_user_id(dm_corresponder_id),
+        "dm_messages": dm_messages,
+        "dm_messages_count": len(dm_messages),
+        "dm_last_message": dm_messages[-1] if dm_messages!= [] else None,
+    }
+
+    return return_object
+
+def get_dm_id_by_members(user1_id:str, user2_id:str):
+    with conn:
+        c = conn.cursor()
+
+        c.execute("SELECT dm_id FROM chat_dms WHERE user1=? AND user2=?", (user1_id, user2_id))
+        return_1 = c.fetchone()
+        c.execute("SELECT dm_id FROM chat_dms WHERE user1=? AND user2=?", (user2_id, user1_id))
+        return_2 = c.fetchone()
+
+        if return_1 != None:
+            return return_1[0]
+        if return_2 != None:
+            return return_2[0]
+        return False
