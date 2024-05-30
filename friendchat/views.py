@@ -33,6 +33,20 @@ def dm(request, dm_id):
 def new_dm(request):
     current_user_id = db.get_users_id_by_username(request.session["current_user"])
 
-    return render(request, "new_dm.html", {"logged_in":True, "current_user":request.session["current_user"],
+    if request.method == 'GET':
+        return render(request, "new_dm.html", {"logged_in":True, "current_user":request.session["current_user"],
                                           "current_user_id": current_user_id,
                                           "this_url":str("/")})
+    
+
+    user_username_to_add = request.POST["user-username-to-add"]
+    if db.user_exists(user_username_to_add) == False or user_username_to_add == request.session["current_user"]:
+        return redirect("/chat/new")
+
+    user_id_to_add = db.get_users_id_by_username(user_username_to_add)
+
+    if db.dm_exists_by_users(current_user_id, user_id_to_add):
+        return redirect(f"/chat/dm/{db.get_dm_id_by_members(current_user_id, user_id_to_add)}")
+    
+    new_dm_id = db.create_dm(current_user_id, user_id_to_add)
+    return redirect(f"/chat/dm/{new_dm_id}")
