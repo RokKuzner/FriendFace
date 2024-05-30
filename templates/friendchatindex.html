@@ -7,6 +7,11 @@
 {% endblock %}
 
 {% block content %}
+    <a href="/chat/add" class="new-dm">
+        <img src="/files/static/icons?file=blue-plus-icon.png" class="new-dm-image">
+        <div class="new-dm-text">New DM</div>
+    </a>
+
     {% for dm in dms %}
         <a href="/chat/dm/{{ dm.dm_id }}" class="dm-preview">
 

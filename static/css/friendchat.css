@@ -45,6 +45,24 @@
     text-overflow: ellipsis;
 }
 
+a.new-dm {
+    width: max-content;
+    margin: 15px auto;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.new-dm-image {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.new-dm-text {
+    color: black;
+    font-size: 1.3rem;
+}
+
 @media (max-device-width: 480px), (max-width: 675px){
     .dm-preview {
         width: 97vw;
