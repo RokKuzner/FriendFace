@@ -8,13 +8,16 @@
 
 {% block content %}
     <div class="new-dm-wrap">
-        <div class="new-dm-errors alert alert-warning hidden">
-            This is an error
-        </div>
+        <div class="new-dm-errors alert alert-warning hidden"></div>
         <form autocomplete="off" class="new-dm-form">
             {% csrf_token %}
             <input class="new-dm-input" name="message_content" placeholder="Username"></textarea>
-            <button type="submit" class="btn btn-primary new-dm-submit-button">Create dm</button>
+            <button type="submit" class="btn btn-primary new-dm-submit-button disabled">Create dm</button>
         </form>
     </div>
+
+    <script>
+        let current_user_username = "{{ current_user }}"
+    </script>
+    <script src="/files/static/js?file=new_dm"></script>
 {% endblock %}
