@@ -1,6 +1,11 @@
+from database import get_dm_members
+
 currenty_typing_by_dm = {}
 
 def start_typing(dm_id:str, user_id:str):
+    if user_id not in get_dm_members(dm_id):
+        return None
+
     try:
         currently_typing_in_this_dm = currenty_typing_by_dm[dm_id]
 
