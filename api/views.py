@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from decorators import login_required_json_response
 import database as db
+import FriendChatTyping as fct
 
 # Views
 @login_required_json_response
@@ -116,3 +117,27 @@ def get_dm_messages(request, dm_id):
         return JsonResponse({"status": "error", "descriprion":"user not in dm"}, status=500)
     
     return JsonResponse({"status": "succes", "messages":db.get_dm_messages(dm_id)}, status=200)
+
+@login_required_json_response
+def currently_typing_in_dm(request):
+    current_user_id = db.get_users_id_by_username(request.session["current_user"])
+
+    dm_id = str(request.GET.get('dm_id', None))
+    is_typing = str(request.GET.get('typing', None))
+
+    if dm_id == "None":
+        return JsonResponse({"status": "error", "descriprion":"dm id not provided"}, status=500)
+    if not db.dm_exists_by_id(dm_id):
+        return JsonResponse({"status": "error", "descriprion":"provided dm id does not exist"}, status=500)
+    
+    if is_typing == "None":
+        return JsonResponse({"status": "error", "descriprion":"typing status not provided"}, status=500)
+    if is_typing != "true" and is_typing != "false":
+        return JsonResponse({"status": "error", "descriprion":"provided typing status is not valid (true or false only allowed)"}, status=500)
+    
+    if is_typing == "true":
+        fct.start_typing(dm_id, current_user_id)
+    else:
+        fct.stop_typing(dm_id, current_user_id)
+
+    return JsonResponse({"status": "succes"}, status=200)
