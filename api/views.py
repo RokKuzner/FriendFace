@@ -141,3 +141,19 @@ def currently_typing_in_dm(request):
         fct.stop_typing(dm_id, current_user_id)
 
     return JsonResponse({"status": "succes"}, status=200)
+
+@login_required_json_response
+def get_currently_typing_in_dm(request):
+    current_user_id = db.get_users_id_by_username(request.session["current_user"])
+
+    dm_id = str(request.GET.get('dm_id', None))
+
+    if dm_id == "None":
+        return JsonResponse({"status": "error", "descriprion":"dm id not provided"}, status=500)
+    if not db.dm_exists_by_id(dm_id):
+        return JsonResponse({"status": "error", "descriprion":"provided dm id does not exist"}, status=500)
+    
+    if current_user_id not in db.get_dm_members(dm_id):
+        return JsonResponse({"status": "error", "descriprion":"user not in dm"}, status=500)
+    
+    return JsonResponse({"status": "succes", "users typing": fct.get_currently_typing_in_dm(dm_id)}, status=200)

@@ -12,5 +12,6 @@ urlpatterns = [
   path('deletepost', views.delete_post, name='deletepost'),
   path('newdmmessage', views.new_dm_message, name='deletepost'),
   path('getdmmessages/<str:dm_id>', views.get_dm_messages, name='get dm messages'),
-  path('settypingstatus', views.currently_typing_in_dm, name='set user typing status in friendchat dm')
+  path('settypingstatus', views.currently_typing_in_dm, name='set user typing status in friendchat dm'),
+  path('getcurrentlytyping', views.get_currently_typing_in_dm, name='get users currently typing friendchat dm')
 ]
