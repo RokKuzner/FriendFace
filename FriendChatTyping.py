@@ -51,7 +51,7 @@ def remove_users_not_typing(dm_id:str, not_typing_treshold=3):
     try:
         users_typing = currenty_typing_by_dm[dm_id]
     except KeyError:
-        user_typing = []
+        users_typing = []
 
     for user_typing in users_typing:
         if float(get_utc_timestamp()) - user_typing["last_typing_time"] >= not_typing_treshold:
