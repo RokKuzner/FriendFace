@@ -119,7 +119,7 @@ def get_dm_messages(request, dm_id):
     return JsonResponse({"status": "succes", "messages":db.get_dm_messages(dm_id)}, status=200)
 
 @login_required_json_response
-def currently_typing_in_dm(request):
+def set_currently_typing_in_dm(request):
     current_user_id = db.get_users_id_by_username(request.session["current_user"])
 
     dm_id = str(request.GET.get('dm_id', None))
