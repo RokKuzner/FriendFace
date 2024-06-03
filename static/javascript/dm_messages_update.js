@@ -70,4 +70,4 @@ window.addEventListener("load", async () => {
     content_wrap_element.scrollTop = content_wrap_element.scrollHeight
 })
 
-setInterval(display_messages, 500)
+setInterval(display_messages, 1000)
