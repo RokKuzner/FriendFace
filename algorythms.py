@@ -51,13 +51,10 @@ def get_personalized_posts(user:str):
 
 
     #Sort dict keys
-    sorted_grades = list(graded_posts_by_grade)
-    sorted_grades.sort()
+    sorted_grades = sorted(graded_posts_by_grade)
 
     #Return sorted values
-    sorted_graded_posts = []
-    for key in sorted_grades:
-        sorted_graded_posts.append(graded_posts_by_grade[key])
+    sorted_graded_posts = [graded_posts_by_grade[key] for key in sorted_grades]
 
     return sorted_graded_posts
 
