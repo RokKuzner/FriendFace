@@ -17,7 +17,10 @@
             <img src="/files/static/icons?file=return.png" class="top-corresponder-info-return-image">
         </a>
         <img src="/files/media/profileimg?user={{ coresponed_id }}" class="round top-corresponder-info-user-image">
-        <div class="top-corresponder-info-username"><strong>{{ corresponder_username }}</strong></div>
+        <div class="top-corresponder-info-username">
+            <strong>{{ corresponder_username }}</strong>
+            <div class="typing-status">typing...</div>
+        </div>
     </div>
 {% endblock %}
 
