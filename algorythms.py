@@ -109,16 +109,8 @@ label_encoder = LabelEncoder()
 label_encoder.fit_transform(df["genre"])
 
 def get_post_genre(post_content:str):
-    #Cleaning up data
-    content_modifyed = ""
-    for char in post_content:
-        if char.isalpha() == True or char == " " or char.isnumeric():
-            content_modifyed += char
-    while len(content_modifyed) != 0 and content_modifyed[0] == " ":
-        content_modifyed = content_modifyed[1:]
-    while len(content_modifyed) != 0 and content_modifyed[-1] == " ":
-        content_modifyed = content_modifyed[:len(content_modifyed)-1]
-    post_content = content_modifyed.lower()
+    #Clean up data
+    post_content = "".join(filter(lambda char: char.isalpha() or char.isnumeric() or char == " ", post_content)).strip().lower()
 
     #Translate content to english (only for prediction)
     all_not_alphaa = True
