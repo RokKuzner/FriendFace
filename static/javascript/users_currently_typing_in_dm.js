@@ -1,4 +1,5 @@
 let send_message_text_area = document.querySelector(".send-message-textarea")
+let typing_status_element = document.querySelector(".top-corresponder-info-username .typing-status")
 
 async function get_users_typing() {
     let request_url = window.location.origin + "/api/getcurrentlytyping?dm_id=" + dm_id
@@ -20,3 +21,23 @@ send_message_text_area.addEventListener("input", () => {
         set_user_typing_status("true")
     }
 })
+
+async function update_typing_status() {
+    let users_typing = await get_users_typing()
+    let corresponder_is_typing = false
+
+    for (let user_typing of users_typing) {
+        if (user_typing.user_id == coresponed_id) {
+            corresponder_is_typing = true
+            break
+        }
+    }
+
+    if (corresponder_is_typing) {
+        typing_status_element.classList.remove("hidden")
+    } else {
+        typing_status_element.classList.add("hidden")
+    }
+}
+
+setInterval(update_typing_status, 1000)
