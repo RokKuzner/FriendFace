@@ -40,4 +40,4 @@ async function update_typing_status() {
     }
 }
 
-setInterval(update_typing_status, 1000)
+setInterval(update_typing_status, 500)
