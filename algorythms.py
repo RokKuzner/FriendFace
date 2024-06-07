@@ -11,7 +11,7 @@ def get_personalized_posts(user:str):
     #posts to grade
     posts_to_grade = []
 
-    #Last 10000 posts
+    #Last 10000 posts posted on FriendFace
     latest_posts = db.get_latest_posts(user, 10000)
     first_latest_post = latest_posts[0]
     
@@ -20,8 +20,10 @@ def get_personalized_posts(user:str):
     #posts from all the users subscribed to
     users_following = db.get_users_following(user)
     users_following_posts = []
+
+    #Iterate through all users subscribed to
     for user_following in users_following:
-        users_following_posts += db.get_posts_by_user(user_following, user)[0]
+        users_following_posts += db.get_posts_by_user(user_following, user)[0] #Add all posts from user
 
     for post in users_following_posts:
         if float(post["time"]) < float(first_latest_post["time"]): #if the post isn't already one of the latest 10000 posts

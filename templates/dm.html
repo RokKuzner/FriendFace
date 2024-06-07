@@ -8,6 +8,7 @@
     <script>
         let dm_id = "{{ dm_id }}"
         let current_user_id = "{{ current_user_id }}"
+        let coresponed_id = "{{ coresponed_id }}"
     </script>
 {% endblock %}
 
@@ -17,7 +18,10 @@
             <img src="/files/static/icons?file=return.png" class="top-corresponder-info-return-image">
         </a>
         <img src="/files/media/profileimg?user={{ coresponed_id }}" class="round top-corresponder-info-user-image">
-        <div class="top-corresponder-info-username"><strong>{{ corresponder_username }}</strong></div>
+        <div class="top-corresponder-info-username">
+            <strong>{{ corresponder_username }}</strong>
+            <div class="typing-status hidden">typing...</div>
+        </div>
     </div>
 {% endblock %}
 
@@ -32,4 +36,5 @@
     
     <script src="/files/static/js?file=send_dm_message"></script>
     <script src="/files/static/js?file=dm_messages_update"></script>
+    <script src="/files/static/js?file=users_currently_typing_in_dm"></script>
 {% endblock %}

@@ -18,6 +18,11 @@
     font-size: 1.5rem;
 }
 
+.top-corresponder-info-username .typing-status {
+    font-size: 1rem;
+    color: gray;
+}
+
 .top-corresponder-info-return-image {
     width: 40px;
     margin-right: 20px;
