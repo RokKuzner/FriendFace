@@ -45,7 +45,7 @@ function display_messages(messages) {
 const dm_messages_socket_url = "ws://" + window.location.host + "/ws/dm-messages/" + dm_id
 const dm_messages_socket = new WebSocket(dm_messages_socket_url)
 
-new_messages_socket.onmessage = function(e) {
+dm_messages_socket.onmessage = function(e) {
     let data = JSON.parse(e.data)
     display_messages(data["messages"])
 }
@@ -53,27 +53,18 @@ new_messages_socket.onmessage = function(e) {
 send_message_form.addEventListener("submit", async function(e){
     e.preventDefault()
 
+    let textarea = send_message_form.querySelector(".send-message-textarea")
     let submit_btn = send_message_form.querySelector(".send-button");
     submit_btn.classList.add("disabled")
     submit_btn.innerHTML = '<img style="width: 30px;" src="/files/static/icons?file=loading.gif">'
 
-    //Make the request
-    let data = new FormData(send_message_form)
-    let payload = new URLSearchParams(data)
-
-    let url = String(window.location.origin)+"/api/newdmmessage"
-
-    let response = await fetch(url, {
-        method: "POST",
-        body: payload
-    })
-    let json_response = await response.json()
+    //Send message
+    dm_messages_socket.send(JSON.stringify({
+        "message": textarea.value
+    }))
 
     //UI stuff
-    let textarea = send_message_form.querySelector(".send-message-textarea")
-    if (json_response.status == "succes") {
-        textarea.value = ""
-    }
+    textarea.value = ""
 
     submit_btn.innerHTML = 'Send'
     submit_btn.classList.remove("disabled")
