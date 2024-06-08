@@ -7,6 +7,10 @@ function display_messages(messages) {
     let message_div;
     let date;
     let date_str;
+    let current_timestamp;
+    let seconds_delta;
+    let days_delta;
+    let datetime_str;
     let message_time_div;
     let message_content_div;
 
@@ -25,11 +29,28 @@ function display_messages(messages) {
 
         //create a new div element for message time
         date = new Date(message.timestamp*1000)
-        date_str = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')} - ${date.getDate()}. ${Number(date.getMonth()+1)}. ${date.getFullYear()}`
+        current_timestamp = Date.now()
+
+        seconds_delta = Number(current_timestamp - Math.floor(message.timestamp*1000)) / 1000
+        seconds_delta = Math.floor(seconds_delta)
+        days_delta = seconds_delta / (60 * 60 * 24)
+        days_delta = Math.floor(days_delta)
+
+        time_str = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+        if (days_delta == 0) {
+            date_str = "Today"
+            datetime_str = `${time_str} - ${date_str}`
+        } else if (days_delta <= 7) {
+            date_str = date.toDateString().substring(0, 3)
+            datetime_str = `${time_str} - ${date_str}`
+        } else {
+            date_str = `${date.getDate()}. ${Number(date.getMonth()+1)}. ${date.getFullYear()}`
+            datetime_str = date_str
+        }
 
         message_time_div = document.createElement("div")
         message_time_div.classList.add("time")
-        message_time_div.innerText = date_str
+        message_time_div.innerText = datetime_str
         message_div.appendChild(message_time_div)
 
         //create a new div element for message content
