@@ -18,7 +18,7 @@ def get_personalized_posts(user:str):
     posts_to_grade += latest_posts
 
     #posts from all the users subscribed to
-    users_following = db.get_users_following(user)
+    users_following = set(db.get_users_following(user))
     users_following_posts = []
 
     #Iterate through all users subscribed to
