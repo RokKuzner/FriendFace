@@ -39,17 +39,6 @@ function display_messages(messages) {
         //Scroll to bottom
         content_wrap_element = document.querySelector(".content-wrap")
         content_wrap_element.scrollTop = content_wrap_element.scrollHeight
-    } else {
-        for (let message of messages) {
-            let message_element = document.getElementById(message.message_id)
-
-            if (message_element == null) {
-                continue
-            }
-
-            let message_time_div = message_element.querySelector(".time")
-            message_time_div.innerText = message.time_pretty
-        }
     }
 }
 
