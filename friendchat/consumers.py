@@ -95,3 +95,14 @@ class DmTyping(AsyncWebsocketConsumer):
       "staus": "connected",
       "users typing": fct.get_currently_typing_in_dm(dm_id)
     }))
+
+  async def disconnect(self, code):
+    dm_id = self.scope['url_route']['kwargs']['dm_id']
+    current_user_username = self.scope["session"]["current_user"]
+    current_user_id = db.get_users_id_by_username(current_user_username)
+
+    fct.stop_typing(dm_id, current_user_id)
+
+    await self.channel_layer.group_send(
+      self.room_group_name, {"type": "chat_typing"}
+    )
