@@ -1,3 +1,8 @@
+:root {
+    --typing-dot-size: 5px;
+    --jumping-dots-animation-duration: 1.4s;
+}
+
 .top-corresponder-info {
     position: relative;
 
@@ -18,9 +23,42 @@
     font-size: 1.5rem;
 }
 
-.top-corresponder-info-username .typing-status {
-    font-size: 1rem;
-    color: gray;
+.typing-animation-container {
+    margin-left: 2px;
+    margin-top: 10px;
+}
+
+.typing-animation-container span {
+    width: var(--typing-dot-size);
+    height: var(--typing-dot-size);
+
+    display: inline-block;
+
+    margin: 0;
+    background-color: gray;
+    border-radius: 50%;
+
+    animation-name: jumpingDots;
+    animation-duration: var(--jumping-dots-animation-duration);
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.01, 0.5, 0.64, 0.99);
+}
+
+.typing-animation-container span:nth-child(2) {
+    animation-delay: calc(var(--jumping-dots-animation-duration)/3);
+}
+
+.typing-animation-container span:nth-child(3) {
+    animation-delay: calc(var(--jumping-dots-animation-duration)/3 * 2);
+}
+
+@keyframes jumpingDots {
+    20% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
 }
 
 .top-corresponder-info-return-image {
