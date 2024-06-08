@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     "servemedia"
 ]
 
+ASGI_APPLICATION = "FriendFace.asgi.application"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
