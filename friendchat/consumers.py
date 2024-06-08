@@ -13,7 +13,7 @@ class DmMessagesConsumer(AsyncWebsocketConsumer):
       await self.close()
       return
 
-    self.room_group_name = dm_id
+    self.room_group_name = f"messages_{dm_id}"
     await self.channel_layer.group_add(
       self.room_group_name,
       self.channel_name
@@ -58,7 +58,7 @@ class DmTyping(AsyncWebsocketConsumer):
       await self.close()
       return
 
-    self.room_group_name = dm_id
+    self.room_group_name = f"typers_{dm_id}"
     await self.channel_layer.group_add(
       self.room_group_name,
       self.channel_name
