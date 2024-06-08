@@ -1,3 +1,4 @@
+let send_message_form = document.querySelector(".send-message-form")
 var last_messages = []
 
 function display_messages(messages) {
@@ -59,3 +60,32 @@ new_messages_socket.onmessage = function(e) {
     let data = JSON.parse(e.data)
     display_messages(data["messages"])
 }
+
+send_message_form.addEventListener("submit", async function(e){
+    e.preventDefault()
+
+    let submit_btn = send_message_form.querySelector(".send-button");
+    submit_btn.classList.add("disabled")
+    submit_btn.innerHTML = '<img style="width: 30px;" src="/files/static/icons?file=loading.gif">'
+
+    //Make the request
+    let data = new FormData(send_message_form)
+    let payload = new URLSearchParams(data)
+
+    let url = String(window.location.origin)+"/api/newdmmessage"
+
+    let response = await fetch(url, {
+        method: "POST",
+        body: payload
+    })
+    let json_response = await response.json()
+
+    //UI stuff
+    let textarea = send_message_form.querySelector(".send-message-textarea")
+    if (json_response.status == "succes") {
+        textarea.value = ""
+    }
+
+    submit_btn.innerHTML = 'Send'
+    submit_btn.classList.remove("disabled")
+})
