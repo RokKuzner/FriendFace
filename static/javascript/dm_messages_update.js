@@ -61,5 +61,6 @@ new_messages_socket.onmessage = function(e) {
     display_messages(data["messages"])
 
     //Scroll to bottom
-    content_wrap_element.scrollTop = document.querySelector(".content-wrap").scrollHeight
+    let content_wrap_element = document.querySelector(".content-wrap")
+    content_wrap_element.scrollTop = content_wrap_element.scrollHeight
 }
