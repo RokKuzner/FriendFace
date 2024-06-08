@@ -83,6 +83,9 @@ send_message_form.addEventListener("submit", async function(e){
     submit_btn.classList.add("disabled")
     submit_btn.innerHTML = '<img style="width: 30px;" src="/files/static/icons?file=loading.gif">'
 
+    //Set typing status to false
+    set_typing_status("false")
+
     //Send message
     dm_messages_socket.send(JSON.stringify({
         "message": textarea.value
