@@ -48,6 +48,9 @@ class DmMessagesConsumer(AsyncWebsocketConsumer):
       "messages": db.get_dm_messages(dm_id)
     }))
 
+  async def disconnect(self, code):
+    await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
+  
 class DmTyping(AsyncWebsocketConsumer):
   async def connect(self):
     dm_id = self.scope['url_route']['kwargs']['dm_id']
@@ -106,3 +109,4 @@ class DmTyping(AsyncWebsocketConsumer):
     await self.channel_layer.group_send(
       self.room_group_name, {"type": "chat_typing"}
     )
+    await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
