@@ -1,6 +1,8 @@
 let send_message_text_area = document.querySelector(".send-message-textarea")
 let typing_status_element = document.querySelector(".top-corresponder-info-username .typing-status")
 
+let last_typing_data = {"time":0, "is_typing":"false"}
+
 function update_typing_status(users_typing) {
     let corresponder_is_typing = false
 
@@ -35,7 +37,25 @@ send_message_text_area.addEventListener("input", () => {
         is_typing = "true"
     }
 
+    //save the data
+    last_typing_data["time"] = Date.now()
+    last_typing_data["is_typing"] = is_typing
+
+    //send typing status to server
     dm_typing_socket.send(JSON.stringify({
         "is_typing": is_typing
     }))
 })
+
+setInterval(()=>{
+    if ( Date.now() - last_typing_data["time"] > 3000 && last_typing_data["is_typing"] == "true") {
+        //save the data
+        last_typing_data["time"] = Date.now()
+        last_typing_data["is_typing"] = "false"
+
+        //send typing status to server
+        dm_typing_socket.send(JSON.stringify({
+            "is_typing": "false"
+        }))
+    }
+}, 500)
