@@ -42,8 +42,8 @@ function display_messages(messages) {
     }
 }
 
-const new_messages_socket_url = "ws://" + window.location.host + "/ws/dm-messages/" + dm_id
-const new_messages_socket = new WebSocket(new_messages_socket_url)
+const dm_messages_socket_url = "ws://" + window.location.host + "/ws/dm-messages/" + dm_id
+const dm_messages_socket = new WebSocket(dm_messages_socket_url)
 
 new_messages_socket.onmessage = function(e) {
     let data = JSON.parse(e.data)
