@@ -1,15 +1,6 @@
 var last_messages = []
 
-async function get_messages() {
-    let request_url = window.location.origin + "/api/getdmmessages/" + dm_id
-    let response = await fetch(request_url)
-    let json_response = await response.json()
-
-    return json_response["messages"]
-}
-
-async function display_messages() {
-    let messages = await get_messages()
+function display_messages(messages) {
 
     if (last_messages.length == 0 || messages[messages.length - 1].message_id != last_messages[last_messages.length - 1].message_id) {
         last_messages = messages
@@ -62,12 +53,13 @@ async function display_messages() {
     }
 }
 
-window.addEventListener("load", async () => {
-    await display_messages()
+let url = "ws://" + window.location.host + "/ws/dm-messages/" + dm_id + "/"
+const new_messages_socket = new WebSocket(url)
+
+new_messages_socket.onmessage = function(e) {
+    let data = JSON.parse(e.data)
+    display_messages(data["messages"])
 
     //Scroll to bottom
-    let content_wrap_element = document.querySelector(".content-wrap")
-    content_wrap_element.scrollTop = content_wrap_element.scrollHeight
-})
-
-setInterval(display_messages, 1000)
+    content_wrap_element.scrollTop = document.querySelector(".content-wrap").scrollHeight
+}
