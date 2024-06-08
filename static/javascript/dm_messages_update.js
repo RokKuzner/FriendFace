@@ -1,7 +1,6 @@
 var last_messages = []
 
 function display_messages(messages) {
-
     if (last_messages.length == 0 || messages[messages.length - 1].message_id != last_messages[last_messages.length - 1].message_id) {
         last_messages = messages
 
@@ -53,14 +52,10 @@ function display_messages(messages) {
     }
 }
 
-let url = "ws://" + window.location.host + "/ws/dm-messages/" + dm_id + "/"
-const new_messages_socket = new WebSocket(url)
+const new_messages_socket_url = "ws://" + window.location.host + "/ws/dm-messages/" + dm_id
+const new_messages_socket = new WebSocket(new_messages_socket_url)
 
 new_messages_socket.onmessage = function(e) {
     let data = JSON.parse(e.data)
     display_messages(data["messages"])
-
-    //Scroll to bottom
-    let content_wrap_element = document.querySelector(".content-wrap")
-    content_wrap_element.scrollTop = content_wrap_element.scrollHeight
 }
