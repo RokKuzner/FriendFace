@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
 
     "daphne",
-    "channels",
 
     #Custom apps
     "app",
