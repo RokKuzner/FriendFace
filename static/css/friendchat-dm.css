@@ -24,7 +24,7 @@
 }
 
 .typing-animation-container {
-    margin-left: 2px;
+    margin-left: 5px;
     margin-top: 10px;
 }
 
@@ -53,7 +53,7 @@
 }
 
 @keyframes jumpingDots {
-    20% {
+    30% {
         transform: translateY(0px);
     }
     50% {
