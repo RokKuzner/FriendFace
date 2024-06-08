@@ -1,11 +1,19 @@
 import json
-from channels.generic.websocket import WebsocketConsumer
+from channels.generic.websocket import AsyncWebsocketConsumer
+import database as db
 
-class DmConsumer(WebsocketConsumer):
-  def connect(self):
-    self.accept()
+class DmMessagesConsumer(AsyncWebsocketConsumer):
+  async def connect(self):
+    dm_id = self.scope['url_route']['kwargs']['dm_id']
+    current_user_username = self.scope["session"]["current_user"]
+    current_user_id = db.get_users_id_by_username(current_user_username)
 
-    self.send(text_data=json.dumps({
-      "staus": "success",
-      "message": "succesfully connected"
+    if db.dm_exists_by_id(dm_id) == False or current_user_id not in db.get_dm_members(dm_id):
+      await self.close()
+    else:
+      await self.accept()
+
+    await self.send(text_data=json.dumps({
+      "staus": "connected",
+      "messages": db.get_dm_messages(dm_id)
     }))
