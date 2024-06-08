@@ -10,8 +10,15 @@ class DmMessagesConsumer(AsyncWebsocketConsumer):
 
     if db.dm_exists_by_id(dm_id) == False or current_user_id not in db.get_dm_members(dm_id):
       await self.close()
-    else:
-      await self.accept()
+      return
+
+    self.room_group_name = dm_id
+    await self.channel_layer.group_add(
+      self.room_group_name,
+      self.channel_name
+    )
+  
+    await self.accept()
 
     await self.send(text_data=json.dumps({
       "staus": "connected",
@@ -27,6 +34,13 @@ class DmMessagesConsumer(AsyncWebsocketConsumer):
     message_content = text_data_json["message"]
 
     db.new_message(dm_id, current_user_id, message_content)
+
+    await self.channel_layer.group_send(
+      self.room_group_name, {"type": "chat_message"}
+    )    
+
+  async def chat_message(self, event):
+    dm_id = self.scope['url_route']['kwargs']['dm_id']
 
     await self.send(text_data=json.dumps({
       "staus": "connected",
