@@ -4,10 +4,16 @@ function display_messages(messages) {
     let content_wrap_element = document.querySelector(".content-wrap")
     content_wrap_element.innerHTML = ""
 
+    let message_div;
+    let date;
+    let date_str;
+    let message_time_div;
+    let message_content_div;
+
     for (let message of messages) {
 
         //create a new div element for the message
-        let message_div = document.createElement("div")
+        message_div = document.createElement("div")
         message_div.id = message.message_id
         message_div.classList.add("message")
 
@@ -18,13 +24,16 @@ function display_messages(messages) {
         }
 
         //create a new div element for message time
-        let message_time_div = document.createElement("div")
+        date = new Date(message.timestamp*1000)
+        date_str = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')} - ${date.getDate()}. ${Number(date.getMonth()+1)}. ${date.getFullYear()}`
+
+        message_time_div = document.createElement("div")
         message_time_div.classList.add("time")
-        message_time_div.innerText = message.time_pretty
+        message_time_div.innerText = date_str
         message_div.appendChild(message_time_div)
 
         //create a new div element for message content
-        let message_content_div = document.createElement("div")
+        message_content_div = document.createElement("div")
         message_content_div.classList.add("content")
         message_content_div.innerText = message.content
         message_div.appendChild(message_content_div)
