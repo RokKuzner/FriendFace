@@ -32,17 +32,29 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    "app",
-    "api",
-    "friendchat",
-    "servemedia",
-
+    #Defauld Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+
+    "daphne",
+
+    #Custom apps
+    "app",
+    "api",
+    "friendchat",
+    "servemedia"
 ]
+
+ASGI_APPLICATION = "FriendFace.asgi.application"
+
+CHANNEL_LAYERS = {
+  "default": {
+    "BACKEND": "channels.layers.InMemoryChannelLayer"
+  }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

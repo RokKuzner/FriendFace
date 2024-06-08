@@ -30,11 +30,9 @@
     <form autocomplete="off" class="send-message-form">
         {% csrf_token %}
         <textarea class="send-message-textarea" name="message_content" placeholder="Message"></textarea>
-        <input type="hidden" name="dm_id" value="{{ dm_id }}">
         <button type="submit" class="btn btn-primary send-button">Send</button>
     </form>
     
-    <script src="/files/static/js?file=send_dm_message"></script>
-    <script src="/files/static/js?file=dm_messages_update"></script>
     <script src="/files/static/js?file=users_currently_typing_in_dm"></script>
+    <script src="/files/static/js?file=handle_dm_messages"></script>
 {% endblock %}
