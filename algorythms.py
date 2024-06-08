@@ -114,9 +114,8 @@ def get_post_genre(post_content:str):
     #Clean up data
     post_content = "".join(filter(lambda char: char.isalpha() or char.isnumeric() or char == " ", post_content)).strip().lower()
 
-    #Translate content to english (only for prediction)
+    #Translate content to english (only for prediction) - translate only if content includes characters
     all_not_alphaa = True
-
     for char in post_content:
         if char.isalpha():
             all_not_alphaa = False
