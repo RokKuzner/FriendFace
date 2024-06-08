@@ -54,9 +54,7 @@ def get_personalized_posts(user:str):
     sorted_grades = sorted(graded_posts_by_grade)
 
     #Return sorted values
-    sorted_graded_posts = [graded_posts_by_grade[key] for key in sorted_grades]
-
-    return sorted_graded_posts
+    return [graded_posts_by_grade[key] for key in sorted_grades]
 
 def grade_post(user:str, post):
     total_points = 0
