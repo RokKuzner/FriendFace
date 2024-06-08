@@ -1,5 +1,5 @@
 let send_message_text_area = document.querySelector(".send-message-textarea")
-let typing_status_element = document.querySelector(".top-corresponder-info-username .typing-status")
+let typing_status_element = document.querySelector(".typing-animation-container")
 
 let last_typing_data = {"time":0, "is_typing":"false"}
 
