@@ -1,6 +1,6 @@
 :root {
     --typing-dot-size: 5px;
-    --jumping-dots-animation-duration: 1.4s;
+    --jumping-dots-animation-duration: 1.2s;
 }
 
 .top-corresponder-info {
@@ -45,11 +45,11 @@
 }
 
 .typing-animation-container span:nth-child(2) {
-    animation-delay: calc(var(--jumping-dots-animation-duration)/3);
+    animation-delay: calc(var(--jumping-dots-animation-duration)/4);
 }
 
 .typing-animation-container span:nth-child(3) {
-    animation-delay: calc(var(--jumping-dots-animation-duration)/3 * 2);
+    animation-delay: calc(var(--jumping-dots-animation-duration)/4 * 2);
 }
 
 @keyframes jumpingDots {
